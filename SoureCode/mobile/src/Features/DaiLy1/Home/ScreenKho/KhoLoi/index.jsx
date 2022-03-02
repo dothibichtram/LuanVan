@@ -12,7 +12,7 @@ import {
 import axiosClient from "../../../../../api/axiosClient";
 
 function KhoLoi(props) {
-  const { navigation, idHodan } = props;
+  const { navigation, idDaily1 } = props;
   const dataLoi = props.kholoi.item;
   const [data, setData] = useState();
   //   console.log(dataLoi);

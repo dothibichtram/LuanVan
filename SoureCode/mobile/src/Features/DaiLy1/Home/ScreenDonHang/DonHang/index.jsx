@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import StickyHeaderFooterScrollView from "react-native-sticky-header-footer-scroll-view";
-function DonHang(props) {
+function DonHangDL1(props) {
   const data = props.route.params.data;
   const { navigation } = props;
   // const formatter = new Intl.NumberFormat("es");
@@ -183,7 +183,7 @@ function DonHang(props) {
             textAlign: "center",
           }}
           onPress={() => {
-            navigation.navigate("TabNav");
+            navigation.navigate("TabNavDL1");
           }}
         >
           <Ionicons name="arrow-back" size={25} color="#0000b3" />
@@ -200,7 +200,7 @@ function DonHang(props) {
             marginLeft: 30,
           }}
           onPress={() => {
-            navigation.navigate("TabNav");
+            navigation.navigate("TabNavDL1");
           }}
         >
           Xác nhận
@@ -219,4 +219,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-export default DonHang;
+export default DonHangDL1;

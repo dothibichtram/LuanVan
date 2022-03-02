@@ -19,6 +19,9 @@ import Test from "../../../test";
 
 import ScreenDoiMatKhauDL1 from "../../../DaiLy1/CaNhan/ScreenDoiMatKhau";
 import TabNavDL1 from "../../../DaiLy1/TabNav";
+import DonHangDL1 from "../../../DaiLy1/Home/ScreenDonHang/DonHang";
+import FormCCLoiDL1 from "../../../DaiLy1/Home/ScreenKho/CongCu/FormCCLoi";
+import ListCongCuDL1 from "../../../DaiLy1/Home/ScreenKho/ListCongCu";
 // import Test from "../../../Test";
 function Login(props) {
   const Stack = createNativeStackNavigator();
@@ -48,6 +51,9 @@ function Login(props) {
 
         <Stack.Screen name="ScreenDoiMatKhauDL1" component={ScreenDoiMatKhauDL1}/>
         <Stack.Screen name="TabNavDL1" component={TabNavDL1}/>
+        <Stack.Screen name="DonHangDL1" component={DonHangDL1}/>
+        <Stack.Screen name="ScreenCongCuDL1" component={ListCongCuDL1} />
+        <Stack.Screen name="FormCCLoiDL1" component={FormCCLoiDL1}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

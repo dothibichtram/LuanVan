@@ -54,11 +54,12 @@ function Home(props) {
     setCheckDonHang(false);
     setCheckKho(true);
   };
+  
   const handleRedirectBCTienDo = () => {
     navigation.navigate("FormBCTienDo", { idDaily1: `${user._id}` });
   };
   const handleRedirectCongCu = () => {
-    navigation.navigate("ScreenCongCu", { idDaily1: `${user._id}` });
+    navigation.navigate("ScreenCongCuDL1", { idDaily1: `${user._id}` });
   };
   const handleRedirectVatTu = () => {
     navigation.navigate("ScreenVatTu", { idDaily1: `${user._id}` });
@@ -128,7 +129,7 @@ function Home(props) {
                 styles.hodanBar,
                 checkTienDo ? styles.activeBar : styles.noActiveBar,
               ]}
-              onPress={handleChangeActiveBar1}
+              onPress={handleChangeActiveBar3}
             >
               <View>
                 <Ionicons
@@ -147,7 +148,7 @@ function Home(props) {
                 { borderTopRightRadius: 10, borderBottomRightRadius: 10 },
                 checkKho ? styles.activeBar : styles.noActiveBar,
               ]}
-              onPress={handleChangeActiveBar3}
+              onPress={handleChangeActiveBar4}
             >
               <View>
                 <Ionicons
@@ -240,7 +241,9 @@ function Home(props) {
                 <>
                   <ScreenDonHang navigation={navigation} daily1Id={user._id} />
                 </>
-              )}
+              )
+              // :()
+              }
             </View>
           </ScrollView>
 

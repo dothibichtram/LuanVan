@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { MaterialDialog } from "react-native-material-dialog";
-import hodanApi from "../../../../api/hodanApi";
-
+// import hodanApi from "../../../../api/hodanApi";
+import daily1Api from "../../../../api/daily1Api";
 function SreenDoiMatKhauDL1(props) {
   const [passwordOld, onChangePasswordOld] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
@@ -54,7 +54,7 @@ function SreenDoiMatKhauDL1(props) {
           user: user.replace(`"`, "").replace(`"`, ""),
           matkhau: passwordNew2,
         };
-        const sendRequest = await hodanApi.doiMatkhau(dataForm);
+        const sendRequest = await daily1Api.doiMatkhau(dataForm);
         handleOpen2();
         // console.log(sendRequest);
       } else {
@@ -211,7 +211,7 @@ function SreenDoiMatKhauDL1(props) {
             textAlign: "center",
           }}
           onPress={() => {
-            navigation.navigate("TabNav");
+            navigation.navigate("TabNavDL1");
           }}
         >
           <Ionicons name="arrow-back" size={25} color="#0000b3" />

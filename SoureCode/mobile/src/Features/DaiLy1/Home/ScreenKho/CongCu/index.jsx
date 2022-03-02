@@ -12,11 +12,11 @@ import {
 import axiosClient from "../../../../../api/axiosClient";
 
 function CongCu(props) {
-  const { navigation, idHodan } = props;
+  const { navigation, idDaily1 } = props;
   const data = props.congcu.item;
-  // console.log(props);
+  console.log(props.congcu.item);
   const handleClickError = () => {
-    navigation.navigate("FormCongCuLoi", { ...data, idHodan });
+    navigation.navigate("FormCCLoiDL1", { ...data, idDaily1 });
   };
   //get link image
   const getImg = (imgName)=>{
@@ -40,7 +40,6 @@ function CongCu(props) {
           >
             <Image
               source={{
-                // uri: `http://10.3.53.160:5000/uploads/${data.congcu.hinhanh}`,
                 uri: `${getImg(data.congcu.hinhanh)}`,
               }}
               style={{

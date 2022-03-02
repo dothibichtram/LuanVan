@@ -7,16 +7,16 @@ import {
   Text,
   StatusBar,
 } from "react-native";
-import hodanApi from "../../../../../api/hodanApi";
+import daily1Api from "../../../../../api/daily1Api";
 import CongCu from "../CongCu";
 
-const ListCongCu = (props) => {
-  const idHodan = props.route.params.idHodan;
+const ListCongCuDL1 = (props) => {
+  const idDaily1 = props.route.params.idDaily1;
   const {navigation} = props;
   const [listCongCu, setListCongCu] = useState();
   useEffect(() => {
     const fetchData = async () => {
-      const getData = await hodanApi.dsCongcu(idHodan);
+      const getData = await daily1Api.dsCongcu(idDaily1);
       setListCongCu(getData.dscongcu);
     };
     fetchData();
@@ -32,7 +32,7 @@ const ListCongCu = (props) => {
       {listCongCu && (
         <FlatList
           data={listCongCu}
-          renderItem={(item) => <CongCu congcu={item} navigation={navigation} idHodan={idHodan} />}
+          renderItem={(item) => <CongCu congcu={item} navigation={navigation} idDaily1={idDaily1} />}
           keyExtractor={(item) => item._id}
         />
       )}
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListCongCu;
+export default ListCongCuDL1;

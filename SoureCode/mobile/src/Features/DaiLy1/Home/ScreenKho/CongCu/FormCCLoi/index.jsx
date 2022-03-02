@@ -8,24 +8,26 @@ import {
   View,
   Dimensions,
   ScrollView,
+  TouchableOpacity
 } from "react-native";
 import { Formik, ErrorMessage, Field } from "formik";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import hodanApi from "../../../../../../api/hodanApi";
 import * as Yup from "yup";
 import { MaterialDialog } from "react-native-material-dialog";
-
-function FormCCLoi(props) {
+import daily1Api from "../../../../../../api/daily1Api";
+import axiosClient from "../../../../../../api/axiosClient";
+function FormCCLoiDL1(props) {
   const {
     route: { params: data },
     route: {
-      params: { idHodan },
+      params: { idDaily1 },
     },
     navigation,
   } = props;
-  // console.log(props, idHodan);
   const [visible, setVisible] = useState(false);
-
+  const getImg = (imgName) => {
+    return `${axiosClient.defaults.baseURL}uploads/${imgName}`;
+  }
   const SignupSchema = Yup.object().shape({
     soluongloi: Yup.string().required("Trường này không được để trống"),
   });
@@ -36,7 +38,7 @@ function FormCCLoi(props) {
     setVisible(true);
   };
   const handleSumitForm = async (dataForm) => {
-    const sendRequest = await hodanApi.themCongcuHuloi(idHodan, {
+    const sendRequest = await daily1Api.themCongcuHuloi(idDaily1, {
       dsccLoi: [{ ...data, ...dataForm }],
     });
     handleOpen();
@@ -63,6 +65,19 @@ function FormCCLoi(props) {
           </View>
           <View style={styles.containerForm}>
             <ScrollView>
+              <View style={styles.centerImg} >
+                <Image
+                  source={{
+                    // uri: `http://10.3.53.160:5000/uploads/${data.congcu.hinhanh}`,
+                    uri: `${getImg(data.congcu.hinhanh)}`
+                  }}
+                  style={{
+                    width: Dimensions.get("window").width - 220,
+                    height: 100,
+                    borderRadius: 20,
+                  }}
+                />
+              </View>
               <Text style={[styles.text]}>Tên công cụ</Text>
               <TextInput
                 style={[
@@ -71,8 +86,8 @@ function FormCCLoi(props) {
                     borderColor: !touched
                       ? "#ccccccf2"
                       : errors.tencc
-                      ? "#FF5A5F"
-                      : "#ccccccf2",
+                        ? "#FF5A5F"
+                        : "#ccccccf2",
                   },
                 ]}
                 editable={false}
@@ -80,11 +95,11 @@ function FormCCLoi(props) {
                 onBlur={handleBlur("tencc")}
                 //   value={values.soluong}
                 defaultValue={data.congcu.ten}
-                //   error={errors.soluong}
-                //   touched={touched.soluong}
+              //   error={errors.soluong}
+              //   touched={touched.soluong}
               />
 
-              <Text style={[styles.text]}>Mô tả</Text>
+              {/* <Text style={[styles.text]}>Mô tả</Text>
               <TextInput
                 style={[
                   styles.textInput,
@@ -92,16 +107,16 @@ function FormCCLoi(props) {
                     borderColor: !touched
                       ? "#ccccccf2"
                       : errors.mota
-                      ? "#FF5A5F"
-                      : "#ccccccf2",
+                        ? "#FF5A5F"
+                        : "#ccccccf2",
                   },
                 ]}
                 editable={false}
                 onChangeText={handleChange("mota")}
                 onBlur={handleBlur("mota")}
                 defaultValue={data.congcu.mota}
-                //   error={errors.mota}
-                //   touched={touched.mota}
+              //   error={errors.mota}
+              //   touched={touched.mota}
               />
 
               <Text style={styles.text}>Công dụng</Text>
@@ -112,17 +127,17 @@ function FormCCLoi(props) {
                     borderColor: !touched
                       ? "#ccccccf2"
                       : errors.congdung
-                      ? "#FF5A5F"
-                      : "#ccccccf2",
+                        ? "#FF5A5F"
+                        : "#ccccccf2",
                   },
                 ]}
                 onChangeText={handleChange("congdung")}
                 editable={false}
                 onBlur={handleBlur("congdung")}
                 defaultValue={data.congcu.congdung}
-                //   error={errors.congdung}
-                //   touched={touched.congdung}
-              />
+              //   error={errors.congdung}
+              //   touched={touched.congdung}
+              /> */}
               <Text style={styles.text}>Số lượng hư hỏng</Text>
               <TextInput
                 style={[
@@ -131,8 +146,8 @@ function FormCCLoi(props) {
                     borderColor: !touched
                       ? "#ccccccf2"
                       : errors.soluongloi
-                      ? "#FF5A5F"
-                      : "#ccccccf2",
+                        ? "#FF5A5F"
+                        : "#ccccccf2",
                   },
                 ]}
                 keyboardType="numeric"
@@ -149,8 +164,8 @@ function FormCCLoi(props) {
                       color: !touched
                         ? "#ccccccf2"
                         : errors.soluongloi
-                        ? "#FF5A5F"
-                        : "#ccccccf2",
+                          ? "#FF5A5F"
+                          : "#ccccccf2",
                       marginBottom: 10,
                     }}
                   >
@@ -174,56 +189,49 @@ function FormCCLoi(props) {
                 <Text style={{ color: "green" }}>Xác nhận thành công!</Text>
               </MaterialDialog>
 
-              <Text style={styles.text}>Hình ảnh</Text>
 
-              <View>
-                <Image
-                  source={{
-                    uri: `http://10.3.53.160:5000/uploads/${data.congcu.hinhanh}`,
-                  }}
-                  style={{
-                    width: Dimensions.get("window").width - 220,
-                    height: 150,
-                    borderRadius: 20,
-                  }}
-                />
-              </View>
             </ScrollView>
           </View>
           <View
             style={{
               flexDirection: "row",
-              //   marginTop: 35,
-              paddingTop: 10,
+              // // marginTop: 150,
+              // paddingTop: 10,
               borderTopColor: "#b3b3b3",
-              borderWidth: 1,
-              borderRightWidth: 0,
-              borderLeftWidth: 0,
-              borderBottomWidth: 0,
+              borderTopWidth: 1,
               justifyContent: "center",
+              backgroundColor: "#ffffff",
+              // height: 100,
+              width: '100%',
+              height: 80,
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'absolute', //Here is the trick
+              bottom: 0
             }}
           >
-            <Text
+            <TouchableOpacity
               style={{
-                borderColor: "#0000e6",
                 borderWidth: 1,
-                borderRadius: 90,
-                paddingTop: 8,
-                width: 50,
-                textAlign: "center",
-                marginLeft: 20,
+                borderColor: 'rgba(0,0,0,0.2)',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 55,
+                height: 55,
+                backgroundColor: '#fff',
+                borderRadius: 50,
               }}
               onPress={() => {
                 navigation.goBack();
               }}
             >
               <Ionicons name="arrow-back" size={30} color="#0000b3" />
-            </Text>
+            </TouchableOpacity>
             <Text
               onPress={handleSubmit}
               style={{
                 padding: 10,
-                marginBottom: 10,
+                // marginBottom: 15,
                 borderRadius: 10,
                 backgroundColor: "#0000e6",
                 width: 200,
@@ -250,6 +258,11 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     alignItems: "center",
   },
+  centerImg: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    alignItems: "center",
+  },
   containerForm: {
     // backgroundColor: "white",
     paddingBottom: 40,
@@ -268,8 +281,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 10,
-    width: 300,
+    // width: 8,
     color: "black",
   },
 });
-export default FormCCLoi;
+export default FormCCLoiDL1;

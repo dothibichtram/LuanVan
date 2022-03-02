@@ -35,12 +35,12 @@ function TabNavDL1(props) {
 
       });
       setUser(user);
-      console.log(dataAccount);
+      // console.log(dataAccount);
       const dsdonhang = await daily1Api.dsDonhang(user._id);
-      setSoluongdonhangchuaxacnhan(
-        dsdonhang.dsdonhang.filter((item) => item.xacnhan === false).length
-      );
-    console.log(user);
+      // setSoluongdonhangchuaxacnhan(
+      //   dsdonhang.dsdonhang.filter((item) => item.xacnhan === false).length
+      // );
+    // console.log(user);
 
     })();
   }, [callback]);
