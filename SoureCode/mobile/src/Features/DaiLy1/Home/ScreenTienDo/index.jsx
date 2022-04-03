@@ -3,7 +3,7 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import ListDonHangBaoCaoTienDo from "./ListDonHangBaoCaoTienDo";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import hodanApi from "../../../../api/hodanApi";
-
+import daily1Api from "../../../../api/daily1Api";
 function ScreenTienDo(props) {
   const {navigation, hodanId } = props;
   // console.log(hodanId);
@@ -11,9 +11,9 @@ function ScreenTienDo(props) {
   const [orderNoComplete, setOrderNoComplete] = useState();
   useEffect(() => {
     (async () => {
-      const getListOrder = await hodanApi.dsDonhang(hodanId);
-      setOrderList(getListOrder.dsdonhang);
-      setOrderNoComplete(getListOrder.dsdonhang.filter(order=>order.dssanpham.find(sp=>sp.soluong !==sp.soluonghoanthanh)));
+      const getListOrder = await daily1Api.dsDonhang(hodanId);
+      // setOrderList(getListOrder.dsdonhang);
+      // setOrderNoComplete(getListOrder.dsdonhang.filter(order=>order.dssanpham.find(sp=>sp.soluong !==sp.soluonghoanthanh)));
     })();
   }, []);
 //   console.log(orderNoComplete)

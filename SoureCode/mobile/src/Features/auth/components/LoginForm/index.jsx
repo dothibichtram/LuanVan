@@ -27,13 +27,13 @@ function LoginForm(props) {
   const dispatch = useDispatch();
   const [check, setCheck] = useState();
   const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const getData = async () => {
-      const dataApi = await userApi.getAll();
-      setCheck(dataApi);
-    };
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const dataApi = await userApi.getAll();
+  //     setCheck(dataApi);
+  //   };
+  //   getData();
+  // }, []);
   const handleClose = () => {
     setVisible(false);
   };
@@ -41,7 +41,7 @@ function LoginForm(props) {
     setVisible(true);
   };
   const handleSumitLogin = async (values) => {
-    console.log(check);
+    // console.log(check);
 
     try {
       const dataForm ={
@@ -184,7 +184,10 @@ function LoginForm(props) {
                   </Text>
                 </>
               ) : null}
-              <Button onPress={handleSubmit} title="Đăng nhập" />
+              {/* <Button onPress={handleSubmit} title="Đăng nhập"/> */}
+              <Text style={styles.button} onPress={handleSubmit}>
+                ĐĂNG NHẬP
+              </Text>
             </View>
           )}
         </Formik>
@@ -196,7 +199,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 10,
-    backgroundColor: "#b35900",
+    backgroundColor: "#B0D578",
+    // backgroundColor:"#b35900",
     alignItems: "center",
     paddingTop: 70,
     // paddingBottom: 230,
@@ -226,6 +230,18 @@ const styles = StyleSheet.create({
   containerImg: {
     paddingBottom: 20,
     marginLeft: 50,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 32,
+    borderRadius: 10,
+    elevation: 3,
+    backgroundColor:"#4AAE4A",
+    textAlign: "center",
+    color: "white",
+    marginTop: 20,
   },
 });
 

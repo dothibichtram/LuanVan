@@ -6,37 +6,47 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
-import hodanApi from "../../../../../api/hodanApi";
-import CongCu from "../CongCu";
+import daily1Api from "../../../../../api/daily1Api";
 import SanPham from "../SanPham";
-
-const ListSanPham = (props) => {
-  const idHodan = props.route.params.idHodan;
+import styles from "../style";
+import Ionicons from "react-native-vector-icons/Ionicons";
+const ListSanPhamDL1 = (props) => {
+  const idDaily1 = props.route.params.idDaily1;
   const {navigation} = props;
-  const [listSanPham, setlistSanPham] = useState();
+  const [listSanPham, setListSanPham] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const getData = await hodanApi.dsCongcu(idHodan);
-      const getListSanPham = await hodanApi.get(idHodan);
-      setlistSanPham(getListSanPham.hodan.dssanpham);
-      // console.log(getListSanPham.hodan.dssanpham);
+      // const getData = await daily1Api.dsCongcu(iddaily1);
+      // const getListSanPham = await daily1Api.get(idDaily1);
+      const getListSanPham = await daily1Api.dsSanpham(idDaily1);
+      // setListSanPham(getListSanPham.daily1.dsSanpham);
+      setListSanPham(getListSanPham.dssanpham);
+      
     };
     fetchData();
   }, []);
   // console.log(props);
-
+  
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={{ color: "white" }}>Danh sách sản phẩm</Text>
+    <SafeAreaView style={_styles.container}>
+      <View style={styles.appBarStyle}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%"}}>Danh sách sản phẩm</Text>
       </View>
       {listSanPham && (
         <FlatList
           data={listSanPham}
-          renderItem={(item) => <SanPham sanpham={item} navigation={navigation} idHodan={idHodan} />}
+          renderItem={(item) => <SanPham sanpham={item} navigation={navigation} idDaily1={idDaily1} />}
           keyExtractor={(item) => item._id}
         />
       )}
@@ -44,7 +54,7 @@ const ListSanPham = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const _styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
@@ -66,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListSanPham;
+export default ListSanPhamDL1;

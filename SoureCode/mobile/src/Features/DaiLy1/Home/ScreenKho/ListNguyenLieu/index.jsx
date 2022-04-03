@@ -6,17 +6,19 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
-import hodanApi from "../../../../../api/hodanApi";
+import daily1Api from "../../../../../api/daily1Api";
 import NguyenLieu from "../NguyenLieu";
-
-const ListNguyenLieu = (props) => {
+import styles from "../style";
+import Ionicons from "react-native-vector-icons/Ionicons";
+const ListNguyenLieuDL1 = (props) => {
   const {navigation} = props;
-  const idHodan = props.route.params.idHodan;
+  const idDaily1 = props.route.params.idDaily1;
   const [listNguyenLieu, setListNguyenLieu] = useState();
   useEffect(() => {
     const fetchData = async () => {
-      const getData = await hodanApi.dsNguyenlieu(idHodan);
+      const getData = await daily1Api.dsNguyenlieu(idDaily1);
       setListNguyenLieu(getData.dsnguyenlieu);
     };
     fetchData();
@@ -25,14 +27,21 @@ const ListNguyenLieu = (props) => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={{ color: "white" }}>Danh sách Nguyên liệu</Text>
+    <SafeAreaView style={_styles.container}>
+      <View style={styles.appBarStyle}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%"}}>Danh sách nguyên liệu</Text>
       </View>
       {listNguyenLieu && (
         <FlatList
           data={listNguyenLieu}
-          renderItem={(item) => <NguyenLieu nguyenlieu={item} navigation={navigation} idHodan={idHodan} />}
+          renderItem={(item) => <NguyenLieu nguyenlieu={item} navigation={navigation} idDaily1={idDaily1} />}
           keyExtractor={(item) => item._id}
         />
       )}
@@ -40,7 +49,7 @@ const ListNguyenLieu = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const _styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
@@ -62,4 +71,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListNguyenLieu;
+export default ListNguyenLieuDL1;

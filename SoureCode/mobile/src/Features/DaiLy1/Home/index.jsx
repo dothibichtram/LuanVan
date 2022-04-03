@@ -15,16 +15,18 @@ import daily1Api from "../../../api/daily1Api";
 import styles from "./style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ScreenDonHang from "./ScreenDonHang";
-import ScreenTienDo from "./ScreenTienDo";
-
+import ScreenDaiLy2 from "./ScreenDaiLy2";
+import ScreenHoDan from "./ScreenHoDan";
 function Home(props) {
   const { navigation } = props;
   // console.log(props);
-  const { user} = props;
+  const { user } = props;
   // console.log(user);
-  const [checkTienDo, setCheckTienDo] = useState(true);
-  const [checkDonHang, setCheckDonHang] = useState(false);
+  const [checkTienDo, setCheckTienDo] = useState(false);
+  const [checkDonHang, setCheckDonHang] = useState(true);
   const [checkKho, setCheckKho] = useState(false);
+  const [checkDaiLy2, setCheckDaiLy2] = useState(false);
+  const [checkHoDan, setCheckHoDan] = useState(false);
   const [idAccount, setIdAccount] = useState();
   //  console.log(user.taikhoan);
   useEffect(() => {
@@ -33,28 +35,38 @@ function Home(props) {
     })();
   }, []);
   // console.log(hoDan)
-  
+
   const handleChangeActiveBar1 = () => {
-    setCheckTienDo(false);
+    // setCheckTienDo(false);
     setCheckDonHang(true);
     setCheckKho(false);
+    setCheckDaiLy2(false);
+    setCheckHoDan(false);
+
   };
   const handleChangeActiveBar2 = () => {
-    setCheckTienDo(true);
+    // setCheckTienDo(false);
     setCheckDonHang(false);
     setCheckKho(false);
+    setCheckHoDan(false);
+    setCheckDaiLy2(true);
   };
   const handleChangeActiveBar3 = () => {
-    setCheckTienDo(false);
+    // setCheckTienDo(false);
     setCheckDonHang(false);
-    setCheckKho(true);
+    setCheckKho(false);
+    setCheckHoDan(true);
+    setCheckDaiLy2(false);
   };
   const handleChangeActiveBar4 = () => {
-    setCheckTienDo(false);
+    // setCheckTienDo(false);
     setCheckDonHang(false);
     setCheckKho(true);
+    setCheckDaiLy2(false);
+    setCheckHoDan(false);
+
   };
-  
+
   const handleRedirectBCTienDo = () => {
     navigation.navigate("FormBCTienDo", { idDaily1: `${user._id}` });
   };
@@ -62,16 +74,16 @@ function Home(props) {
     navigation.navigate("ScreenCongCuDL1", { idDaily1: `${user._id}` });
   };
   const handleRedirectVatTu = () => {
-    navigation.navigate("ScreenVatTu", { idDaily1: `${user._id}` });
+    navigation.navigate("ScreenVatTuDL1", { idDaily1: `${user._id}` });
   };
   const handleRedirectNguyenLieu = () => {
-    navigation.navigate("ScreenNguyenLieu", { idDaily1: `${user._id}` });
+    navigation.navigate("ScreenNguyenLieuDL1", { idDaily1: `${user._id}` });
   };
   const handleRedirectKhoLoi = () => {
-    navigation.navigate("ScreenKhoLoi", { idDaily1: `${user._id}` });
+    navigation.navigate("ScreenKhoLoiDL1", { idDaily1: `${user._id}` });
   };
   const handleRedirectSanPham = () => {
-    navigation.navigate("ScreenSanPham", { idDaily1: `${user._id}` });
+    navigation.navigate("ScreenSanPhamDL1", { idDaily1: `${user._id}` });
   };
 
   return (
@@ -81,83 +93,82 @@ function Home(props) {
           <View style={styles.headerContainer}>
             <Text style={{ color: "white" }}>Xin chào {user.ten} </Text>
           </View>
-          {/* <Text>Ứng dụng di động dành cho Đại lý cấp 1</Text> */}
-
-          {/****************************** {Start link bar} **************************************/}
           <View style={styles.containerLinkBar}>
-            <Text
-                style={[
-                  styles.singleBar,
-                  styles.donhangBar,
-                  checkDonHang ? styles.activeBar : styles.noActiveBar,
-                ]}
-                onPress={handleChangeActiveBar1}
-              >
-                <View>
-                  <Ionicons
-                    style={styles.textAlign}
-                    name="cart-outline"
-                    size={30}
-                    color="white"
-                  />
-                  <Text style={styles.textLinkBar}>Đơn hàng</Text>
-                </View>
-              </Text>
-            
             <Text
               style={[
                 styles.singleBar,
-                styles.daily2Bar,
-                checkKho ? styles.activeBar : styles.noActiveBar,
+                styles.progressBar,
+                checkDonHang ? styles.activeBar : styles.noActiveBar,
+              ]}
+              onPress={handleChangeActiveBar1}
+            >
+              <View>
+                {/* <Ionicons
+                  style={styles.textAlign}
+                  name="cart"
+                  size={40}
+                  color="white"
+                /> */}
+                {/* <Text style={styles.textLinkBar}>Đơn hàng</Text> */}
+                <Text style={checkDonHang ? styles.activeBar : styles.noActiveBar}>Đơn hàng</Text>
+              </View>
+            </Text>
+
+            <Text
+              style={[
+                styles.singleBar,
+                styles.progressBar,
+                checkDaiLy2 ? styles.activeBar : styles.noActiveBar,
               ]}
               onPress={handleChangeActiveBar2}
             >
               <View>
-                <Ionicons
+                {/* <Ionicons
                   style={styles.textAlign}
-                  name="albums-outline"
-                  size={30}
+                  name="albums"
+                  size={40}
                   color="white"
-                />
-                <Text style={styles.textLinkBar}>Đại lý 2</Text>
+                /> */}
+                <Text style={
+                  checkDaiLy2 ? styles.activeBar : styles.noActiveBar}>Đại lý 2</Text>
               </View>
             </Text>
 
             <Text
               style={[
                 styles.singleBar,
-                styles.hodanBar,
-                checkTienDo ? styles.activeBar : styles.noActiveBar,
+                styles.progressBar,
+                checkHoDan ? styles.activeBar : styles.noActiveBar,
               ]}
               onPress={handleChangeActiveBar3}
             >
               <View>
-                <Ionicons
+                {/* <Ionicons
                   style={styles.textAlign}
-                  name="rose-outline"
-                  size={30}
+                  name="rose"
+                  size={40}
                   color="white"
-                />
-                <Text style={styles.textLinkBar}>Hộ dân</Text>
+                /> */}
+                <Text style={checkHoDan ? styles.activeBar : styles.noActiveBar}>Hộ dân</Text>
               </View>
             </Text>
-            
+
             <Text
               style={[
                 styles.singleBar,
-                { borderTopRightRadius: 10, borderBottomRightRadius: 10 },
+                styles.progressBar,
                 checkKho ? styles.activeBar : styles.noActiveBar,
               ]}
               onPress={handleChangeActiveBar4}
             >
               <View>
-                <Ionicons
+                {/* <Ionicons
                   style={styles.textAlign}
-                  name="folder-open-outline"
-                  size={30}
-                  color="white"
-                />
-                <Text style={styles.textLinkBar}>Kho</Text>
+                  name="folder-open"
+                  size={40}
+                  color="gray"
+                /> */}
+                <Text style={checkKho ? styles.activeBar : styles.noActiveBar}>Kho</Text>
               </View>
             </Text>
           </View>
@@ -175,74 +186,83 @@ function Home(props) {
               ) : checkKho ? (
                 <>
                   <View style={styles.containerRowRedirect}>
-                    <View style={{ marginRight: 20 }}>
+                    <View style={styles.containerItemRedirect}>
                       <Text onPress={handleRedirectCongCu}>
                         <View style={styles.containerRedirectKho}>
                           <Ionicons
                             name="construct"
-                            size={60}
-                            color="#0000b3"
+                            style={styles.iconStore}
                           />
                         </View>
                       </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
+                      <Text style={styles.containerTextRedirect} >
                         Công cụ
                       </Text>
                     </View>
-                    <View style={{ marginRight: 20 }}>
+                    <View style={styles.containerItemRedirect}>
                       <Text onPress={handleRedirectVatTu}>
                         <View style={styles.containerRedirectKho}>
-                          <Ionicons name="basket" size={60} color="#0000b3" />
+                          <Ionicons name="basket"
+                            style={styles.iconStore} />
                         </View>
                       </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
+                      <Text style={styles.containerTextRedirect}>
                         Vật tư
                       </Text>
                     </View>
-                    <View>
+                    <View style={styles.containerItemRedirect}>
                       <Text onPress={handleRedirectNguyenLieu}>
                         <View style={styles.containerRedirectKho}>
-                          <Ionicons name="nuclear" size={60} color="#0000b3" />
+                          <Ionicons name="bonfire"
+                            style={styles.iconStore} />
                         </View>
                       </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
+                      <Text style={styles.containerTextRedirect}>
                         Nguyên liệu
+                      </Text>
+                    </View>
+                    <View style={styles.containerItemRedirect}>
+                      <Text onPress={handleRedirectSanPham}>
+                        <View style={styles.containerRedirectKho}>
+                          <Ionicons name="leaf"
+                            style={styles.iconStore} />
+                        </View>
+                      </Text>
+                      <Text style={styles.containerTextRedirect}>
+                        Sản phẩm
                       </Text>
                     </View>
                   </View>
                   <View style={styles.containerRowRedirect}>
-                    <View style={{ marginRight: 20 }}>
-                      <Text onPress={handleRedirectSanPham}>
-                        <View style={styles.containerRedirectKho}>
-                          <Ionicons name="leaf" size={60} color="#0000b3" />
-                        </View>
-                      </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
-                        Sản phẩm
-                      </Text>
-                    </View>
-                    <View style={{ marginRight: 30 }}>
+
+                    <View style={styles.containerItemRedirect}>
                       <Text onPress={handleRedirectKhoLoi}>
                         <View style={styles.containerRedirectKho}>
                           <Ionicons
                             name="close-circle"
-                            size={60}
-                            color="#0000b3"
+                            style={styles.iconStore}
                           />
                         </View>
                       </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
+                      <Text style={styles.containerTextRedirect}>
                         Hư hỏng
                       </Text>
                     </View>
                   </View>
                 </>
-              ) : checkDonHang(
+              ) : checkDonHang ? (
                 <>
                   <ScreenDonHang navigation={navigation} daily1Id={user._id} />
                 </>
-              )
-              // :()
+              ) : checkDaiLy2 ? (
+                <>
+                  <ScreenDaiLy2 navigation={navigation} daily1Id={user._id} />
+                </>
+              ) : checkHoDan ? (
+                <>
+                  <ScreenHoDan navigation={navigation} daily1Id={user._id} />
+                </>
+              ) : (<></>)
               }
             </View>
           </ScrollView>
@@ -253,5 +273,6 @@ function Home(props) {
     </View>
   );
 }
+
 
 export default Home;

@@ -10,31 +10,28 @@ import {
   Dimensions,
 } from "react-native";
 import axiosClient from "../../../../../api/axiosClient";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import styles from "../style";
 
 function SanPham(props) {
-  const { navigation, idHodan } = props;
+  const { navigation, idDaily1 } = props;
   const data = props.sanpham.item;
-  // console.log(props);
-  // const formatNumber = new Intl.NumberFormat('es');
   //get link image
-  const getImg = (imgName)=>{
-    return `${axiosClient.defaults.baseURL}uploads/${imgName}`;
+  const getImg = (imgName) => {
+    return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
   }
+
   return (
     <View style={styles.container}>
-      <View style={{ padding: 20 }}>
+      <View style={{ paddingBottom: 5 }}>
         <View
           style={{
             flexDirection: "row",
-            marginTop: 20,
-            marginLeft: 40,
-            backgroundColor: "#ff751a",
+            backgroundColor: "white",
             borderRadius: 20,
           }}
         >
-          <View
-            style={{ position: "relative", marginTop: -20, marginLeft: -30 }}
-          >
+          <View style={styles.imageStyle}>
             <Image
               source={{
                 uri: `${getImg(data.sanpham.hinhanh)}`,
@@ -42,38 +39,63 @@ function SanPham(props) {
               style={{
                 width: Dimensions.get("window").width - 220,
                 height: 130,
+                width: 130,
                 borderRadius: 20,
+                borderColor: "#F1F1F1",
+                borderWidth: 1,
               }}
             />
           </View>
           <View
             style={{
+              flexDirection: "column",
+              justifyContent: "space-between",
               marginTop: 10,
               marginLeft: 10,
               marginBottom: 10,
             }}
           >
-            <Text style={{ color: "white" }}>Tên :{data.sanpham.ten}</Text>
-            <Text style={{ color: "white" }}>Giá : {data.sanpham.gia}đ</Text>
-            <Text style={{ color: "white" }}>Mô tả :{data.sanpham.mota}</Text>
-            <Text style={{ color: "white" }}>
-              S.Lượng yêu cầu :{data.soluong}
-            </Text>
-            <Text style={{ color: "white" }}>
-              S.Lượng hoàn thành :{data.soluonghoanthanh}
-            </Text>
-            <Text style={{ color: "white" }}>
-              S.Lượng đã giao :{data.dagiao}
-            </Text>
+            <View>
+              <Text style={styles.headingText}>{data.sanpham.ten}</Text>
+              <View style={styles.listTile}>
+                <Ionicons name="star-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>Giá: {data.sanpham.gia} đ</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="albums-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>Mô tả: {data.sanpham.mota}</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="git-pull-request-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>SL yêu cầu: {data.soluong}</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="pie-chart-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>SL hoàn thành: {data.soluonghoanthanh}</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="checkmark-circle-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>SL đã giao :{data.dagiao}</Text>
+              </View>
+            </View>
+            {/* <Text
+              style={{
+                color: "white",
+                padding: 5,
+                backgroundColor: "#E43A45",
+                textAlign: "center",
+                marginTop: 10,
+                borderRadius: 5,
+              }}
+              onPress={handleClickError}
+            >
+              Báo lỗi
+            </Text> */}
           </View>
         </View>
       </View>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 0,
-  },
-});
 export default SanPham;
+

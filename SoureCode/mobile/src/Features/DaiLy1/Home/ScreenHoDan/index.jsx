@@ -1,40 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import ListDonHang from "./ListDonHang";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // import hodanApi from "../../../../api/hodanApi";
 import daily1Api from "../../../../api/daily1Api";
-function ScreenDonHang(props) {
+// import ListHodan from "./ListHoDan";
+import ListHoDan from "./ListHoDan";
+import Test from "../test";
+function ScreenHoDan(props) {
   const { navigation, daily1Id } = props;
-  // console.log(daily1Api.dsDonhang(daily1Id));
-  const [orderList, setOrderList] = useState();
+  // console.log(daily1Id);
+  const [hodanList, setHodanList] = useState();
   useEffect(() => {
     (async () => {
-      const getListOrder = await daily1Api.dsDonhang(daily1Id);
-      setOrderList(
-        getListOrder.donhang.filter((item) => item.xacnhan === true)
+      const getHodanList = await daily1Api.dsHodanThuocDaily1(daily1Id);
+      setHodanList(
+        getHodanList
       );
     })();
   }, []);
-  // console.log(orderList);
+  // console.log(hodanList);
 
   return (
     <View>
-      {orderList && (
+      {hodanList && (
         <FlatList
-          data={orderList}
-          keyExtractor={(item) => item._id}
+          data={hodanList.hodan}
           renderItem={(item, index) => (
-            <ListDonHang
+            <ListHoDan
               dataList={item}
               navigation={navigation}
               daily1Id={daily1Id}
             />
+            // <Test/>
           )}
+          keyExtractor={(item) => item._id}
         />
       )}
     </View>
   );
 }
 
-export default ScreenDonHang;
+export default ScreenHoDan;

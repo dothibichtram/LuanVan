@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     flexDirection: "row",
     justifyContent: "space-between",
+    marginHorizontal: 10,
     // color: "red",
   },
   containerItemRedirect: {
@@ -97,6 +98,20 @@ const styles = StyleSheet.create({
   iconStore: {
     fontSize: 35,
     color: "#23CC87"
+  },
+  title: {
+    paddingBottom: 8,
+    fontSize: 16,
+    // fontWeight: "bold",
+  },
+  normalText: {
+    marginLeft: 8,
+    color: "grey",
+  },
+  listTile: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 3,
   },
 
 });

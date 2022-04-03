@@ -107,7 +107,7 @@ function SreenDoiMatKhauDL1(props) {
                 borderWidth: 1,
                 padding: 10,
                 borderRadius: 10,
-                width: 250,
+                width: 280,
                 color: "black",
               }}
               placeholder="Mật khẩu cũ"
@@ -122,7 +122,7 @@ function SreenDoiMatKhauDL1(props) {
               style={{ position: "relative", marginTop: 20, marginLeft: -30 }}
               name="eye"
               size={25}
-              color="#0000b3"
+              color="green"
             />
           </View>
           <Text>Nhập mật mới</Text>
@@ -135,7 +135,7 @@ function SreenDoiMatKhauDL1(props) {
                 borderWidth: 1,
                 padding: 10,
                 borderRadius: 10,
-                width: 250,
+                width: 280,
                 color: "black",
               }}
               placeholder="Mật khẩu cũ"
@@ -150,7 +150,7 @@ function SreenDoiMatKhauDL1(props) {
               style={{ position: "relative", marginTop: 20, marginLeft: -30 }}
               name="eye"
               size={25}
-              color="#0000b3"
+              color="green"
             />
           </View>
           <Text>Nhập lại mật khẩu mới</Text>
@@ -163,7 +163,7 @@ function SreenDoiMatKhauDL1(props) {
                 borderWidth: 1,
                 padding: 10,
                 borderRadius: 10,
-                width: 250,
+                width: 280,
                 color: "black",
               }}
               placeholder="Mật khẩu cũ"
@@ -178,7 +178,7 @@ function SreenDoiMatKhauDL1(props) {
               style={{ position: "relative", marginTop: 20, marginLeft: -30 }}
               name="eye"
               size={25}
-              color="#0000b3"
+              color="green"
             />
           </View>
           <Text style={{ color: "red" }}>
@@ -202,7 +202,7 @@ function SreenDoiMatKhauDL1(props) {
       >
         <Text
           style={{
-            borderColor: "#0000e6",
+            borderColor: "green",
             borderWidth: 1,
             borderRadius: 90,
             width: 50,
@@ -214,14 +214,15 @@ function SreenDoiMatKhauDL1(props) {
             navigation.navigate("TabNavDL1");
           }}
         >
-          <Ionicons name="arrow-back" size={25} color="#0000b3" />
+          <Ionicons name="arrow-back" size={25} color="green" />
         </Text>
         <Text
           style={{
             padding: 10,
             marginBottom: 10,
             borderRadius: 10,
-            backgroundColor: "#0000e6",
+            // backgroundColor: "#0000e6",
+            backgroundColor: "green",
             width: 200,
             textAlign: "center",
             color: "white",
@@ -240,7 +241,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
+    // backgroundColor: "#e65c00",
+    backgroundColor: "#4AAE4A",
     paddingTop: 10,
     paddingBottom: 15,
     alignItems: "center",

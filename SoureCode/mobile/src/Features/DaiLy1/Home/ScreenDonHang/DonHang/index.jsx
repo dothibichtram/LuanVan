@@ -174,7 +174,7 @@ function DonHangDL1(props) {
       >
         <Text
           style={{
-            borderColor: "#0000e6",
+            borderColor: "green",
             borderWidth: 1,
             borderRadius: 90,
             width: 50,
@@ -186,14 +186,14 @@ function DonHangDL1(props) {
             navigation.navigate("TabNavDL1");
           }}
         >
-          <Ionicons name="arrow-back" size={25} color="#0000b3" />
+          <Ionicons name="arrow-back" size={25} color="green" />
         </Text>
         <Text
           style={{
             padding: 10,
             marginBottom: 10,
             borderRadius: 10,
-            backgroundColor: "#0000e6",
+            backgroundColor: "green",
             width: 200,
             textAlign: "center",
             color: "white",
@@ -214,7 +214,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
+    // backgroundColor: "#e65c00",
+    backgroundColor: "#4AAE4A",
     padding: 15,
     alignItems: "center",
   },

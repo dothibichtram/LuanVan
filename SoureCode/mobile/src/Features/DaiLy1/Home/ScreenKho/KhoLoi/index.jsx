@@ -10,6 +10,8 @@ import {
   Dimensions,
 } from "react-native";
 import axiosClient from "../../../../../api/axiosClient";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import styles from "../style";
 
 function KhoLoi(props) {
   const { navigation, idDaily1 } = props;
@@ -21,29 +23,42 @@ function KhoLoi(props) {
     dataLoi.congcu
       ? setData(dataLoi.congcu)
       : dataLoi.vattu
-      ? setData(dataLoi.vattu)
-      : setData(dataLoi.nguyenlieu);
+        ? setData(dataLoi.vattu)
+        : setData(dataLoi.nguyenlieu);
   }, []);
-   //get link image
-   const getImg = (imgName)=>{
-    return `${axiosClient.defaults.baseURL}uploads/${imgName}`;
+  //get link image
+  const getImg = (imgName) => {
+    return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
   }
- 
+
   // console.log(dataLoi, data);
   return (
     <View style={styles.container}>
       {data && (
-        <View style={{ padding: 20 }}>
+        <View style={{ paddingBottom: 5 }}>
           <View
             style={{
               flexDirection: "row",
-              marginTop: 20,
-              marginLeft: 40,
-              backgroundColor: "red",
+              backgroundColor: "white",
               borderRadius: 20,
             }}
           >
-            <View
+            <View style={styles.imageStyle}>
+              <Image
+                source={{
+                  uri: `${getImg(data.hinhanh)}`,
+                }}
+                style={{
+                  width: Dimensions.get("window").width - 220,
+                  height: 130,
+                  width: 130,
+                  borderRadius: 20,
+                  borderColor: "#F1F1F1",
+                  borderWidth: 1,
+                }}
+              />
+            </View>
+            {/* <View
               style={{ position: "relative", marginTop: -20, marginLeft: -30 }}
             >
               <Image
@@ -57,7 +72,7 @@ function KhoLoi(props) {
                   borderRadius: 20,
                 }}
               />
-            </View>
+            </View> */}
             <View
               style={{
                 marginTop: 10,
@@ -65,21 +80,26 @@ function KhoLoi(props) {
                 marginBottom: 10,
               }}
             >
-              <Text style={{ color: "white" }}>Tên :{data.ten}</Text>
-              <Text style={{ color: "white" }}>Công dụng :{data.congdung}</Text>
-              <Text style={{ color: "white" }}>Mô tả :{data.mota}</Text>
+              <Text style={styles.headingText}>{data.ten}</Text>
+              <View style={styles.listTile}>
+                <Ionicons name="star-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>Công dụng: {data.congdung}</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="albums-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>Mô tả: {data.mota}</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="locate-outline" size={18} style={styles.iconStyle} />
               {dataLoi.nguyenlieu ? (
-                <Text style={{ color: "white" }}>
-                  Số lượng lỗi :{dataLoi.loi.khoiluongloi}
-                </Text>
+                  <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.soluongloi}</Text>
               ) : (
-                <Text style={{ color: "white" }}>
-                  Số lượng lỗi :{dataLoi.loi.soluongloi}
-                </Text>
-              )}
-              <Text style={{ color: "white" }}>
-                Ngày báo lỗi :{dataLoi.loi.ngaybaoloi}
-              </Text>
+                  <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.soluongloi}</Text>
+              )}</View>
+              <View style={styles.listTile}>
+                <Ionicons name="calendar-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>Ngày báo lỗi :{dataLoi.loi.ngaybaoloi}</Text>
+              </View>
             </View>
           </View>
         </View>
@@ -87,7 +107,7 @@ function KhoLoi(props) {
     </View>
   );
 }
-const styles = StyleSheet.create({
+const _styles = StyleSheet.create({
   container: {
     marginTop: 0,
   },

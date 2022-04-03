@@ -14,7 +14,7 @@ import axiosClient from "../../../../../api/axiosClient";
 function SanPham(props) {
   const { navigation, idHodan } = props;
   const data = props.sanpham.item;
-  // console.log(props);
+  // console.log(data);
   // const formatNumber = new Intl.NumberFormat('es');
   //get link image
   const getImg = (imgName)=>{

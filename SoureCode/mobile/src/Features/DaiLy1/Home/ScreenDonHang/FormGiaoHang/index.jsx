@@ -20,14 +20,14 @@ import * as Yup from "yup";
 import apiTiendo from "../../../../../api/apiTiendo";
 import { MaterialDialog } from "react-native-material-dialog";
 // import hodanApi from "../../../../api/hodanApi";
-import hodanApi from "../../../../../api/hodanApi";
+import daily1Api from "../../../../../api/daily1Api";
 import apiDonhang from "../../../../../api/apiDonhang";
 import apiGiaoHang from "../../../../../api/apiGiaohang"
-// import apiGiaohang from "../../../../api/apiGiaohang";
-function FormGiaoHang(props) {
+import apiGiaohang from "../../../../../api/apiGiaohang"
+function FormGiaoHangDL1(props) {
   const { navigation } = props;
   const data = props.route.params.data;
-  const hodanId = props.route.params.hodanId;
+  const daily1Id = props.route.params.daily1Id;
   // console.log(props);
   // console.log(hodanId);
   const SignupSchema = Yup.object().shape({
@@ -129,13 +129,13 @@ function FormGiaoHang(props) {
         ) {
           const dataForm = {
             donhangId: data._id,
-            hodanId: hodanId,
+            daily1Id: daily1Id,
             dssanpham: [
               { sanpham: sanphamId, dagiao: parseInt(values.soluong) },
             ],
           };
           // console.log(dataForm);
-          const sendRequest = await apiGiaohang.hodanToDaily2(dataForm);
+          const sendRequest = await apiGiaohang.daily1ToGSV(dataForm);
           handleOpen2();
         } else {
           handleOpen3();
@@ -167,11 +167,11 @@ function FormGiaoHang(props) {
         visible={visible2}
         onOk={() => {
           setVisible(false);
-          navigation.navigate("TabNav");
+          navigation.navigate("TabNavDL1");
         }}
         onCancel={() => {
           setVisible(false);
-          navigation.navigate("TabNav");
+          navigation.navigate("TabNavDL1");
         }}
       >
         <Text style={{ color: "green" }}>Đã giao hàng thành công !</Text>
@@ -309,6 +309,7 @@ function FormGiaoHang(props) {
                         borderRadius: 10,
                         backgroundColor: "#e6e6e6",
                         width: 100,
+                        textAlign: "center",
                       }}
                       onPress={pickImage}
                     >
@@ -346,7 +347,8 @@ function FormGiaoHang(props) {
                   >
                     <Text
                       style={{
-                        borderColor: "#0000e6",
+                        // borderColor: "#0000e6",
+                        borderColor: "green",
                         borderWidth: 1,
                         borderRadius: 90,
                         paddingTop: 8,
@@ -355,10 +357,13 @@ function FormGiaoHang(props) {
                         marginLeft: 20,
                       }}
                       onPress={() => {
-                        navigation.navigate("TabNav");
+                        navigation.navigate("TabNavDL1");
                       }}
                     >
-                      <Ionicons name="arrow-back" size={30} color="#0000b3" />
+                      <Ionicons name="arrow-back" size={30} 
+                      // color="#0000b3" 
+                      color="green"
+                      />
                     </Text>
                     <Text
                       onPress={handleSubmit}
@@ -366,7 +371,9 @@ function FormGiaoHang(props) {
                         padding: 10,
                         marginBottom: 10,
                         borderRadius: 10,
-                        backgroundColor: "#0000e6",
+                        // backgroundColor: "#0000e6",
+                        backgroundColor: "green",
+
                         width: 200,
                         textAlign: "center",
                         color: "white",
@@ -391,7 +398,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
+    // backgroundColor: "#e65c00",
+    backgroundColor: "#4AAE4A",
     paddingTop: 10,
     paddingBottom: 30,
     flex: 1,
@@ -447,4 +455,4 @@ const styles = StyleSheet.create({
     marginLeft: 50,
   },
 });
-export default FormGiaoHang;
+export default FormGiaoHangDL1;

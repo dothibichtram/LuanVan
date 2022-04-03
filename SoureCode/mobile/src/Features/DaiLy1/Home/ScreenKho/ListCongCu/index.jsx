@@ -6,13 +6,15 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import daily1Api from "../../../../../api/daily1Api";
 import CongCu from "../CongCu";
-
+import styles from "../style";
+import Ionicons from "react-native-vector-icons/Ionicons";
 const ListCongCuDL1 = (props) => {
   const idDaily1 = props.route.params.idDaily1;
-  const {navigation} = props;
+  const { navigation } = props;
   const [listCongCu, setListCongCu] = useState();
   useEffect(() => {
     const fetchData = async () => {
@@ -25,9 +27,16 @@ const ListCongCuDL1 = (props) => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={{ color: "white" }}>Danh sách công cụ</Text>
+    <SafeAreaView style={_styles.container}>
+      <View style={styles.appBarStyle}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%"}}>Danh sách công cụ</Text>
       </View>
       {listCongCu && (
         <FlatList
@@ -40,7 +49,7 @@ const ListCongCuDL1 = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const _styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,

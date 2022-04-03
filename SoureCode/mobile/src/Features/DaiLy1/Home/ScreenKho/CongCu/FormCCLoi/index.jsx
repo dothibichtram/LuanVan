@@ -26,7 +26,7 @@ function FormCCLoiDL1(props) {
   } = props;
   const [visible, setVisible] = useState(false);
   const getImg = (imgName) => {
-    return `${axiosClient.defaults.baseURL}uploads/${imgName}`;
+    return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
   }
   const SignupSchema = Yup.object().shape({
     soluongloi: Yup.string().required("Trường này không được để trống"),
@@ -73,8 +73,8 @@ function FormCCLoiDL1(props) {
                   }}
                   style={{
                     width: Dimensions.get("window").width - 220,
-                    height: 100,
-                    borderRadius: 20,
+                    height: 150,
+                    borderRadius: 15,
                   }}
                 />
               </View>
@@ -99,45 +99,7 @@ function FormCCLoiDL1(props) {
               //   touched={touched.soluong}
               />
 
-              {/* <Text style={[styles.text]}>Mô tả</Text>
-              <TextInput
-                style={[
-                  styles.textInput,
-                  {
-                    borderColor: !touched
-                      ? "#ccccccf2"
-                      : errors.mota
-                        ? "#FF5A5F"
-                        : "#ccccccf2",
-                  },
-                ]}
-                editable={false}
-                onChangeText={handleChange("mota")}
-                onBlur={handleBlur("mota")}
-                defaultValue={data.congcu.mota}
-              //   error={errors.mota}
-              //   touched={touched.mota}
-              />
-
-              <Text style={styles.text}>Công dụng</Text>
-              <TextInput
-                style={[
-                  styles.textInput,
-                  {
-                    borderColor: !touched
-                      ? "#ccccccf2"
-                      : errors.congdung
-                        ? "#FF5A5F"
-                        : "#ccccccf2",
-                  },
-                ]}
-                onChangeText={handleChange("congdung")}
-                editable={false}
-                onBlur={handleBlur("congdung")}
-                defaultValue={data.congcu.congdung}
-              //   error={errors.congdung}
-              //   touched={touched.congdung}
-              /> */}
+             
               <Text style={styles.text}>Số lượng hư hỏng</Text>
               <TextInput
                 style={[
@@ -213,7 +175,7 @@ function FormCCLoiDL1(props) {
             <TouchableOpacity
               style={{
                 borderWidth: 1,
-                borderColor: 'rgba(0,0,0,0.2)',
+                borderColor: 'green',
                 alignItems: 'center',
                 justifyContent: 'center',
                 width: 55,
@@ -225,7 +187,7 @@ function FormCCLoiDL1(props) {
                 navigation.goBack();
               }}
             >
-              <Ionicons name="arrow-back" size={30} color="#0000b3" />
+              <Ionicons name="arrow-back" size={30} color="green" />
             </TouchableOpacity>
             <Text
               onPress={handleSubmit}
@@ -233,7 +195,8 @@ function FormCCLoiDL1(props) {
                 padding: 10,
                 // marginBottom: 15,
                 borderRadius: 10,
-                backgroundColor: "#0000e6",
+                // backgroundColor: "#0000e6",
+                backgroundColor: "green",
                 width: 200,
                 textAlign: "center",
                 color: "white",
@@ -253,7 +216,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
+    // backgroundColor: "#e65c00",
+    backgroundColor: "#4AAE4A",
     paddingTop: 10,
     paddingBottom: 10,
     alignItems: "center",

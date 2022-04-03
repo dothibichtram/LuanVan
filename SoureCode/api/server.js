@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 const userRouter = require("./routers/userRouter");
 const sanphamRouter = require("./routers/sanphamRouter");
 const congcuRouter = require("./routers/congcuRouter");
@@ -19,6 +20,7 @@ const giaohangRouter = require("./routers/giaohangRouter");
 const app = express();
 
 app.use(cors());
+app.use(morgan('tiny'));
 require("dotenv").config();
 require("./database/config")();
 
