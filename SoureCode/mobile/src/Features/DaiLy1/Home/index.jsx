@@ -16,7 +16,8 @@ import styles from "./style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ScreenDonHang from "./ScreenDonHang";
 import ScreenDaiLy2 from "./ScreenDaiLy2";
-import ScreenHoDan from "./ScreenHoDan";
+// import ScreenHoDan from "./ScreenHoDan";
+import ScreenHoDanThuocDL1 from "./ScreenHoDan";
 function Home(props) {
   const { navigation } = props;
   // console.log(props);
@@ -260,7 +261,7 @@ function Home(props) {
                 </>
               ) : checkHoDan ? (
                 <>
-                  <ScreenHoDan navigation={navigation} daily1Id={user._id} />
+                  <ScreenHoDanThuocDL1 navigation={navigation} daily1Id={user._id} />
                 </>
               ) : (<></>)
               }

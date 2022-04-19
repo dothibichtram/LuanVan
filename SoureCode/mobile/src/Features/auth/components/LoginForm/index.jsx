@@ -67,6 +67,9 @@ function LoginForm(props) {
         case "daily1": {
           return(navigation.navigate("TabNavDL1"));
         }
+        case "daily2": {
+          return(navigation.navigate("TabNavDL2"));
+        }
         default: {
           return (navigation.navigate("TabNavHD"));
         }

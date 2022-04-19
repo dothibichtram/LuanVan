@@ -12,6 +12,7 @@ import img_placeholder from "../../../assets/images/img_placeholder.png";
 import EnhancedTableHead from "../../../components/table/EnhancedTableHead";
 import { formatMoney, getComparator } from "../../../utils";
 import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
+import QRCode from 'qrcode.react';
 import {
   headCellsSanphamDonhangChitiet,
   headCellsSanphamDonhangChitiet2,
@@ -140,7 +141,7 @@ const TableSanphamDonhangChitiet = ({ dsSanpham = [], hodanRole }) => {
                                 : img_placeholder
                             }
                             alt="anhcongcu"
-                            style={{ width: "30px" }}
+                            style={{ width: "100px" }}
                             className={!row?.hinhanh && "noImage"}
                           />
                         </TableCell>
@@ -161,11 +162,17 @@ const TableSanphamDonhangChitiet = ({ dsSanpham = [], hodanRole }) => {
                           {!hodanRole && row.danhan && row.dagiao
                             ? row.danhan - row.dagiao
                             : hodanRole
-                            ? row.soluonghoanthanh - row.dagiao
-                            : 0}
+                              ? row.soluonghoanthanh - row.dagiao
+                              : 0}
                         </TableCell>
                         <TableCell align="right">
                           {formatMoney(row.soluong * row?.gia)} vnđ
+                        </TableCell>
+                        <TableCell>
+                          <QRCode
+                            value={row.qrcode}
+                            size={100}
+                            includeMargin={true} />
                         </TableCell>
                       </TableRow>
                     );

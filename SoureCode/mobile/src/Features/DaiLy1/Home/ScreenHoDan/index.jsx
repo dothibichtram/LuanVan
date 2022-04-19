@@ -5,8 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import daily1Api from "../../../../api/daily1Api";
 // import ListHodan from "./ListHoDan";
 import ListHoDan from "./ListHoDan";
-import Test from "../test";
-function ScreenHoDan(props) {
+function ScreenHoDanThuocDL1(props) {
   const { navigation, daily1Id } = props;
   // console.log(daily1Id);
   const [hodanList, setHodanList] = useState();
@@ -40,4 +39,4 @@ function ScreenHoDan(props) {
   );
 }
 
-export default ScreenHoDan;
+export default ScreenHoDanThuocDL1;

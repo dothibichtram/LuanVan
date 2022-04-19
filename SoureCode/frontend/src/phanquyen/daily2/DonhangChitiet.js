@@ -58,7 +58,7 @@ const DonhangChitiet = (props) => {
     type: "",
     type2: "",
   });
-
+  
   const emptyTableData = (dsDonhang, type) => {
     const typeName = type === "hodan" ? "Hộ dân" : "";
     if (!dsDonhang.length) {

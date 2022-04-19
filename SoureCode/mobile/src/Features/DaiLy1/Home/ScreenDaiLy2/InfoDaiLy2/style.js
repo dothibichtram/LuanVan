@@ -118,5 +118,12 @@ const styles = StyleSheet.create({
     // marginRight: 15,
     padding: 15,
   },
+  appBarStyle: {
+    flexDirection: "row",
+    backgroundColor: "#4AAE4A",
+    paddingVertical: 10, 
+    paddingHorizontal: 15,
+    alignItems: "center",
+  },
 });
 export default styles;

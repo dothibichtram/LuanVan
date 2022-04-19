@@ -8,7 +8,6 @@ import {
   ScrollView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import StickyHeaderFooterScrollView from "react-native-sticky-header-footer-scroll-view";
 function DonHangDL1(props) {
   const data = props.route.params.data;
   const { navigation } = props;
@@ -28,26 +27,21 @@ function DonHangDL1(props) {
                   <Text>Sản phẩm {index + 1}</Text>
                   <View style={{ marginLeft: 10 }}>
                     <Text>
-                      <Ionicons name="square" size={5} color="black" /> Tên sản
-                      phẩm : {item.sanpham.ten}
+                      <Ionicons name="square" size={5} color="black" /> Tên sản phẩm : {item.sanpham.ten}
                     </Text>
                     <Text>
-                      <Ionicons name="square" size={5} color="black" /> Mã sản
-                      phẩm : {item.sanpham.ma}
+                      <Ionicons name="square" size={5} color="black" /> Mã sản phẩm : {item.sanpham.ma}
                     </Text>
                     <Text>
-                      <Ionicons name="square" size={5} color="black" /> Số lượng
-                      : {item.soluong}
+                      <Ionicons name="square" size={5} color="black" /> Số lượng : {item.soluong}
                     </Text>
                     <Text style={{ color: "green" }}>
-                      <Ionicons name="square" size={5} color="black" /> Số lượng
-                      đã hoàn thành : {item.soluonghoanthanh}
+                      <Ionicons name="square" size={5} color="black" /> Số lượng đã hoàn thành : {item.soluonghoanthanh}
                     </Text>
                     {/* <Text><Ionicons name="square" size={5} color="black"  />
                     {" "}Đơn vị : {item.donvi}</Text> */}
                     <Text>
-                      <Ionicons name="square" size={5} color="black" /> Đơn giá
-                      : {item.sanpham.gia} vnđ/m
+                      <Ionicons name="square" size={5} color="black" /> Đơn giá : {item.sanpham.gia} vnđ/m
                     </Text>
                     <Text>
                       <Ionicons name="square" size={5} color="black" /> Mô tả :{" "}

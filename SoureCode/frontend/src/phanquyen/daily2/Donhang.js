@@ -15,6 +15,7 @@ import TableDonhang from "./tables/TableDonhang";
 import { useSelector } from "react-redux";
 import apiDaily2 from "../../axios/apiDaily2";
 import { links } from "./arrayOfLinks";
+import QRCode from 'qrcode.react';
 
 const Donhang = (props) => {
   const [query, setQuery] = useState("");
@@ -57,6 +58,7 @@ const Donhang = (props) => {
   return (
     <>
       <Container>
+     
         <Header title="Đơn hàng" arrOfLinks={links} vaitro="daily2" />
         <Content>
           <FilterSection>

@@ -8,6 +8,7 @@ import {
   Pressable,
   ScrollView,
   LogBox,
+  TouchableOpacity,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // import hodanApi from "../../../api/hodanApi"
@@ -25,8 +26,15 @@ function InfoDaiLy2(props) {
   // console.log(data.ten);
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
-      <View style={styles.headerContainer}>
-        <Text style={{ color: "white" }}>Thông tin đại lý 2</Text>
+      <View style={styles.appBarStyle}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%"}}>Thông tin đại lý 2</Text>
       </View>
       <View
         style={{

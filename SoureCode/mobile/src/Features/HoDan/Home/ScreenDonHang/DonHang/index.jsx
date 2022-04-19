@@ -12,6 +12,7 @@ import StickyHeaderFooterScrollView from "react-native-sticky-header-footer-scro
 function DonHangHD(props) {
   const data = props.route.params.data;
   const { navigation } = props;
+  console.log(props);
   // const formatter = new Intl.NumberFormat("es");
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 20 }}>

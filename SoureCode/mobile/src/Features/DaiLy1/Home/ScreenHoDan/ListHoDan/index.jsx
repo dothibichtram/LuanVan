@@ -9,7 +9,7 @@ function ListHoDan(props) {
   } = props;
   // console.log(data.daidien);
   const handleClickInfo = () => {
-    navigation.navigate("InfoHoDan", { data });
+    navigation.navigate("InfoHoDanThuocDL1", { data });
   };
 
 

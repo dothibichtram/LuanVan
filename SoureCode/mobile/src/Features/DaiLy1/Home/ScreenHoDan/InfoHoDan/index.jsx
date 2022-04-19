@@ -8,6 +8,7 @@ import {
   Pressable,
   ScrollView,
   LogBox,
+  TouchableOpacity,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // import hodanApi from "../../../api/hodanApi"
@@ -15,54 +16,49 @@ import daily1Api from "../../../../../api/daily1Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import ScreenDonHang from "../../ScreenDonHang";
 // import ScreenDaiLy2 from "../../ScreenDaiLy2";
-import ScreenHoDan from "..";
+import ScreenHoDanThuocDL1 from "..";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DataTable } from 'react-native-paper';
 import styles from "./style";
-function InfoHoDan(props) {
+function InfoHoDanThuocDL1(props) {
   const data = props.route.params.data;
   const { navigation } = props;
   // console.log(123456);
   // console.log(user);
   // console.log(data.ten);
+  console.log(data._id);
+  const handleRedirectCongCu = () => {
+    navigation.navigate("ScreenCongCuHDThuocDL1", { idHodan: `${data._id}` });
+  };
+  const handleRedirectVatTu = () => {
+    navigation.navigate("ScreenVatTuHDThuocDL1", { idHodan: `${data._id}` });
+  };
+  const handleRedirectNguyenLieu = () => {
+    navigation.navigate("ScreenNguyenLieuHDThuocDL1", { idHodan: `${data._id}` });
+  };
+  const handleRedirectSanPham = () => {
+    navigation.navigate("ScreenSanPhamHDThuocDL1", { idHodan: `${data._id}` });
+  };
+  const handleRedirectDonHang = () => {
+    navigation.navigate("ScreenDonHangHDThuocDL1", { idHodan: `${data._id}` });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
-      <View>
-      <DataTable>
-        <DataTable.Header>
-          <DataTable.Title>Name</DataTable.Title>
-          <DataTable.Title>Email</DataTable.Title>
-          <DataTable.Title numeric>Age</DataTable.Title>
-        </DataTable.Header>
-
-        <DataTable.Row>
-          <DataTable.Cell>John</DataTable.Cell>
-          <DataTable.Cell>john@kindacode.com</DataTable.Cell>
-          <DataTable.Cell numeric>33</DataTable.Cell>
-        </DataTable.Row>
-
-        <DataTable.Row>
-          <DataTable.Cell>Bob</DataTable.Cell>
-          <DataTable.Cell>test@test.com</DataTable.Cell>
-          <DataTable.Cell numeric>105</DataTable.Cell>
-        </DataTable.Row>
-
-        <DataTable.Row>
-          <DataTable.Cell>Mei</DataTable.Cell>
-          <DataTable.Cell>mei@kindacode.com</DataTable.Cell>
-          <DataTable.Cell numeric>23</DataTable.Cell>
-        </DataTable.Row>
-
-      </DataTable>
-      </View>
-      <View style={styles.headerContainer}>
-        <Text style={{ color: "white" }}>Thông tin hộ dân</Text>
+      <View style={styles.appBarStyle}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin hộ dân</Text>
       </View>
       <View
         style={{
           flexDirection: "row",
-          paddingTop: 20,
-          paddingBottom: 20,
+          paddingVertical: 10,
           paddingLeft: 20,
           borderRadius: 10,
           backgroundColor: "white",
@@ -70,82 +66,126 @@ function InfoHoDan(props) {
           marginBottom: 20,
         }}
       >
-        {/* <Text style={{ marginRight: 10 }}  onPress={handleClickInfo}> */}
-        {/* <Text style={{ marginRight: 10 }} >
-          <Ionicons name="information-circle-outline" size={50} color="black" />
-        </Text> */}
-        <View style={{ marginLeft: 20 }}>
-          <Text style={styles.title}>{data.daidien}</Text>
-          <View style={styles.listTile}>
-            <Ionicons name="call-outline" size={18} color="grey" />
-            <Text style={styles.normalText}>
-              {data.sdt}
-            </Text>
+
+        <DataTable>
+
+          <View style={{ marginLeft: 10 }}>
+            {/* <Text style={styles.title}>{data.daidien}</Text> */}
+            <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="person-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  Tên :
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.daidien}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
+            <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="call-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  Số điện thoại:
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.sdt}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
+
+            <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="card-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  CMND:
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.cmnd}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
+
+            <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="location-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  Làng nghề:
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.langnghe.ten}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
+
+            <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="grid-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  Loại sản phẩm:
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.loaisanpham.ten}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
           </View>
-          <View style={styles.listTile}>
-            <Ionicons name="location-outline" size={20} color="grey" />
-            <Text style={styles.normalText}>
-              {data.langnghe.ten}
-            </Text>
-          </View>
-          <View style={styles.listTile}>
-            <Ionicons name="grid-outline" size={20} color="grey" />
-            <Text style={styles.normalText}>
-              {data.loaisanpham.ten}
-            </Text>
-          </View>
-          <View style={styles.listTile}>
-            <Ionicons name="location-outline" size={20} color="grey" />
-            <Text style={styles.normalText}>
-              {data.langnghe.ten}
-            </Text>
-          </View>
-          {/* <Text>Tài khoản: {data.taikhoan}</Text> */}
-        </View>
+        </DataTable>
       </View>
+
       <View style={styles.containerRowRedirect}>
         <View style={styles.containerItemRedirect}>
-          {/* <Text onPress={handleRedirectCongCu}> */}
-          <View style={styles.containerRedirectKho}>
-            <Ionicons
-              name="construct"
-              style={styles.iconStore}
-            />
-          </View>
-          {/* </Text> */}
+          <Text onPress={handleRedirectCongCu}>
+            <View style={styles.containerRedirectKho}>
+              <Ionicons
+                name="construct"
+                style={styles.iconStore}
+              />
+            </View>
+          </Text>
           <Text style={styles.containerTextRedirect} >
             Công cụ
           </Text>
         </View>
         <View style={styles.containerItemRedirect}>
-          {/* <Text onPress={handleRedirectVatTu}> */}
+          <Text onPress={handleRedirectVatTu}>
           <View style={styles.containerRedirectKho}>
             <Ionicons name="basket"
               style={styles.iconStore} />
           </View>
-          {/* </Text> */}
+          </Text>
           <Text style={styles.containerTextRedirect}>
             Vật tư
           </Text>
         </View>
         <View style={styles.containerItemRedirect}>
-          {/* <Text onPress={handleRedirectNguyenLieu}> */}
+          <Text onPress={handleRedirectNguyenLieu}>
           <View style={styles.containerRedirectKho}>
             <Ionicons name="bonfire"
               style={styles.iconStore} />
           </View>
-          {/* </Text> */}
+          </Text>
           <Text style={styles.containerTextRedirect}>
             Nguyên liệu
           </Text>
         </View>
         <View style={styles.containerItemRedirect}>
-          {/* <Text onPress={handleRedirectSanPham}> */}
+          <Text onPress={handleRedirectSanPham}>
           <View style={styles.containerRedirectKho}>
             <Ionicons name="leaf"
               style={styles.iconStore} />
           </View>
-          {/* </Text> */}
+          </Text>
           <Text style={styles.containerTextRedirect}>
             Sản phẩm
           </Text>
@@ -154,22 +194,20 @@ function InfoHoDan(props) {
       <View style={styles.containerRowRedirect}>
 
         <View style={styles.containerItemRedirect}>
-          {/* <Text onPress={handleRedirectKhoLoi}> */}
+          <Text onPress={handleRedirectDonHang}>
           <View style={styles.containerRedirectKho}>
             <Ionicons
-              name="close-circle"
+              name="file-tray-full"
               style={styles.iconStore}
             />
           </View>
-          {/* </Text> */}
+          </Text>
           <Text style={styles.containerTextRedirect}>
-            Hư hỏng
+            Đơn hàng
           </Text>
         </View>
       </View>
     </SafeAreaView >
   )
-
-
 }
-export default InfoHoDan;
+export default InfoHoDanThuocDL1;

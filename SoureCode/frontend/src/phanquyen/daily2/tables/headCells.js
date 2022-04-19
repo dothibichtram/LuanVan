@@ -509,6 +509,12 @@ export const headCellsSanphamDonhangChitiet = [
     disablePadding: false,
     label: "Giá",
   },
+  {
+    id: "qr",
+    numeric: false,
+    disablePadding: false,
+    label: "Mã QR",
+  },
 ];
 
 export const headCellsSanphamDonhangChitiet2 = [

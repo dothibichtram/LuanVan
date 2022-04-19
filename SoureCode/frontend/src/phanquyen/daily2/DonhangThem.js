@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import BackdropMaterial from "../../components/BackdropMaterial";
 import apiDonhang from "../../axios/apiDonhang";
 import { useSelector } from "react-redux";
+import QRCode from 'qrcode.react';
 import TableSanphamDonhang from "./tables/TableSanphamDonhang";
 import TableDonhangGoc from "./tables/TableDonhangGoc";
 import {
@@ -52,7 +53,7 @@ const DonhangThem = (props) => {
       dssanpham: [],
     },
   ]);
-
+  const [dataQR, setDataQR] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -90,16 +91,16 @@ const DonhangThem = (props) => {
         dsThoaman.map((tm) =>
           tm.hodan._id === hodanId
             ? {
-                ...tm,
-                dssanpham: tm.dssanpham.map((sp) =>
-                  sp._id === spId
-                    ? {
-                        ...sp,
-                        soluongpp: val,
-                      }
-                    : sp
-                ),
-              }
+              ...tm,
+              dssanpham: tm.dssanpham.map((sp) =>
+                sp._id === spId
+                  ? {
+                    ...sp,
+                    soluongpp: val,
+                  }
+                  : sp
+              ),
+            }
             : tm
         )
       );
@@ -110,16 +111,16 @@ const DonhangThem = (props) => {
     stateRef.current = stateRef.current.map((tm) =>
       tm.hodan._id === hodanId
         ? {
-            ...tm,
-            dssanpham: tm.dssanpham.map((sp) =>
-              sp._id === spId
-                ? {
-                    ...sp,
-                    soluongpp: val,
-                  }
-                : sp
-            ),
-          }
+          ...tm,
+          dssanpham: tm.dssanpham.map((sp) =>
+            sp._id === spId
+              ? {
+                ...sp,
+                soluongpp: val,
+              }
+              : sp
+          ),
+        }
         : tm
     );
 
@@ -143,9 +144,8 @@ const DonhangThem = (props) => {
     const tongsl = calcTongSoluong1Sanpham(val, spId, hodanId);
     if (tongsl > sanphamGoc.soluong) {
       let msg = `
-      Tổng số lượng sản phẩm "${sanphamGoc.sanpham.ma}" vượt quá ${
-        tongsl - sanphamGoc.soluong
-      } so với số lượng gốc ${sanphamGoc.soluong}
+      Tổng số lượng sản phẩm "${sanphamGoc.sanpham.ma}" vượt quá ${tongsl - sanphamGoc.soluong
+        } so với số lượng gốc ${sanphamGoc.soluong}
       `;
       setAlertMsg(msg);
       handleOpen();
@@ -163,13 +163,13 @@ const DonhangThem = (props) => {
     temp = temp.map((tm) =>
       value.includes(tm.hodan._id)
         ? {
-            ...tm,
-            dssanpham: tm.dssanpham.map((sp) => ({ ...sp, soluongpp: 1 })),
-          }
+          ...tm,
+          dssanpham: tm.dssanpham.map((sp) => ({ ...sp, soluongpp: 1 })),
+        }
         : {
-            ...tm,
-            dssanpham: tm.dssanpham.map((sp) => ({ ...sp, soluongpp: 0 })),
-          }
+          ...tm,
+          dssanpham: tm.dssanpham.map((sp) => ({ ...sp, soluongpp: 0 })),
+        }
     );
     stateRef.current = temp;
     setDsThoaman(temp);
@@ -198,12 +198,12 @@ const DonhangThem = (props) => {
           temp = temp.map((t) =>
             t.hodan !== null && t.hodan._id === hodan._id
               ? {
-                  ...t,
-                  dssanpham: [
-                    ...t.dssanpham,
-                    { ...sp.sanpham, soluong: sp.soluong },
-                  ],
-                }
+                ...t,
+                dssanpham: [
+                  ...t.dssanpham,
+                  { ...sp.sanpham, soluong: sp.soluong },
+                ],
+              }
               : t
           );
         }
@@ -215,16 +215,16 @@ const DonhangThem = (props) => {
     temp =
       temp.length > 1
         ? temp.map((item) => ({
-            ...item,
-            dssanpham: item.dssanpham.map((sp) => ({ ...sp, soluongpp: 1 })),
-          }))
+          ...item,
+          dssanpham: item.dssanpham.map((sp) => ({ ...sp, soluongpp: 1 })),
+        }))
         : temp.map((item) => ({
-            ...item,
-            dssanpham: item.dssanpham.map((sp) => ({
-              ...sp,
-              soluongpp: sp.soluong,
-            })),
-          }));
+          ...item,
+          dssanpham: item.dssanpham.map((sp) => ({
+            ...sp,
+            soluongpp: sp.soluong,
+          })),
+        }));
 
     setDsThoaman(temp);
     stateRef.current = temp;
@@ -265,6 +265,7 @@ const DonhangThem = (props) => {
                 sanpham: item._id,
                 soluong: item.soluong,
                 soluonghoanthanh: 0,
+                qrcode: tm.hodan._id+ '-' +singleDonhang.ma +'-' + item._id,
               })),
               tongsanpham: getTongNguyenVatlieu(tm.dssanpham, "sanpham"),
               dscongcu: danhsachcongcu.map((item) => ({
@@ -292,10 +293,13 @@ const DonhangThem = (props) => {
               to: {
                 hodan: tm.hodan._id,
               },
+
+              // 
             };
             dsdonhang.push(dl);
           }
         });
+
         const { success } = await apiDonhang.daily2ToHodan({
           donhangId: singleDonhang._id,
           dsdonhang,
@@ -323,6 +327,7 @@ const DonhangThem = (props) => {
     setSingleDonhang(donhang);
     setSingleDaily2(daily2);
     setLoading(false);
+    console.log(singleDonhang);
   };
 
   const getMappedDSSP = (dssp) => {
@@ -403,7 +408,7 @@ const DonhangThem = (props) => {
                 <TotalValue>
                   {formatMoney(
                     singleDonhang?.dssanpham.length &&
-                      getTongDonhang(getMappedDSSP(singleDonhang?.dssanpham))
+                    getTongDonhang(getMappedDSSP(singleDonhang?.dssanpham))
                   )}
                 </TotalValue>
               </div>
@@ -433,19 +438,19 @@ const DonhangThem = (props) => {
                           <span>
                             {isNaN(
                               sp?.soluong -
-                                calcTongSoluong1Sanpham(
-                                  sp?.soluongpp,
-                                  sp?._id,
-                                  tm?.hodan?._id
-                                )
+                              calcTongSoluong1Sanpham(
+                                sp?.soluongpp,
+                                sp?._id,
+                                tm?.hodan?._id
+                              )
                             )
                               ? ""
                               : sp?.soluong -
-                                calcTongSoluong1Sanpham(
-                                  sp?.soluongpp,
-                                  sp?._id,
-                                  tm?.hodan?._id
-                                )}
+                              calcTongSoluong1Sanpham(
+                                sp?.soluongpp,
+                                sp?._id,
+                                tm?.hodan?._id
+                              )}
                           </span>
                         </p>
                       ))}

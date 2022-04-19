@@ -192,10 +192,10 @@ const Tiendo = (props) => {
                                     ? "success"
                                     : tiendoDonhang &&
                                       !tiendoDonhang.hodanNhandon
-                                    ? "danger"
-                                    : ref.current.hodanNhandon
-                                    ? "success"
-                                    : "danger"
+                                      ? "danger"
+                                      : ref.current.hodanNhandon
+                                        ? "success"
+                                        : "danger"
                                 }
                               >
                                 {tiendoDonhang && tiendoDonhang.hodanNhandon ? (
@@ -218,11 +218,10 @@ const Tiendo = (props) => {
                                     ? tiendoDonhang.hodanTDHT
                                     : ref.current.hodanTDHT
                                 )}
-                              >{`${
-                                tiendoDonhang
+                              >{`${tiendoDonhang
                                   ? tiendoDonhang.hodanTDHT
                                   : ref.current.hodanTDHT
-                              } %`}</td>
+                                } %`}</td>
                             </tr>
                           </tbody>
                         </table>
