@@ -31,6 +31,12 @@ import ListKhoLoiDL1 from "../../../DaiLy1/Home/ScreenKho/ListKhoLoi";
 import ScreenDaiLy2 from "../../../DaiLy1/Home/ScreenDaiLy2"
 import FormGiaoHangDL1 from "../../../DaiLy1/Home/ScreenDonHang/FormGiaoHang";
 import InfoDaiLy2 from "../../../DaiLy1/Home/ScreenDaiLy2/InfoDaiLy2";
+import ListCongCuDL2ThuocDL1 from "../../../DaiLy1/Home/ScreenDaiLy2/KhoDaiLy2/ListCongCu";
+import ListVatTuDL2ThuocDL1 from "../../../DaiLy1/Home/ScreenDaiLy2/KhoDaiLy2/ListVatTu";
+import ListNguyenLieuDL2ThuocDL1 from "../../../DaiLy1/Home/ScreenDaiLy2/KhoDaiLy2/ListNguyenLieu";
+import ListSanPhamDL2ThuocDL1 from "../../../DaiLy1/Home/ScreenDaiLy2/KhoDaiLy2/ListSanPham";
+import DonHangDL2ThuocDL1 from "../../../DaiLy1/Home/ScreenDaiLy2/DonHangDaiLy2/DonHang";
+import ScreenDonHangDL2ThuocDL1 from "../../../DaiLy1/Home/ScreenDaiLy2/DonHangDaiLy2";
 import ScreenHoDanThuocDL1 from "../../../DaiLy1/Home/ScreenHoDan";
 import InfoHoDanThuocDL1 from "../../../DaiLy1/Home/ScreenHoDan/InfoHoDan";
 import ListCongCuHDThuocDL1 from "../../../DaiLy1/Home/ScreenHoDan/KhoHoDan/ListCongCu";
@@ -102,6 +108,12 @@ function Login(props) {
         <Stack.Screen name="ScreenDaiLy2" component={ScreenDaiLy2} />
         <Stack.Screen name="FormGiaoHangDL1" component={FormGiaoHangDL1} />
         <Stack.Screen name="InfoDaiLy2" component={InfoDaiLy2} />
+        <Stack.Screen name="ScreenCongCuDL2ThuocDL1" component={ListCongCuDL2ThuocDL1} />
+        <Stack.Screen name="ScreenVatTuDL2ThuocDL1" component={ListVatTuDL2ThuocDL1} />
+        <Stack.Screen name="ScreenNguyenLieuDL2ThuocDL1" component={ListNguyenLieuDL2ThuocDL1} />
+        <Stack.Screen name="ScreenSanPhamDL2ThuocDL1" component={ListSanPhamDL2ThuocDL1} />
+        <Stack.Screen name="DonHangDL2ThuocDL1" component={DonHangDL2ThuocDL1}/>
+        <Stack.Screen name="ScreenDonHangDL2ThuocDL1" component={ScreenDonHangDL2ThuocDL1}/>
         <Stack.Screen name="ScreenHoDanThuocDL1" component={ScreenHoDanThuocDL1} />
         <Stack.Screen name="InfoHoDanThuocDL1" component={InfoHoDanThuocDL1} />
         <Stack.Screen name="ScreenCongCuHDThuocDL1" component={ListCongCuHDThuocDL1} />

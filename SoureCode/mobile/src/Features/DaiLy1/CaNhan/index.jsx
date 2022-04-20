@@ -5,12 +5,11 @@ import {
   FlatList,
   StyleSheet,
   Text,
-  StatusBar,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch } from "react-redux";
 import { logout } from "../../auth/userSlice";
-
+import { StatusBar } from "expo-status-bar";
 const CaNhan = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleChangePassWord = () => {
@@ -71,14 +70,13 @@ const CaNhan = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
   },
   headerContainer: {
-    // backgroundColor: "#e65c00",
     backgroundColor: "#4AAE4A",
-    paddingTop: 10,
-    paddingBottom: 30,
-    flex: 1,
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
   containerRowRedirect: {

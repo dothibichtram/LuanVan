@@ -1,15 +1,15 @@
 import { StyleSheet } from "react-native";
+import { StatusBar } from 'expo-status-bar';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
     flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
   },
   headerContainer: {
-    // backgroundColor: "#e65c00",
     backgroundColor: "#4AAE4A",
-    paddingVertical: 10,
-    // flex: 1,
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
   containerLinkBar: {

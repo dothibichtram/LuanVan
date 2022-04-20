@@ -201,11 +201,11 @@ function LoginForm(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    // marginTop: 10,
     backgroundColor: "#B0D578",
     // backgroundColor:"#b35900",
     alignItems: "center",
-    paddingTop: 70,
+    paddingTop: '45%',
     // paddingBottom: 230,
   },
   containerForm: {

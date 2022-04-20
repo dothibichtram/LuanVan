@@ -13,6 +13,7 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { Formik, ErrorMessage, Field } from "formik";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as ImagePicker from "expo-image-picker";
@@ -395,16 +396,16 @@ function FormGiaoHangDL1(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
   },
   headerContainer: {
-    // backgroundColor: "#e65c00",
     backgroundColor: "#4AAE4A",
-    paddingTop: 10,
-    paddingBottom: 30,
-    flex: 1,
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
+  
   containerForm: {
     backgroundColor: "white",
     paddingBottom: 40,

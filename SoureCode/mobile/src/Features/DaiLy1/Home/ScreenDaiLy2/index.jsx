@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-// import hodanApi from "../../../../api/hodanApi";
+// import daily2Api from "../../../../api/daily2Api";
 import daily1Api from "../../../../api/daily1Api";
+// import Listdaily2 from "./Listdaily2";
 import ListDaiLy2 from "./ListDaiLy2";
-function ScreenDaiLy2(props) {
+function ScreenDaily2ThuocDL1(props) {
   const { navigation, daily1Id } = props;
   // console.log(daily1Id);
   const [daily2List, setDaily2List] = useState();
   useEffect(() => {
     (async () => {
-      const getDaily2List = await daily1Api.dsDaily2ThuocDaily1(daily1Id);
+      const getdaily2List = await daily1Api.dsDaily2ThuocDaily1(daily1Id);
       setDaily2List(
-        getDaily2List
+        getdaily2List
       );
     })();
   }, []);
@@ -29,6 +30,7 @@ function ScreenDaiLy2(props) {
               navigation={navigation}
               daily1Id={daily1Id}
             />
+            // <Test/>
           )}
           keyExtractor={(item) => item._id}
         />
@@ -37,4 +39,4 @@ function ScreenDaiLy2(props) {
   );
 }
 
-export default ScreenDaiLy2;
+export default ScreenDaily2ThuocDL1;

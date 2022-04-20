@@ -7,6 +7,7 @@ import ThongBao from "../ThongBao";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import hodanApi from "../../../api/hodanApi";
 import daily1Api from "../../../api/daily1Api";
+import QRCode from "../Home/ScreenQR";
 const Tab = createBottomTabNavigator();
 function TabNavDL1(props) {
   const {navigation} = props;
@@ -52,9 +53,14 @@ function TabNavDL1(props) {
 
           if (route.name === "Trang chủ") {
             iconName = focused ? "home" : "home";
-          } else if (route.name === "Đơn hàng mới") {
-            iconName = focused ? "notifications" : "notifications";
-          } else if (route.name === "Cá nhân") {
+          } 
+          else if (route.name === "QR") {
+            iconName = focused ? "qr-code-outline" : "qr-code-outline";
+          } 
+          // else if (route.name === "Đơn hàng mới") {
+          //   iconName = focused ? "notifications" : "notifications";
+          // } 
+          else if (route.name === "Cá nhân") {
             iconName = focused ? "person" : "person";
           }
 
@@ -70,7 +76,12 @@ function TabNavDL1(props) {
         children={()=><Home user={user} navigation={navigation}  />}
         options={{ header: () => null }}
       />
-      <Tab.Screen
+       <Tab.Screen
+        name="QR"
+        children={()=><QRCode user={user} navigation={navigation}  />}
+        options={{ header: () => null }}
+      />
+      {/* <Tab.Screen
         name="Đơn hàng mới"
         // component={ThongBao}
         children={()=><ThongBao handleCallBackSL={handleCallBackSL}  user={user} navigation={navigation} />}
@@ -78,7 +89,7 @@ function TabNavDL1(props) {
         //   header: () => null,
         //   tabBarBadge: soluongdonhangchuaxacnhan && soluongdonhangchuaxacnhan,
         // }}
-      />
+      /> */}
       <Tab.Screen
         name="Cá nhân"
         component={CaNhan}

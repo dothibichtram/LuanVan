@@ -26,7 +26,7 @@ function InfoHoDanThuocDL1(props) {
   // console.log(123456);
   // console.log(user);
   // console.log(data.ten);
-  console.log(data._id);
+  // console.log(data._id);
   const handleRedirectCongCu = () => {
     navigation.navigate("ScreenCongCuHDThuocDL1", { idHodan: `${data._id}` });
   };

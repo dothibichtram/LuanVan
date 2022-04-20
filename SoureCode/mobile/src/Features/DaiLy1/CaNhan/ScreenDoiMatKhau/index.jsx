@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from "react";
 import {
   SafeAreaView,
@@ -65,7 +66,7 @@ function SreenDoiMatKhauDL1(props) {
     }
   };
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={{ color: "white" }}>Đổi mật khẩu </Text>
       </View>
@@ -238,13 +239,13 @@ function SreenDoiMatKhauDL1(props) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
   },
   headerContainer: {
-    // backgroundColor: "#e65c00",
     backgroundColor: "#4AAE4A",
-    paddingTop: 10,
-    paddingBottom: 15,
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
 });
