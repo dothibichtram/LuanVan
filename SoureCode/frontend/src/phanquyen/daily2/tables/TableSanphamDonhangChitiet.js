@@ -39,7 +39,7 @@ const TableSanphamDonhangChitiet = ({ dsSanpham = [], hodanRole }) => {
     }
     setSelected([]);
   };
-
+  // console.log(dsSanpham.qrcode);
   const handleClick = (event, _id) => {
     const selectedIndex = selected.indexOf(_id);
     let newSelected = [];
@@ -141,7 +141,7 @@ const TableSanphamDonhangChitiet = ({ dsSanpham = [], hodanRole }) => {
                                 : img_placeholder
                             }
                             alt="anhcongcu"
-                            style={{ width: "100px" }}
+                            style={{ width: "80px" }}
                             className={!row?.hinhanh && "noImage"}
                           />
                         </TableCell>
@@ -169,9 +169,11 @@ const TableSanphamDonhangChitiet = ({ dsSanpham = [], hodanRole }) => {
                           {formatMoney(row.soluong * row?.gia)} vnđ
                         </TableCell>
                         <TableCell>
+                        {/* {row.qrcode}
+                        12345 */}
                           <QRCode
-                            value={row.qrcode}
-                            size={100}
+                            value={row?.qrcode}
+                            size={80}
                             includeMargin={true} />
                         </TableCell>
                       </TableRow>

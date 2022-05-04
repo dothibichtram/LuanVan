@@ -59,6 +59,7 @@ const hodanSchema = new mongoose.Schema(
           default: 0,
         },
         ngaytao: String,
+        qrcode: String,
       },
     ],
     dscongcu: [

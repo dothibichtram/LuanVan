@@ -52,7 +52,7 @@ const ListCongCuDL1 = (props) => {
 const _styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop:  0,
   },
   item: {
     backgroundColor: "#f9c2ff",

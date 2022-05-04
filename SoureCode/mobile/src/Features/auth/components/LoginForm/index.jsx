@@ -205,7 +205,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#B0D578",
     // backgroundColor:"#b35900",
     alignItems: "center",
-    paddingTop: '45%',
+    paddingTop: '30%',
+    height: '100%',
     // paddingBottom: 230,
   },
   containerForm: {

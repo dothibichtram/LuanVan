@@ -74,7 +74,12 @@ const daily2Schema = new mongoose.Schema(
           type: Number,
           default: 0,
         },
+        loi: {
+          soluongloi: Number,
+          ngaybaoloi: String,
+        },
         ngaytao: String,
+        qrcode: String,
       },
     ],
     dscongcu: [

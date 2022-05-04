@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 0,
     flex: 1,
   },
   headerContainer: {
@@ -131,7 +131,9 @@ const styles = StyleSheet.create({
   appBarStyle: {
     flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingVertical: 10, 
+    // paddingVertical: 10, 
+    paddingBottom: 20,
+    paddingTop:40,
     paddingHorizontal: 15,
     alignItems: "center",
   }

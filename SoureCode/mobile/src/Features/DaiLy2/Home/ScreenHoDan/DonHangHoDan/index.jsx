@@ -18,7 +18,7 @@ function ScreenDonHangHDThuocDL2(props) {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={{ flex: 1, marginTop: 0 }}>
       <View style={styles.appBarStyle}>
         <TouchableOpacity
           onPress={() => {
@@ -58,7 +58,9 @@ const styles = StyleSheet.create({
   appBarStyle: {
     flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingVertical: 10, 
+    // paddingVertical: 10,
+    paddingBottom: 20,
+    paddingTop: 40, 
     paddingHorizontal: 15,
     alignItems: "center",
   }

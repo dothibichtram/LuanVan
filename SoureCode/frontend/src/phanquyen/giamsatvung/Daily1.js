@@ -15,6 +15,7 @@ import {
 import TableDaily1 from "./tables/TableDaily1";
 import BackdropMaterial from "../../components/BackdropMaterial";
 import apiGSV from "../../axios/apiGSV";
+import apiDaily1 from "../../axios/apiDaily1";
 import { useSelector } from "react-redux";
 import { links } from "./arrayOfLinks";
 
@@ -31,6 +32,7 @@ const Daily1 = (props) => {
     const { gsv } = await apiGSV.singleGsvBasedUserId(userInfo._id);
     const { daily1 } = await apiGSV.dsDaily1(gsv._id);
     setDsDaily1(daily1 && daily1.length ? daily1 : []);
+   
     setLoading(false);
   };
 
@@ -39,8 +41,10 @@ const Daily1 = (props) => {
       dsDaily1 &&
       dsDaily1.filter((item) =>
         searchColumns.some(
-          (col) =>
-            item[col].toString().toLowerCase().indexOf(query.toLowerCase()) > -1
+          (col) => {
+            // console.log(item[col].toString().toLowerCase().indexOf(query.toLowerCase()) > -1);
+            return item[col].toString().toLowerCase().indexOf(query.toLowerCase()) > -1;
+          }
         )
       )
     );

@@ -24,6 +24,7 @@ function FormCCLoiDL1(props) {
     },
     navigation,
   } = props;
+  // console.log(props);
   const [visible, setVisible] = useState(false);
   const getImg = (imgName) => {
     return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
@@ -42,8 +43,7 @@ function FormCCLoiDL1(props) {
       dsccLoi: [{ ...data, ...dataForm }],
     });
     handleOpen();
-
-    // console.log({ dsccLoi: [{ ...data, ...dataForm }] }, sendRequest);
+    console.log({ dsccLoi: [{ ...data, ...dataForm }] }, sendRequest);
   };
   return (
     <Formik
@@ -68,7 +68,6 @@ function FormCCLoiDL1(props) {
               <View style={styles.centerImg} >
                 <Image
                   source={{
-                    // uri: `http://10.3.53.160:5000/uploads/${data.congcu.hinhanh}`,
                     uri: `${getImg(data.congcu.hinhanh)}`
                   }}
                   style={{

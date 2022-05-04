@@ -29,6 +29,7 @@ const bophankdSchema = new mongoose.Schema(
         },
         soluong: Number, // = số lượng sp đặt * định mức công cụ
         ngaytao: String,
+        qrcode: String,
       },
     ],
     dsvattu: [

@@ -8,6 +8,7 @@ function ListDonHang(props) {
     navigation,
     daily2Id,
   } = props;
+  // console.log(props);
   const checkComplelteOrder = data.dssanpham.find(
     (item) => item.soluong !== item.soluonghoanthanh
   );

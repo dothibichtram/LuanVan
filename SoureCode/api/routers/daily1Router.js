@@ -31,7 +31,7 @@ daily1Router.post("/them", async (req, res) => {
       giamsatvung: gsvId,
     });
     const savedDaily1 = await newDaily1.save();
-
+  
     if (savedDaily1) {
       // Thêm vào danh sách đại lý 1 của GSV
       const gsv = await Giamsatvung.findById(gsvId);
@@ -424,7 +424,6 @@ daily1Router.get("/danhsachvattu/:daily1Id", async (req, res) => {
     res.send({ message: error.message, success: false });
   }
 });
-
 // Lay danh sach hodan thuoc dai ly 1
 daily1Router.get("/dshodan/:daily1Id", async (req, res) => {
   try {
@@ -506,7 +505,6 @@ daily1Router.get("/dsdonhang/:daily1Id", async (req, res) => {
           },
         },
       });
-
     res.send({ donhang, success: true });
   } catch (error) {
     res.send({ message: error.message, success: false });
@@ -662,7 +660,6 @@ daily1Router.get("/tongquan/:daily1Id", async (req, res) => {
     let daily1 = await Daily1.findById(req.params.daily1Id).populate(
       "dssanpham dscongcu dsvattu dsnguyenlieu daily2 hodan donhang"
     );
-
     res.send({
       dssanpham: daily1.dssanpham.length,
       dscongcu: daily1.dscongcu.length,
@@ -691,7 +688,6 @@ daily1Router.get("/dsshowbadge/:daily1Id", async (req, res) => {
       .select("donhang")
       .populate("donhang");
     donhang = donhang.filter((dh) => !dh.xacnhan);
-
     res.send({
       hodanBadge: hodan.length,
       donhangBadge: donhang.length,
@@ -701,7 +697,68 @@ daily1Router.get("/dsshowbadge/:daily1Id", async (req, res) => {
     res.send({ message: error.message, success: false });
   }
 });
-//--------------------------------------------
+//-------------------------------------------
+daily1Router.put("/themsphuloi/:dl1Id", async (req, res) => {
+  const { dsspLoi } = req.body;
+  const daily1 = await Daily1.findById(req.params.dl1Id);
+  console.log(dsspLoi);
+  try {
+    for (const sp of dsspLoi) {
+      const daily1 = await Daily1.findById(req.params.dl1Id);
+      // console.log(daily1.dssanpham);
+      daily1.dssanpham = daily1.dssanpham.map((item) =>
+        item.sanpham.toString() === sp.idSanpham &&
+          item.donhang.toString() === sp.idDonhang &&
+          item.loi.soluongloi
+          ? {
+            donhang: item.donhang,
+            sanpham: item.sanpham,
+            loi: {
+              soluongloi: item.loi.soluongloi + 1,
+              ngaybaoloi: getCurrentDatetime(),
+            },
+            soluong: item.soluong,
+            ngaytao: item.ngaytao,
+          }
+          : item.sanpham.toString() === sp.idSanpham &&
+            item.donhang.toString() === sp.idDonhang
+            ? {
+              donhang: item.donhang,
+              sanpham: item.sanpham,
+              loi: {
+                soluongloi: 1,
+                ngaybaoloi: getCurrentDatetime(),
+              },
+              soluong: item.soluong,
+              ngaytao: item.ngaytao,
+            }
+            : item
+      );
+      await daily1.save();
+    }
+    res.send({ success: true });
+  } catch (error) {
+    res.send({ message: error.message, success: false });
+  }
+});
+// //lay ds sản phẩm hư lỗi
+daily1Router.get("/dssphuloi/:dl1Id", async (req, res) => {
+  try {
+    let { dssanpham: dssanphamhuloi } = await Daily1.findById(req.params.dl1Id)
+      .select("dssanpham")
+      .populate({
+        path: "dssanpham",
+        populate: {
+          path: "donhang sanpham",
+        },
+      });
+    // dssanphamhuloi = dssanphamhuloi.filter((sp) => sp.loi.soluongloi);
+    res.send({ dssanphamhuloi, success: true });
+  } catch (error) {
+    res.send({ message: error.message, success: false });
+  }
+});
+
 
 // them cong cu hu loi
 daily1Router.put("/themcchuloi/:dl1Id", async (req, res) => {
@@ -709,6 +766,7 @@ daily1Router.put("/themcchuloi/:dl1Id", async (req, res) => {
   try {
     for (const cc of dsccLoi) {
       const daily1 = await Daily1.findById(req.params.dl1Id);
+      console.log(daily1);
       daily1.dscongcu = daily1.dscongcu.map((item) =>
         item.congcu.toString() === cc.congcu._id &&
         item.donhang.toString() === cc.donhang._id &&

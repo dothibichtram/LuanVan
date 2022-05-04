@@ -23,11 +23,12 @@ hodanRouter.post("/them", async (req, res) => {
     cmnd,
     namsinh,
     langnghe,
-    loaisanpham,
+    // loaisanpham,
     taikhoan,
     daily1,
     daily2,
   } = req.body;
+  console.log(req.body);
   try {
     // create hodan
     const hodan = new Hodan({
@@ -39,7 +40,7 @@ hodanRouter.post("/them", async (req, res) => {
       cmnd,
       namsinh,
       langnghe,
-      loaisanpham,
+      // loaisanpham,
       taikhoan,
       daily2,
     });

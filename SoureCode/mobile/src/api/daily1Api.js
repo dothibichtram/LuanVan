@@ -148,11 +148,21 @@ const daily1Api = {
     const url = `/api/daily1/dssanpham/${daily1Id}`;
     return axiosClient.get(url);
   },
-  // // xac nhan don hang thuoc hodan
-  // xacnhan(hodanId, donhangId) {
-  //   const url = `/api/daily1/xacnhandh/${hodanId}/${donhangId}`;
-  //   return axiosClient.put(url);
-  // },
+  // xac nhan don hang thuoc hodan
+  xacnhan(daily1Id, donhangId) {
+    const url = `/api/daily1/xacnhandh/${daily1Id}/${donhangId}`;
+    return axiosClient.put(url);
+  },
+
+  themSanphamHuloi(daily1Id, payload) {
+    const url = `/api/daily1/themsphuloi/${daily1Id}`;
+    return axiosClient.put(url, payload);
+  },
+
+  dsSanphamHuloi(daily1Id) {
+    const url = `/api/daily1/dssphuloi/${daily1Id}`;
+    return axiosClient.get(url);
+  },
 
   // them cong cu hu loi
   themCongcuHuloi(daily1Id, payload) {

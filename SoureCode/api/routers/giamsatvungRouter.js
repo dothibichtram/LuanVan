@@ -256,9 +256,11 @@ giamsatvungRouter.get("/dsdonhang/:gsvId", async (req, res) => {
 });
 
 // lay ds dai ly 1 thuoc giam sat vung
-giamsatvungRouter.get("/dsdaily1/:gsvId", async (req, res) => {
+giamsatvungRouter.get("/dsdaily1/:giamsatvungId", async (req, res) => {
+  // console.log(req.params);
+
   try {
-    let { daily1 } = await Giamsatvung.findById(req.params.gsvId)
+    let { daily1 } = await Giamsatvung.findById(req.params.giamsatvungId)
       .select("daily1")
       .populate("daily1");
     if (!daily1.length) {

@@ -4,7 +4,8 @@ import { StatusBar } from 'expo-status-bar';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 0,
+    // marginTop: StatusBar.currentHeight || 0,
   },
   headerContainer: {
     backgroundColor: "#4AAE4A",

@@ -95,14 +95,14 @@ const apiDaily2 = {
 
   //============
   // lay ds don hang thuoc daily2
-  dsDonhang(daily1Id) {
-    const url = `/daily2/dsdonhang/${daily1Id}`;
+  dsDonhang(daily2Id) {
+    const url = `/daily2/dsdonhang/${daily2Id}`;
     return axiosClient.get(url);
   },
 
   // lay ds SUB don hang thuoc daily2
-  dsSubDonhang(daily1Id, madh) {
-    const url = `/daily2/dssubdonhang/${daily1Id}/${madh}`;
+  dsSubDonhang(daily2Id, madh) {
+    const url = `/daily2/dssubdonhang/${daily2Id}/${madh}`;
     return axiosClient.get(url);
   },
 

@@ -41,89 +41,89 @@ function InfoDaiLy2(props) {
     navigation.navigate("ScreenDonHangDL2ThuocDL1", { idDaily2: `${data._id}` });
   };
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
-    <View style={styles.appBarStyle}>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.goBack();
+    <SafeAreaView style={styles.container}>
+      <View style={styles.appBarStyle}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin đại lý 2</Text>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          paddingVertical: 10,
+          paddingLeft: 20,
+          borderRadius: 10,
+          backgroundColor: "white",
+          alignItems: "center",
+          marginBottom: 20,
         }}
       >
-        <Ionicons name="arrow-back" size={25} color="white" />
-      </TouchableOpacity>
-      <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin hộ dân</Text>
-    </View>
-    <View
-      style={{
-        flexDirection: "row",
-        paddingVertical: 10,
-        paddingLeft: 20,
-        borderRadius: 10,
-        backgroundColor: "white",
-        alignItems: "center",
-        marginBottom: 20,
-      }}
-    >
 
-      <DataTable>
+        <DataTable>
 
-        <View style={{ marginLeft: 10 }}>
-          {/* <Text style={styles.title}>{data.daidien}</Text> */}
-          <DataTable.Row style={styles.rowtable}>
-            <DataTable.Cell >
-              <Ionicons name="person-outline" size={17} color="grey" />
-              <Text style={styles.lableText}>
-                Tên :
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Text style={styles.normalText}>
-                {data.daidien}
-              </Text>
-            </DataTable.Cell>
-          </DataTable.Row>
-          <DataTable.Row style={styles.rowtable}>
-            <DataTable.Cell >
-              <Ionicons name="call-outline" size={17} color="grey" />
-              <Text style={styles.lableText}>
-                Số điện thoại:
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Text style={styles.normalText}>
-                {data.sdt}
-              </Text>
-            </DataTable.Cell>
-          </DataTable.Row>
+          <View style={{ marginLeft: 10 }}>
+            {/* <Text style={styles.title}>{data.daidien}</Text> */}
+            <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="person-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  Tên :
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.ten}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
+            <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="call-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  Số điện thoại:
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.sdt}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
 
-          <DataTable.Row style={styles.rowtable}>
-            <DataTable.Cell >
-              <Ionicons name="card-outline" size={17} color="grey" />
-              <Text style={styles.lableText}>
-                CMND:
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Text style={styles.normalText}>
-                {data.cmnd}
-              </Text>
-            </DataTable.Cell>
-          </DataTable.Row>
+            <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="mail-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  Email:
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.email}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
 
-          <DataTable.Row style={styles.rowtable}>
-            <DataTable.Cell >
-              <Ionicons name="location-outline" size={17} color="grey" />
-              <Text style={styles.lableText}>
-                Làng nghề:
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Text style={styles.normalText}>
-                {data.langnghe.ten}
-              </Text>
-            </DataTable.Cell>
-          </DataTable.Row>
+            {/* <DataTable.Row style={styles.rowtable}>
+              <DataTable.Cell >
+                <Ionicons name="location-outline" size={17} color="grey" />
+                <Text style={styles.lableText}>
+                  Địa chỉ:
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.normalText}>
+                  {data.huyen} {data.tinh}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row> */}
 
-          <DataTable.Row style={styles.rowtable}>
+            {/* <DataTable.Row style={styles.rowtable}>
             <DataTable.Cell >
               <Ionicons name="grid-outline" size={17} color="grey" />
               <Text style={styles.lableText}>
@@ -132,79 +132,79 @@ function InfoDaiLy2(props) {
             </DataTable.Cell>
             <DataTable.Cell>
               <Text style={styles.normalText}>
-                {data.loaisanpham.ten}
+                {data.loaisanpham}
               </Text>
             </DataTable.Cell>
-          </DataTable.Row>
-        </View>
-      </DataTable>
-    </View>
-
-    <View style={styles.containerRowRedirect}>
-      <View style={styles.containerItemRedirect}>
-        <Text onPress={handleRedirectCongCu}>
-          <View style={styles.containerRedirectKho}>
-            <Ionicons
-              name="construct"
-              style={styles.iconStore}
-            />
+          </DataTable.Row> */}
           </View>
-        </Text>
-        <Text style={styles.containerTextRedirect} >
-          Công cụ
-        </Text>
+        </DataTable>
       </View>
-      <View style={styles.containerItemRedirect}>
-        <Text onPress={handleRedirectVatTu}>
-        <View style={styles.containerRedirectKho}>
-          <Ionicons name="basket"
-            style={styles.iconStore} />
-        </View>
-        </Text>
-        <Text style={styles.containerTextRedirect}>
-          Vật tư
-        </Text>
-      </View>
-      <View style={styles.containerItemRedirect}>
-        <Text onPress={handleRedirectNguyenLieu}>
-        <View style={styles.containerRedirectKho}>
-          <Ionicons name="bonfire"
-            style={styles.iconStore} />
-        </View>
-        </Text>
-        <Text style={styles.containerTextRedirect}>
-          Nguyên liệu
-        </Text>
-      </View>
-      <View style={styles.containerItemRedirect}>
-        <Text onPress={handleRedirectSanPham}>
-        <View style={styles.containerRedirectKho}>
-          <Ionicons name="leaf"
-            style={styles.iconStore} />
-        </View>
-        </Text>
-        <Text style={styles.containerTextRedirect}>
-          Sản phẩm
-        </Text>
-      </View>
-    </View>
-    <View style={styles.containerRowRedirect}>
 
-      <View style={styles.containerItemRedirect}>
-        <Text onPress={handleRedirectDonHang}>
-        <View style={styles.containerRedirectKho}>
-          <Ionicons
-            name="file-tray-full"
-            style={styles.iconStore}
-          />
+      <View style={styles.containerRowRedirect}>
+        <View style={styles.containerItemRedirect}>
+          <Text onPress={handleRedirectCongCu}>
+            <View style={styles.containerRedirectKho}>
+              <Ionicons
+                name="construct"
+                style={styles.iconStore}
+              />
+            </View>
+          </Text>
+          <Text style={styles.containerTextRedirect} >
+            Công cụ
+          </Text>
         </View>
-        </Text>
-        <Text style={styles.containerTextRedirect}>
-          Đơn hàng
-        </Text>
+        <View style={styles.containerItemRedirect}>
+          <Text onPress={handleRedirectVatTu}>
+            <View style={styles.containerRedirectKho}>
+              <Ionicons name="basket"
+                style={styles.iconStore} />
+            </View>
+          </Text>
+          <Text style={styles.containerTextRedirect}>
+            Vật tư
+          </Text>
+        </View>
+        <View style={styles.containerItemRedirect}>
+          <Text onPress={handleRedirectNguyenLieu}>
+            <View style={styles.containerRedirectKho}>
+              <Ionicons name="bonfire"
+                style={styles.iconStore} />
+            </View>
+          </Text>
+          <Text style={styles.containerTextRedirect}>
+            Nguyên liệu
+          </Text>
+        </View>
+        <View style={styles.containerItemRedirect}>
+          <Text onPress={handleRedirectSanPham}>
+            <View style={styles.containerRedirectKho}>
+              <Ionicons name="leaf"
+                style={styles.iconStore} />
+            </View>
+          </Text>
+          <Text style={styles.containerTextRedirect}>
+            Sản phẩm
+          </Text>
+        </View>
       </View>
-    </View>
-  </SafeAreaView >
+      <View style={styles.containerRowRedirect}>
+
+        <View style={styles.containerItemRedirect}>
+          <Text onPress={handleRedirectDonHang}>
+            <View style={styles.containerRedirectKho}>
+              <Ionicons
+                name="file-tray-full"
+                style={styles.iconStore}
+              />
+            </View>
+          </Text>
+          <Text style={styles.containerTextRedirect}>
+            Đơn hàng
+          </Text>
+        </View>
+      </View>
+    </SafeAreaView >
   )
 
   // const handleRedirectBCTienDo = () => {

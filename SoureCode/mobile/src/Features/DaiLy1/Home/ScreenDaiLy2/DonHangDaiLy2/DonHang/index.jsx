@@ -32,7 +32,7 @@ function DonHangDL2ThuocDL1(props) {
 
   // const formatter = new Intl.NumberFormat("es");
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.appBarStyle}>
         <TouchableOpacity
           onPress={() => {
@@ -186,7 +186,7 @@ function DonHangDL2ThuocDL1(props) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 0,
   },
   headerContainer: {
     // backgroundColor: "#e65c00",
@@ -197,7 +197,9 @@ const styles = StyleSheet.create({
   appBarStyle: {
     flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingVertical: 10, 
+    // paddingVertical: 10,
+    paddingBottom:20,
+    paddingTop:40, 
     paddingHorizontal: 15,
     alignItems: "center",
   }

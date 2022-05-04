@@ -140,6 +140,7 @@ const Daily1Them = (props) => {
     setGsvInfo(gsv);
     setLoading(false);
   };
+  console.log(userInfo._id);
 
   React.useEffect(() => {
     setSuccess(false);
@@ -157,7 +158,7 @@ const Daily1Them = (props) => {
         <Header
           title="Quay lại danh sách đại lý 1"
           titleBack
-          onClick={() => props.history.push("/giamsatvung/daily1")}
+          onClick={() => props.history.push("/giamsatvung/dsdaily1")}
           headerRight={
             <button className="btn btn-primary px-3" onClick={handleSubmit}>
               Lưu

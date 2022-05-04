@@ -14,6 +14,7 @@ import Header from "../../components/Header";
 import { apiTinhThanh } from "../../apiTinhThanh";
 import apiHodan from "../../axios/apiHodan";
 import apiLangnghe from "../../axios/apiLangnghe";
+import apiLoaiSanpham from "../../axios/apiLoaiSanpham";
 import BackdropMaterial from "../../components/BackdropMaterial";
 import { useSelector } from "react-redux";
 import apiDaily2 from "../../axios/apiDaily2";
@@ -70,11 +71,22 @@ const HodanThem = (props) => {
     }
   };
 
+  const dsTinh = apiTinhThanh.map((item) => item.name);
+  const dsHuyen = apiTinhThanh
+    .find((item) => item.name === tinh)
+    ?.districts.map((item) => item.name);
   const dsXa = apiTinhThanh
     .find((item) => item.name === tinh)
     ?.districts.find((item) => item.name === huyen)
     ?.wards.map((item) => item.name);
 
+
+  // const dsXa = apiTinhThanh
+  //   .find((item) => item.name === tinh)
+  //   ?.districts.find((item) => item.name === huyen)
+  //   ?.wards.map((item) => item.name);
+
+    // console.log(dsXa);
   const handleChangeHodan = (e) => {
     setHodan({
       ...hodan,
@@ -100,8 +112,8 @@ const HodanThem = (props) => {
       !hodan.cmnd ||
       !hodan.namsinh ||
       !selectedLangnghe ||
-      !xa ||
-      !selectedLoaiSP
+      !xa 
+      // !selectedLoaiSP
     ) {
       setErrMsg("Thông tin không được để trống");
       return false;
@@ -120,7 +132,7 @@ const HodanThem = (props) => {
         cmnd: hodan.cmnd,
         namsinh: hodan.namsinh,
         langnghe: selectedLangnghe,
-        loaisanpham: selectedLoaiSP,
+        // loaisanpham: selectedLoaiSP,
         taikhoan: hodan.taikhoan,
         daily1: daily2Info.daily1,
         daily2: daily2Info._id,
@@ -148,7 +160,7 @@ const HodanThem = (props) => {
     sethuyen(null);
     setSelectedLangnghe(null);
     setXa(null);
-    setselectedLoaiSP(null);
+    // setselectedLoaiSP(null);
     setdsLoaiSP([]);
   };
 
@@ -163,11 +175,26 @@ const HodanThem = (props) => {
     setLoading(false);
   };
 
+  const fetchDsLoaiSP = async () => {
+    setLoading(true);
+    const { loaisanpham } = await apiLoaiSanpham.dsLoaiSanpham();
+    const { daily2 } = await apiDaily2.singleDaily2BasedUser(userInfo._id);
+    const { hodan } = await apiHodan.dsHodan();
+    setDsTaikhoan(hodan.map((hodan) => hodan.taikhoan));
+    setdsLoaiSP(loaisanpham);
+    setDaily2Info(daily2);
+    setLoading(false);
+   
+  };
+   console.log(dsLangnghe);
+
   useEffect(() => {
     setSuccess(false);
     fetchDsLangnghe();
+    fetchDsLoaiSP();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
+
 
   if (loading) {
     return <BackdropMaterial />;
@@ -281,7 +308,7 @@ const HodanThem = (props) => {
                         sethuyen(huyen);
                         setdsLoaiSP(loaisanpham);
                         setXa(null);
-                        setselectedLoaiSP(null);
+                        // setselectedLoaiSP(null);
                       }}
                     >
                       {dsLangnghe &&
@@ -299,29 +326,76 @@ const HodanThem = (props) => {
 
               <div className="col-lg-6">
                 <FormGroup>
-                  <Label>
-                    <img src={diachi} alt="diachi" />
-                    <span>Nơi cư trú:</span>
-                  </Label>
-                  {dsXa && dsXa.length ? (
-                    <DropdownMaterial2
-                      label="Chọn xã"
-                      value={xa}
-                      onChange={(e) => setXa(e.target.value)}
-                    >
-                      {dsXa.map((item) => (
-                        <MenuItem value={item}>{item}</MenuItem>
-                      ))}
-                    </DropdownMaterial2>
-                  ) : (
-                    <DropdownMaterial2 label="Chọn xã" />
-                  )}
-                  {!xa && <ErrMsg>{errMsg}</ErrMsg>}
-                </FormGroup>
+                <Label>
+                  <img src={diachi} alt="diachi" />
+                  <span>Địa chỉ:</span>
+                </Label>
+                <div className="row">
+                  <div className="col-lg-4">
+                    {dsTinh && dsTinh.length ? (
+                      <DropdownMaterial2
+                        label="Chọn Tỉnh/Thành Phố"
+                        value={tinh}
+                        onChange={(e) => {
+                          setTinh(e.target.value);
+                          sethuyen(null);
+                          setXa(null);
+                        }}
+                      >
+                        {dsTinh.map((item) => (
+                          <MenuItem value={item}>{item}</MenuItem>
+                        ))}
+                      </DropdownMaterial2>
+                    ) : (
+                      <DropdownMaterial2 label="Chọn Tỉnh/Thành Phố" />
+                    )}
+                    {!tinh && <ErrMsg>{errMsg}</ErrMsg>}
+                  </div>
+
+                  <div className="col-lg-4">
+                    {dsHuyen && dsHuyen.length ? (
+                      <DropdownMaterial2
+                        label="Chọn Quận/Huyện"
+                        value={huyen}
+                        onChange={(e) => {
+                          sethuyen(e.target.value);
+                          setXa(null);
+                        }}
+                      >
+                        {dsHuyen.map((item) => (
+                          <MenuItem value={item}>{item}</MenuItem>
+                        ))}
+                      </DropdownMaterial2>
+                    ) : (
+                      <DropdownMaterial2 label="Chọn Quận/Huyện" />
+                    )}
+                    {!huyen && <ErrMsg>{errMsg}</ErrMsg>}
+                  </div>
+
+                  <div className="col-lg-4">
+                    {dsXa && dsXa.length ? (
+                      <DropdownMaterial2
+                        label="Chọn Phường/Xã"
+                        value={xa}
+                        onChange={(e) => {
+                          setXa(e.target.value);
+                        }}
+                      >
+                        {dsXa.map((item) => (
+                          <MenuItem value={item}>{item}</MenuItem>
+                        ))}
+                      </DropdownMaterial2>
+                    ) : (
+                      <DropdownMaterial2 label="Chọn Quận/Huyện" />
+                    )}
+                    {!xa && <ErrMsg>{errMsg}</ErrMsg>}
+                  </div>
+                </div>
+              </FormGroup>
               </div>
             </div>
 
-            <FormGroup>
+            {/* <FormGroup>
               <Label>
                 <img src={loai} alt="loai" />
                 <span>Loại sản phẩm:</span>
@@ -341,6 +415,42 @@ const HodanThem = (props) => {
               )}
               {!selectedLoaiSP && <ErrMsg>{errMsg}</ErrMsg>}
             </FormGroup>
+
+            <FormGroup>
+                  <Label>
+                    <img src={loai} alt="loai" />
+                    <span>Loại sản phẩm:</span>
+                  </Label>
+                  {dsLoaiSP && dsLoaiSP.length ? (
+                    <DropdownMaterial2
+                      label="Chọn Loại sản phẩm"
+                      value={selectedLoaiSP}
+                      onChange={(e) => {
+                        setselectedLoaiSP(e.target.value);
+                        const { tinh, huyen, langnghe } = dsLoaiSP.find(
+                          (item) => item._id === e.target.value
+                        );
+                        setTinh(tinh);
+                        sethuyen(huyen);
+                        setDsLangnghe(langnghe);
+                        setXa(null);
+                        // setselectedLoaiSP(null);
+                      }}
+                    >
+                      {dsLoaiSP &&
+                        dsLoaiSP.length &&
+                        dsLoaiSP.map((item) => (
+                          <MenuItem value={item._id}>{item.ten}</MenuItem>
+                    //     ))}
+                    //      {dsLoaiSP.map((item) => (
+                    // <MenuItem value={item._id}>{item.ten}</MenuItem>
+                  ))}
+                    </DropdownMaterial2>
+                  ) : (
+                    <DropdownMaterial2 label="Chọn loại sản phẩm" />
+                  )}
+                  {!selectedLoaiSP && <ErrMsg>{errMsg}</ErrMsg>}
+                </FormGroup> */}
 
             <FormGroup>
               <Label>

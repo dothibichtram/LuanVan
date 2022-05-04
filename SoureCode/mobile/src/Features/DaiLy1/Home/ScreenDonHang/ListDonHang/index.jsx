@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
+import daily1Api from "../../../../../api/daily1Api";
+import apiDonhang from "../../../../../api/apiDonhang";
 function ListDonHang(props) {
   const {
     dataList: { item: data },
@@ -11,6 +12,21 @@ function ListDonHang(props) {
   const checkComplelteOrder = data.dssanpham.find(
     (item) => item.soluong !== item.soluonghoanthanh
   );
+  const [orderList, setOrderList] = useState();
+  // const [data, setData] = useState();
+  useEffect(() => {
+    (async () => {
+      // const getListOrder = await daily1Api.dsDonhang(Daily1Id);
+      // const getData = await daily1Api.dsDonhang(Daily1Id);
+      // let { donhang } = await apiDonhang.singleDonhang(donhangId);
+      // setData(getData);
+      // setOrderList(
+      //   getListOrder.donhang.filter((item) => item.xacnhan === true)
+      // );
+    })();
+  }, []);
+
+
   // console.log(checkComplelteOrder);
   const handleClickOrder = () => {
     navigation.navigate("DonHangDL1", { data });
@@ -34,10 +50,7 @@ function ListDonHang(props) {
           marginBottom: 10,
         }}
       >
-
         <View>
-
-
           <View style={styles.listTile}>
             <Text style={styles.headerTile}>Mã đơn hàng: {data.ma}</Text>
             {/* <Text>{data.ma}</Text> */}

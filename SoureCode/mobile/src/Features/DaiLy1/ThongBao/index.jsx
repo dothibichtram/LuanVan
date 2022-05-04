@@ -7,16 +7,16 @@ import {
   SafeAreaView,
   RefreshControl,
 } from "react-native";
-import hodanApi from "../../../api/hodanApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import RenderPhanPhat from "./RenderPhanPhat";
 import { useIsFocused } from "@react-navigation/native";
+import daily1Api from "../../../api/daily1Api";
 function ThongBao(props) {
   const { handleCallBackSL, user} = props;
-  // console.log(user);
+ 
   // const [infoHoDan, setInfoHoDan] = useState();
   const [orderList, setOrderList] = useState();
-  const [hoDan, setHoDan] = useState("");
+  const [daily1, setDaily1] = useState("");
   const [callBack, setCallBack] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const wait = (timeout) => {
@@ -31,8 +31,8 @@ function ThongBao(props) {
   };
   useEffect(() => {
     (async () => {
-      const getListOrder = await hodanApi.dsDonhang(user._id);
-      setOrderList(getListOrder.dsdonhang);
+      const getListOrder = await daily1Api.dsDonhang(user._id);
+      setOrderList(getListOrder.donhang);
     })();
   }, [callBack]);
   // console.log(orderList);
@@ -52,7 +52,7 @@ function ThongBao(props) {
           renderItem={(item, index) => (
             <RenderPhanPhat
               phanphat={item}
-              hodanId={user._id}
+              daily1Id={user._id}
               checkCallBack={checkCallBack}
               handleCallBackSL={handleCallBackSL}
             />
@@ -69,13 +69,14 @@ function ThongBao(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: 0,
+    // marginTop: StatusBar.currentHeight || 0,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
-    paddingTop: 10,
-    paddingBottom: 30,
-    flex: 1,
+    backgroundColor: "#4AAE4A",
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
 });

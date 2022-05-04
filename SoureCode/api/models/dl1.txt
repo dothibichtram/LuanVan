@@ -1,0 +1,58 @@
+daily1Router.put("/themsphuloi/:dl1Id", async (req, res) => {
+  // const { dsspLoi } = req.body;
+  const { dsspLoi } = req.body;
+  // try {
+  //   for (const sp of dsspLoi) {
+  //     const daily1 = await Daily1.findById(req.params.dl1Id);
+  //     daily1.dssanpham = daily1.dssanpham.map((item) =>
+  //       item.sanpham.toString() === sp.sanpham._id &&
+  //         item.donhang.toString() === sp.donhang._id &&
+  //         item.loi.soluongloi
+  //         ? {
+  //           donhang: item.donhang,
+  //           sanpham: item.sanpham,
+  //           loi: {
+  //             soluongloi: item.loi.soluongloi + parseInt(sp.soluongloi),
+  //             ngaybaoloi: getCurrentDatetime(),
+  //           },
+  //           soluong: item.soluong,
+  //           ngaytao: item.ngaytao,
+  //         }
+  //         : item.sanpham.toString() === sp.sanpham._id &&
+  //           item.donhang.toString() === sp.donhang._id
+  //           ? {
+  //             donhang: item.donhang,
+  //             sanpham: item.sanpham,
+  //             loi: {
+  //               soluongloi: sp.soluongloi,
+  //               ngaybaoloi: getCurrentDatetime(),
+  //             },
+  //             soluong: item.soluong,
+  //             ngaytao: item.ngaytao,
+  //           }
+  //           : item
+  //     );
+  //     await daily1.save();
+  //   }
+  //   res.send({ success: true });
+  // } catch (error) {
+  //   res.send({ message: error.message, success: false });
+  // }
+});
+//lay ds sản phẩm hư lỗi
+daily1Router.get("/dssphuloi/:dl1Id", async (req, res) => {
+  try {
+    let { dssanpham: dssanphamhuloi } = await Daily1.findById(req.params.dl1Id)
+      .select("dssanpham")
+      .populate({
+        path: "dssanpham",
+        populate: {
+          path: "donhang sanpham",
+        },
+      });
+    // dssanphamhuloi = dssanphamhuloi.filter((sp) => sp.loi.soluongloi);
+    res.send({ dssanphamhuloi, success: true });
+  } catch (error) {
+    res.send({ message: error.message, success: false });
+  }
+});

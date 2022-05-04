@@ -394,12 +394,12 @@ function FormGiaoHangDL2(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 0,
   },
   headerContainer: {
     // backgroundColor: "#e65c00",
     backgroundColor: "#4AAE4A",
-    paddingTop: 10,
+    paddingTop: 40,
     paddingBottom: 30,
     flex: 1,
     alignItems: "center",

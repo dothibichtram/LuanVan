@@ -30,6 +30,7 @@ const Daily2 = (props) => {
     setLoading(true);
     const { gsv } = await apiGSV.singleGsvBasedUserId(userInfo._id);
     const { daily2 } = await apiGSV.dsDaily2(gsv._id);
+    console.log(gsv);
     setGsvInfo(gsv);
     setDsDaily2(daily2 && daily2.length ? daily2 : []);
     setLoading(false);

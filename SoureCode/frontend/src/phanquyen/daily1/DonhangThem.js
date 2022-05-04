@@ -296,7 +296,7 @@ const DonhangThem = (props) => {
             dsdonhang.push(dl);
           }
         });
-        console.log({ dsdonhang });
+        // console.log({ dsdonhang });
         const { success } = await apiDonhang.daily1ToDaily2({
           donhangId: singleDonhang._id,
           dsdonhang,

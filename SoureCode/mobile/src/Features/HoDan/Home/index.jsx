@@ -19,7 +19,7 @@ import ScreenTienDo from "./ScreenTienDo";
 function Home(props) {
   const { navigation } = props;
   // console.log(props);
-  const { user} = props;
+  const { user } = props;
   // console.log(user);
   const [checkTienDo, setCheckTienDo] = useState(true);
   const [checkDonHang, setCheckDonHang] = useState(false);
@@ -73,61 +73,43 @@ function Home(props) {
           <View style={styles.headerContainer}>
             <Text style={{ color: "white" }}>Xin chào {user.daidien} </Text>
           </View>
-          <Text>Ứng dụng di động dành cho hộ dân</Text>
 
           {/****************************** {Start link bar} **************************************/}
           <View style={styles.containerLinkBar}>
             <Text
               style={[
                 styles.singleBar,
-                styles.tiendoBar,
+                styles.progressBar,
                 checkTienDo ? styles.activeBar : styles.noActiveBar,
               ]}
               onPress={handleChangeActiveBar1}
             >
               <View>
-                <Ionicons
-                  style={styles.textAlign}
-                  name="calendar-outline"
-                  size={40}
-                  color="white"
-                />
                 <Text style={styles.textLinkBar}>Tiến độ</Text>
               </View>
             </Text>
             <Text
               style={[
                 styles.singleBar,
-                styles.donhangBar,
+                styles.progressBar,
                 checkDonHang ? styles.activeBar : styles.noActiveBar,
               ]}
               onPress={handleChangeActiveBar2}
             >
               <View>
-                <Ionicons
-                  style={styles.textAlign}
-                  name="cart-outline"
-                  size={40}
-                  color="white"
-                />
                 <Text style={styles.textLinkBar}>Đơn hàng</Text>
               </View>
             </Text>
             <Text
               style={[
                 styles.singleBar,
-                { borderTopRightRadius: 10, borderBottomRightRadius: 10 },
+                styles.progressBar,
                 checkKho ? styles.activeBar : styles.noActiveBar,
               ]}
               onPress={handleChangeActiveBar3}
             >
               <View>
-                <Ionicons
-                  style={styles.textAlign}
-                  name="folder-open-outline"
-                  size={40}
-                  color="white"
-                />
+                
                 <Text style={styles.textLinkBar}>Kho</Text>
               </View>
             </Text>
@@ -146,73 +128,76 @@ function Home(props) {
               ) : checkKho ? (
                 <>
                   <View style={styles.containerRowRedirect}>
-                    <View style={{ marginRight: 20 }}>
+                    <View style={styles.containerItemRedirect}>
                       <Text onPress={handleRedirectCongCu}>
                         <View style={styles.containerRedirectKho}>
                           <Ionicons
                             name="construct"
-                            size={60}
-                            color="#0000b3"
+                            style={styles.iconStore}
                           />
                         </View>
                       </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
+                      <Text style={styles.containerTextRedirect} >
                         Công cụ
                       </Text>
                     </View>
-                    <View style={{ marginRight: 20 }}>
+                    <View style={styles.containerItemRedirect}>
                       <Text onPress={handleRedirectVatTu}>
                         <View style={styles.containerRedirectKho}>
-                          <Ionicons name="basket" size={60} color="#0000b3" />
+                          <Ionicons name="basket"
+                            style={styles.iconStore} />
                         </View>
                       </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
+                      <Text style={styles.containerTextRedirect}>
                         Vật tư
                       </Text>
                     </View>
-                    <View>
+                    <View style={styles.containerItemRedirect}>
                       <Text onPress={handleRedirectNguyenLieu}>
                         <View style={styles.containerRedirectKho}>
-                          <Ionicons name="nuclear" size={60} color="#0000b3" />
+                          <Ionicons name="bonfire"
+                            style={styles.iconStore} />
                         </View>
                       </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
+                      <Text style={styles.containerTextRedirect}>
                         Nguyên liệu
+                      </Text>
+                    </View>
+                    <View style={styles.containerItemRedirect}>
+                      <Text onPress={handleRedirectSanPham}>
+                        <View style={styles.containerRedirectKho}>
+                          <Ionicons name="leaf"
+                            style={styles.iconStore} />
+                        </View>
+                      </Text>
+                      <Text style={styles.containerTextRedirect}>
+                        Sản phẩm
                       </Text>
                     </View>
                   </View>
                   <View style={styles.containerRowRedirect}>
-                    <View style={{ marginRight: 20 }}>
-                      <Text onPress={handleRedirectSanPham}>
-                        <View style={styles.containerRedirectKho}>
-                          <Ionicons name="leaf" size={60} color="#0000b3" />
-                        </View>
-                      </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
-                        Sản phẩm
-                      </Text>
-                    </View>
-                    <View style={{ marginRight: 30 }}>
+
+                    <View style={styles.containerItemRedirect}>
                       <Text onPress={handleRedirectKhoLoi}>
                         <View style={styles.containerRedirectKho}>
                           <Ionicons
                             name="close-circle"
-                            size={60}
-                            color="#0000b3"
+                            style={styles.iconStore}
                           />
                         </View>
                       </Text>
-                      <Text style={[{ marginTop: 10, textAlign: "center" }]}>
+                      <Text style={styles.containerTextRedirect}>
                         Hư hỏng
                       </Text>
                     </View>
                   </View>
                 </>
-              ) : (
+              ) : checkDonHang ? (
                 <>
                   <ScreenDonHang navigation={navigation} hodanId={user._id} />
                 </>
-              )}
+              ) : (<></>)
+              }
             </View>
           </ScrollView>
 

@@ -18,7 +18,8 @@ function DonHangHDThuocDL1(props) {
  
   const { navigation } = props;
   const data = props.route.params.data;
-  // console.log(data);
+  console.log(data.ma);
+  console.log(123);
 
   // useEffect(() => {
   //   (async () => {
@@ -31,8 +32,9 @@ function DonHangHDThuocDL1(props) {
   // }, []);
 
   // const formatter = new Intl.NumberFormat("es");
+  console.log(data);
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={{ flex: 1, marginTop: 0 }}>
       <View style={styles.appBarStyle}>
         <TouchableOpacity
           onPress={() => {
@@ -197,7 +199,9 @@ const styles = StyleSheet.create({
   appBarStyle: {
     flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingVertical: 10, 
+    // paddingVertical: 10, 
+    paddingBottom: 20,
+    paddingTop: 40,
     paddingHorizontal: 15,
     alignItems: "center",
   }

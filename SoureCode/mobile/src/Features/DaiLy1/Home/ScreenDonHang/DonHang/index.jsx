@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   FlatList,
   SafeAreaView,
@@ -9,9 +9,27 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import daily1Api from "../../../../../api/daily1Api";
+import apiDonhang from "../../../../../api/apiDonhang";
 function DonHangDL1(props) {
   const data = props.route.params.data;
   const { navigation } = props;
+  
+  const [donhang, setDonhang] = useState();
+  useEffect(() => {
+    (async () => {
+      // const getListOrder = await daily1Api.dsDonhang(daily1Id);
+      const getdonhang = await apiDonhang.singleDonhang(data._id);
+      setDonhang(getdonhang);
+      // const getData = await daily1Api.dsDonhang(daily1Id);
+      // setData(getData);
+      // setOrderList(
+      //   getListOrder.donhang.filter((item) => item.xacnhan === true)
+      // );
+      // console.log(setSubDH);
+    })();
+  }, []);
+  console.log(donhang);
   // const formatter = new Intl.NumberFormat("es");
   return (
     <SafeAreaView style={styles.container}>
@@ -207,7 +225,7 @@ function DonHangDL1(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 0,
   },
   headerContainer: {
     backgroundColor: "#4AAE4A",

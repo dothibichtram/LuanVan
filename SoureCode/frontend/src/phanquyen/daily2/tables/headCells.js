@@ -572,6 +572,12 @@ export const headCellsSanphamDonhangChitiet2 = [
     disablePadding: false,
     label: "Giá",
   },
+  {
+    id: "qrcode",
+    numeric: false,
+    disablePadding: false,
+    label: "Mã QR",
+  },
 ];
 
 export const headCellsVattuDonhang = [

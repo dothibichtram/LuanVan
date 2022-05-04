@@ -23,6 +23,7 @@ donhangRouter.post("/them", async (req, res) => {
     tongnguyenlieu,
     tongdongia,
   } = req.body;
+
   try {
     const newDH = new Donhang({
       ma,
@@ -39,9 +40,10 @@ donhangRouter.post("/them", async (req, res) => {
       donhanggoc: true,
       dasudung: false,
     });
+
     const savedDH = await newDH.save();
 
-    res.send({ savedDH, success: true });
+    res.send({ newDH, success: true });
   } catch (error) {
     res.send({ message: error.message, success: false });
   }
@@ -342,9 +344,12 @@ donhangRouter.put("/daily1todaily2", async (req, res) => {
 // daily2 send donhang -> hodan
 donhangRouter.put("/daily2tohodan", async (req, res) => {
   const { donhangId, dsdonhang, daily2Id } = req.body;
+  console.log(req.body.dsdonhang.dssanpham);
   try {
+    
     // Donhang coll
     const donhang = await Donhang.findById(donhangId);
+    
     // Daily2 coll
     let dsspTemp = donhang.dssanpham.map((sp) => ({
       donhang: donhang._id.toString(),
@@ -352,6 +357,7 @@ donhangRouter.put("/daily2tohodan", async (req, res) => {
       soluong: sp.soluong,
       soluonghoanthanh: sp.soluonghoanthanh,
       ngaytao: donhang.ngaydathang,
+      qrcode: sp.qrcode,
     }));
     let dsccTemp = donhang.dscongcu.map((cc) => ({
       donhang: donhang._id.toString(),
@@ -376,6 +382,7 @@ donhangRouter.put("/daily2tohodan", async (req, res) => {
     dl2.dscongcu = [...dsccTemp, ...dl2.dscongcu];
     dl2.dsvattu = [...dsvtTemp, ...dl2.dsvattu];
     dl2.dsnguyenlieu = [...dsnglTemp, ...dl2.dsnguyenlieu];
+    // dl2.dssanpham. = [...dsspTemp, ...dl2.dssanpham];
     await dl2.save();
 
     // Donhang coll
@@ -396,6 +403,8 @@ donhangRouter.put("/daily2tohodan", async (req, res) => {
       const dl2 = await Daily2.findById(daily2Id);
       dl2.subdonhang = [savedDH._id, ...dl2.subdonhang];
       await dl2.save();
+
+      // const qrcode = hd + "-" + ;
     }
 
     res.send({ success: true });

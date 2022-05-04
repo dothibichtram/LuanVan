@@ -4,21 +4,21 @@ import ListDonHang from "./ListDonHang";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import daily2Api from "../../../../../api/daily2Api";
 function ScreenDonHangDL2ThuocDL1(props) {
-  const daily2Id = props.route.params.iddaily2;
+  const daily2Id = props.route.params.idDaily2;
   const { navigation} = props;
-  // console.log(daily2Id);
+  // console.log(props.route.params.idDaily2);
   const [orderList, setOrderList] = useState();
   useEffect(() => {
     (async () => {
       const getListOrder = await daily2Api.dsDonhang(daily2Id);
       setOrderList(
-        getListOrder.dsdonhang.filter((item) => item.xacnhan === true)
+        getListOrder.donhang.filter((item) => item.xacnhan === true)
       );
     })();
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.appBarStyle}>
         <TouchableOpacity
           onPress={() => {
@@ -47,7 +47,8 @@ function ScreenDonHangDL2ThuocDL1(props) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 0,
+    flex: 1,
   },
   headerContainer: {
     // backgroundColor: "#e65c00",
@@ -58,7 +59,9 @@ const styles = StyleSheet.create({
   appBarStyle: {
     flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingVertical: 10, 
+    // paddingVertical: 10, 
+    paddingTop: 40,
+    paddingBottom: 20,
     paddingHorizontal: 15,
     alignItems: "center",
   }

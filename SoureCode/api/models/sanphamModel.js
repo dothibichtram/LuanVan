@@ -19,6 +19,10 @@ const sanphamSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "LoaiSanpham",
     },
+    loi: {
+      soluongloi: Number,
+      ngaybaoloi: String,
+    },
     thuoctinh: [],
     dscongcu: [
       {

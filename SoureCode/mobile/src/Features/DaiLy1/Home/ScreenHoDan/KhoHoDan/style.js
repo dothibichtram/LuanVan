@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
   appBarStyle: {
     flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingVertical: 10, 
+    // paddingVertical: 40, 
+    paddingTop:40,
+    paddingBottom:20,
     paddingHorizontal: 15,
     alignItems: "center",
     // justifyContent: "space",

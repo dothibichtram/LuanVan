@@ -13,7 +13,7 @@ function DonHangDL2(props) {
   const { navigation } = props;
   // const formatter = new Intl.NumberFormat("es");
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={{ flex: 1, marginTop: 0 }}>
       <View style={styles.headerContainer}>
         <Text style={{ color: "white" }}>Thông tin đơn hàng</Text>
       </View>
@@ -205,12 +205,13 @@ function DonHangDL2(props) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 0,
   },
   headerContainer: {
     // backgroundColor: "#e65c00",
     backgroundColor: "#4AAE4A",
-    padding: 15,
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
 });

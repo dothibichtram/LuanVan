@@ -226,7 +226,7 @@ const DonhangThem = (props) => {
             })),
           }));
 
-    console.log({ donhang, dsDaily1 });
+    // console.log({ donhang, dsDaily1 });
 
     setDsThoaman(temp);
     stateRef.current = temp;

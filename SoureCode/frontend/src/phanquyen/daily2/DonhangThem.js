@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import MenuItem from "@mui/material/MenuItem";
 import BackdropMaterial from "../../components/BackdropMaterial";
 import apiDonhang from "../../axios/apiDonhang";
+import apiSanpham from "../../axios/apiSanpham";
 import { useSelector } from "react-redux";
 import QRCode from 'qrcode.react';
 import TableSanphamDonhang from "./tables/TableSanphamDonhang";
@@ -40,6 +41,7 @@ const DonhangThem = (props) => {
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [singleDonhang, setSingleDonhang] = useState(null);
+  const [singleSanpham, setSingleSanpham] = useState(null);
   const [singleDaily2, setSingleDaily2] = useState(null);
   const [selectedHodan, setselectedHodan] = useState([]);
   const { id: donhangId } = props.match.params;
@@ -51,6 +53,7 @@ const DonhangThem = (props) => {
     {
       hodan: null,
       dssanpham: [],
+      dsdonhang: [],
     },
   ]);
   const [dataQR, setDataQR] = useState("");
@@ -297,6 +300,7 @@ const DonhangThem = (props) => {
               // 
             };
             dsdonhang.push(dl);
+            
           }
         });
 
@@ -304,6 +308,7 @@ const DonhangThem = (props) => {
           donhangId: singleDonhang._id,
           dsdonhang,
           daily2Id: singleDaily2._id,
+          
         });
         if (success) {
           toast.success("Thêm thành công!", { theme: "colored" });
@@ -322,12 +327,14 @@ const DonhangThem = (props) => {
     const { daily2 } = await apiDaily2.singleDaily2BasedUser(userInfo._id);
     let { hodan } = await apiDaily2.dsHodan(daily2._id);
     hodan = hodan.filter((hd) => hd.user);
-
+    const { sanpham } = await apiDaily2.dsSanpham(daily2._id);
+    // const { sanpha } = await apiDaily2.dsSanpham(daily2._id);
     getDsThoaman(donhang, hodan);
     setSingleDonhang(donhang);
     setSingleDaily2(daily2);
+    setSingleSanpham(sanpham);
     setLoading(false);
-    console.log(singleDonhang);
+    // console.log(singleDonhang);
   };
 
   const getMappedDSSP = (dssp) => {

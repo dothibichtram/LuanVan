@@ -1,71 +1,82 @@
 import { StyleSheet } from "react-native";
+import { StatusBar } from 'expo-status-bar';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
     flex: 1,
+    marginTop: 0,
+    // marginTop: StatusBar.currentHeight || 0,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
-    paddingTop: 10,
-    paddingBottom: 10,
-    // flex: 1,
+    backgroundColor: "#4AAE4A",
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
   containerLinkBar: {
     marginTop: 5,
     flexDirection: "row",
-    justifyContent: "center",
+    // justifyContent: "center",
+    
   },
   singleBar: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingRight: 35,
-    paddingLeft: 35,
+    minWidth: "34%",
+
+    padding: 17,
+    // textAlign: "center",
   },
   activeBar: {
-    backgroundColor: "#ff9933",
+    // backgroundColor: "#4AAE4A",
+    backgroundColor: "white",
+    color: "#4AAE4A",
+    borderColor: "#4AAE4A",
+    textAlign: "center",
   },
   noActiveBar: {
-    backgroundColor: "#e65c00",
+    // backgroundColor: "#4AAE4A",
+    backgroundColor: "white",
+    color: "grey",
+    borderColor: "white",
+    textAlign: "center",
+
   },
-  tiendoBar: {
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+  progressBar: {
     borderRightColor: "white",
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
-    borderBottomWidth: 0,
-  },
-  donhangBar: {
-    borderRightColor: "white",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 2,
   },
   textAlign: {
     textAlign: "center",
+    justifyContent: "center"
   },
-
   textLinkBar: {
-    color: "white",
+    color: "gray",
     textAlign: "center",
   },
   containerRedirectScreen: {
-    backgroundColor: "#e6e6e6",
-    marginTop: 10,
     paddingTop: 20,
-    paddingRight: 20,
-    paddingLeft: 20,
-    marginLeft: 14,
-    marginRight: 14,
+    paddingHorizontal: 20,
     borderRadius: 10,
+
   },
   containerRowRedirect: {
     marginBottom: 20,
     flexDirection: "row",
+    justifyContent: "space-between",
+    // color: "red",
+  },
+  containerItemRedirect: {
+    paddingBottom: 15,
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  containerTextRedirect: {
+    marginTop: 5, 
+    // textAlign: "center",
+    color: "black",
   },
   containerRowRedirect2: {
     flexDirection: "row",
@@ -76,21 +87,18 @@ const styles = StyleSheet.create({
   },
   containerRedirect: {
     borderRadius: 90,
-    paddingTop: 20,
-    paddingBottom: 15,
-    paddingLeft: 20,
-    paddingRight: 15,
+    padding: 15,
     backgroundColor: "white",
-    marginRight: 15,
   },
   containerRedirectKho: {
-    borderRadius: 90,
-    paddingTop: 20,
-    paddingBottom: 15,
-    paddingLeft: 20,
-    paddingRight: 15,
+    borderRadius: 20,
     backgroundColor: "white",
-    marginRight: 15,
+    padding: 15,
   },
+  iconStore: {
+    fontSize: 35,
+    color: "#23CC87"
+  },
+
 });
 export default styles;

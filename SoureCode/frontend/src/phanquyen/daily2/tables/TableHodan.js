@@ -221,7 +221,7 @@ const TableHodan = ({ dsHodan = [], setRowsRemoved, readOnly }) => {
                         <TableCell align="right">{row?.cmnd}</TableCell>
                         <TableCell align="right">{row?.namsinh}</TableCell>
                         <TableCell align="right">
-                          {row?.loaisanpham.ten}
+                          {row?.langnghe}
                         </TableCell>
                         <TableCell align="right">{row?.langnghe}</TableCell>
                         <TableCell align="right">

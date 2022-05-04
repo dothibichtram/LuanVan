@@ -44,7 +44,7 @@ function InfoHoDanThuocDL1(props) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.appBarStyle}>
         <TouchableOpacity
           onPress={() => {

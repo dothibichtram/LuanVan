@@ -247,7 +247,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
                         </TableCell>
                         <TableCell align="right">{row.ten}</TableCell>
                         <TableCell align="right">
-                          {row.loaisanpham.ten}
+                          {row.ten}
                         </TableCell>
                         <TableCell align="right">
                           {formatMoney(row.gia)}

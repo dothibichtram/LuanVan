@@ -65,7 +65,7 @@ function SreenDoiMatKhauDL2(props) {
     }
   };
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={{ flex: 1, marginTop: 0 }}>
       <View style={styles.headerContainer}>
         <Text style={{ color: "white" }}>Đổi mật khẩu </Text>
       </View>
@@ -243,8 +243,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     // backgroundColor: "#e65c00",
     backgroundColor: "#4AAE4A",
-    paddingTop: 10,
-    paddingBottom: 15,
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
 });

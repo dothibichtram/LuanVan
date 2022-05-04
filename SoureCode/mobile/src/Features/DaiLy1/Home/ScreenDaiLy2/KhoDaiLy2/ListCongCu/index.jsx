@@ -51,8 +51,9 @@ const ListCongCuDL2ThuocDL1= (props) => {
 
 const _styles = StyleSheet.create({
   container: {
+    marginTop:0,
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    // marginTop: StatusBar.currentHeight || 0,
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -65,8 +66,8 @@ const _styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: "#e65c00",
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
 });

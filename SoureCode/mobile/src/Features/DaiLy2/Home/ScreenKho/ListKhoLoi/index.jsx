@@ -13,7 +13,7 @@ import KhoLoi from "../KhoLoi";
 import styles from "../style";
 import Ionicons from "react-native-vector-icons/Ionicons";
 const ListKhoLoiDL2 = (props) => {
-  const idDaily2 = props.route.params.idDail21;
+  const idDaily2 = props.route.params.idDaily2;
   const {navigation} = props;
   const [listKhoLoi, setListKhoLoi] = useState();
   useEffect(() => {
@@ -55,7 +55,7 @@ const ListKhoLoiDL2 = (props) => {
 const _styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 0,
   },
   item: {
     backgroundColor: "#f9c2ff",
