@@ -92,7 +92,7 @@ function KhoLoi(props) {
               <View style={styles.listTile}>
                 <Ionicons name="locate-outline" size={18} style={styles.iconStyle} />
               {dataLoi.nguyenlieu ? (
-                  <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.soluongloi}</Text>
+                  <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.khoiluongloi}</Text>
               ) : (
                   <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.soluongloi}</Text>
               )}</View>

@@ -166,7 +166,6 @@ function FormCCLoiDL2(props) {
               // height: 100,
               width: '100%',
               height: 80,
-              justifyContent: 'center',
               alignItems: 'center',
               position: 'absolute', //Here is the trick
               bottom: 0
@@ -230,7 +229,7 @@ const styles = StyleSheet.create({
   containerForm: {
     // backgroundColor: "white",
     paddingBottom: 40,
-    paddingLeft: 40,
+    paddingLeft: 10,
     paddingTop: 10,
     paddingRight: 30,
     borderRadius: 10,

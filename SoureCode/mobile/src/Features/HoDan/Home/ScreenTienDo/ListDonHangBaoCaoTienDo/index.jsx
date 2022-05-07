@@ -12,7 +12,9 @@ function ListDonHangBaoCaoTienDo(props) {
   useEffect(() => {
     LogBox.ignoreLogs(['Each child in a list should have a unique "key" prop']);
   }, []);
-
+  const checkComplelteOrder = data.dssanpham.find(
+    (item) => item.soluong !== item.soluonghoanthanh
+  );
   // console.log(checkComplelteOrder);
   const handleClickOrder = () => {
     navigation.navigate("BCTienDoHD", { data, hodanId });
@@ -35,39 +37,91 @@ function ListDonHangBaoCaoTienDo(props) {
     <>
       {data.xacnhan && (
         <View
+          elevation={50}
           style={{
             flexDirection: "row",
-            paddingTop: 20,
-            paddingBottom: 20,
+            paddingVertical: 12,
+            paddingHorizontal: 15,
             borderRadius: 10,
             backgroundColor: "white",
-            alignItems: "center",
-            marginBottom: 20,
+            justifyContent: "space-between",
+            marginBottom: 10,
           }}
         >
-          <Text style={{ marginRight: 5 }} onPress={handleClickOrder}>
+          {/* <Text style={{ marginRight: 5 }} onPress={handleClickOrder}>
             <Ionicons name="cart" size={50} color="black" />
-          </Text>
-          <View style={{ marginRight: 10 }}>
-            <Text>Mã đơn hàng : {data.ma}</Text>
+          </Text> */}
+          <View>
+            <View style={styles.listTile}>
+              <Text style={styles.headerTile}>Mã đơn hàng : {data.ma}</Text>
+            </View>
             {data.dssanpham.map((item) => (
               <>
-                <Text key={item.sanpham._id}>
+                <View style={styles.listTile}>
+                  <Ionicons name="calendar-outline" size={18} color="grey" />
+                  <Text style={styles.contentTile} >Ngày nhận: {data.ngaytao}</Text>
+                </View>
+                <View style={styles.listTile}>
+                  <Ionicons name="pie-chart-outline" size={18} color="grey" />
+                  <Text key={item._id}
+                    style={styles.contentTile} >
+                    {item.sanpham.ten} : {item.soluonghoanthanh}/{item.soluong}
+                  </Text>
+                </View>
+                {/* <Text>
                   <Ionicons name="square" size={5} color="black" />{" "}
                   {item.sanpham.ten} : {item.soluonghoanthanh}/{item.soluong}
-                </Text>
+                </Text> */}
               </>
             ))}
+
           </View>
 
-          <Text
+          {!checkComplelteOrder ? (
+            // <Text
+            //   style={[styles.btnClass, { backgroundColor: "green", fontSize: 12 }]}
+            // >
+            //   Hoàn thành
+            // </Text>
+            <Ionicons name="checkmark-circle" size={20} color="green" />
+          ) : (
+            <View flexDirection="column" justifyContent="space-between" alignItems="flex-end">
+              <Text
+                style={{ color: "green" }}
+              >
+                Hoàn thành : {completePercent} %
+              </Text>
+              <Text
+                style={[styles.btnClass, { backgroundColor: "#FF851B", fontSize: 12 }]}
+                onPress={handleClickOrder}
+              >
+                Báo cáo
+              </Text>
+
+            </View>
+          )}
+          {/* <View flexDirection="column" justifyContent="space-between" alignItems="flex-end">
+            <Text
+             style={{ color: "green" }}
+            >
+              Hoàn thành : {completePercent} %
+            </Text>
+            <Text
+              style={[styles.btnClass, { backgroundColor: "#FF851B", fontSize: 12 }]}
+              onPress={handleClickOrder}
+            >
+              Báo cáo
+            </Text>
+
+          </View> */}
+          {/* <Text
             style={[
               styles.btnClass,
               { backgroundColor: "#ff6600", fontSize: 9 },
             ]}
           >
             Hoàn thành : {completePercent} %
-          </Text>
+          </Text> */}
         </View>
       )}
     </>
@@ -75,10 +129,27 @@ function ListDonHangBaoCaoTienDo(props) {
 }
 const styles = StyleSheet.create({
   btnClass: {
-    padding: 5,
-    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 5,
     color: "white",
-    marginRight: 10,
+    // marginRight: 5,
+    // minWidth: 65,
+    textAlign: "center",
   },
+  listTile: {
+    flexDirection: "row",
+    alignItems: "center",
+    // justifyContent: "space-around",
+    marginBottom: 5,
+  },
+  headerTile: {
+    fontSize: 16,
+    marginBottom: 3,
+  },
+  contentTile: {
+    marginLeft: 5,
+    color: "grey",
+  }
 });
 export default ListDonHangBaoCaoTienDo;

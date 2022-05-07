@@ -65,7 +65,7 @@ function SreenDoiMatKhauHD(props) {
     }
   };
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={{ color: "white" }}>Đổi mật khẩu </Text>
       </View>
@@ -107,7 +107,7 @@ function SreenDoiMatKhauHD(props) {
                 borderWidth: 1,
                 padding: 10,
                 borderRadius: 10,
-                width: 250,
+                width: 280,
                 color: "black",
               }}
               placeholder="Mật khẩu cũ"
@@ -122,7 +122,7 @@ function SreenDoiMatKhauHD(props) {
               style={{ position: "relative", marginTop: 20, marginLeft: -30 }}
               name="eye"
               size={25}
-              color="#0000b3"
+              color="green"
             />
           </View>
           <Text>Nhập mật mới</Text>
@@ -135,7 +135,7 @@ function SreenDoiMatKhauHD(props) {
                 borderWidth: 1,
                 padding: 10,
                 borderRadius: 10,
-                width: 250,
+                width: 280,
                 color: "black",
               }}
               placeholder="Mật khẩu cũ"
@@ -150,7 +150,7 @@ function SreenDoiMatKhauHD(props) {
               style={{ position: "relative", marginTop: 20, marginLeft: -30 }}
               name="eye"
               size={25}
-              color="#0000b3"
+              color="green"
             />
           </View>
           <Text>Nhập lại mật khẩu mới</Text>
@@ -163,7 +163,7 @@ function SreenDoiMatKhauHD(props) {
                 borderWidth: 1,
                 padding: 10,
                 borderRadius: 10,
-                width: 250,
+                width: 280,
                 color: "black",
               }}
               placeholder="Mật khẩu cũ"
@@ -178,7 +178,7 @@ function SreenDoiMatKhauHD(props) {
               style={{ position: "relative", marginTop: 20, marginLeft: -30 }}
               name="eye"
               size={25}
-              color="#0000b3"
+              color="green"
             />
           </View>
           <Text style={{ color: "red" }}>
@@ -187,7 +187,7 @@ function SreenDoiMatKhauHD(props) {
         </View>
       </ScrollView>
       <View
-        style={{
+         style={{
           flexDirection: "row",
           marginTop: 10,
           paddingTop: 10,
@@ -202,7 +202,7 @@ function SreenDoiMatKhauHD(props) {
       >
         <Text
           style={{
-            borderColor: "#0000e6",
+            borderColor: "green",
             borderWidth: 1,
             borderRadius: 90,
             width: 50,
@@ -214,14 +214,15 @@ function SreenDoiMatKhauHD(props) {
             navigation.navigate("TabNavHD");
           }}
         >
-          <Ionicons name="arrow-back" size={25} color="#0000b3" />
+          <Ionicons name="arrow-back" size={25} color="green" />
         </Text>
         <Text
           style={{
             padding: 10,
             marginBottom: 10,
             borderRadius: 10,
-            backgroundColor: "#0000e6",
+            // backgroundColor: "#0000e6",
+            backgroundColor: "green",
             width: 200,
             textAlign: "center",
             color: "white",
@@ -237,12 +238,13 @@ function SreenDoiMatKhauHD(props) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: 0,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
-    paddingTop: 10,
-    paddingBottom: 15,
+    backgroundColor: "#4AAE4A",
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
 });

@@ -29,7 +29,7 @@ function FormNLLoiDL1(props) {
     return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
   }
   const SignupSchema = Yup.object().shape({
-    soluongloi: Yup.string().required("Trường này không được để trống"),
+    khoiluongloi: Yup.string().required("Trường này không được để trống"),
   });
   const handleClose = () => {
     setVisible(false);
@@ -39,15 +39,15 @@ function FormNLLoiDL1(props) {
   };
   const handleSumitForm = async (dataForm) => {
     const sendRequest = await daily1Api.themNguyenlieuHuloi(idDaily1, {
-      dsccLoi: [{ ...data, ...dataForm }],
+      dsnglLoi: [{ ...data, ...dataForm }],
     });
     handleOpen();
 
-    // console.log({ dsccLoi: [{ ...data, ...dataForm }] }, sendRequest);
+    console.log({ dsnglLoi: [{ ...data, ...dataForm }] }, sendRequest);
   };
   return (
     <Formik
-      initialValues={{ soluongloi: "" }}
+      initialValues={{ khoiluongloi: "" }}
       onSubmit={handleSumitForm}
       validationSchema={SignupSchema}
     >
@@ -59,9 +59,16 @@ function FormNLLoiDL1(props) {
         errors,
         touched,
       }) => (
-        <View style={{ marginTop: 20, flex: 1, backgroundColor: "white" }}>
+        <View style={styles.container}>
           <View style={styles.headerContainer}>
-            <Text style={{ color: "white" }}>Thông tin nguyên liệu lỗi</Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Ionicons name="arrow-back" size={25} color="white" />
+            </TouchableOpacity>
+            <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin đơn hàng</Text>
           </View>
           <View style={styles.containerForm}>
             <ScrollView>
@@ -72,8 +79,8 @@ function FormNLLoiDL1(props) {
                     uri: `${getImg(data.nguyenlieu.hinhanh)}`
                   }}
                   style={{
-                    width: Dimensions.get("window").width - 220,
-                    height: 150,
+                    width: Dimensions.get("window").width - 120,
+                    height: 180,
                     borderRadius: 15,
                   }}
                 />
@@ -99,7 +106,7 @@ function FormNLLoiDL1(props) {
               //   touched={touched.soluong}
               />
 
-              
+
               <Text style={styles.text}>Số lượng hư hỏng</Text>
               <TextInput
                 style={[
@@ -107,31 +114,31 @@ function FormNLLoiDL1(props) {
                   {
                     borderColor: !touched
                       ? "#ccccccf2"
-                      : errors.soluongloi
+                      : errors.khoiluongloi
                         ? "#FF5A5F"
                         : "#ccccccf2",
                   },
                 ]}
                 keyboardType="numeric"
-                onChangeText={handleChange("soluongloi")}
-                onBlur={handleBlur("soluongloi")}
-                value={values.soluongloi}
-                error={errors.soluongloi}
-                touched={touched.soluongloi}
+                onChangeText={handleChange("khoiluongloi")}
+                onBlur={handleBlur("khoiluongloi")}
+                value={values.khoiluongloi}
+                error={errors.khoiluongloi}
+                touched={touched.khoiluongloi}
               />
-              {errors.soluongloi && touched.soluongloi ? (
+              {errors.khoiluongloi && touched.khoiluongloi ? (
                 <>
                   <Text
                     style={{
                       color: !touched
                         ? "#ccccccf2"
-                        : errors.soluongloi
+                        : errors.khoiluongloi
                           ? "#FF5A5F"
                           : "#ccccccf2",
                       marginBottom: 10,
                     }}
                   >
-                    {errors.soluongloi}
+                    {errors.khoiluongloi}
                   </Text>
                 </>
               ) : null}
@@ -156,23 +163,16 @@ function FormNLLoiDL1(props) {
           </View>
           <View
             style={{
-              flexDirection: "row",
-              // // marginTop: 150,
-              // paddingTop: 10,
-              borderTopColor: "#b3b3b3",
-              borderTopWidth: 1,
               justifyContent: "center",
-              backgroundColor: "#ffffff",
-              // height: 100,
               width: '100%',
               height: 80,
               justifyContent: 'center',
               alignItems: 'center',
-              position: 'absolute', //Here is the trick
+              // position: 'absolute', //Here is the trick
               bottom: 0
             }}
           >
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{
                 borderWidth: 1,
                 borderColor: 'green',
@@ -188,7 +188,7 @@ function FormNLLoiDL1(props) {
               }}
             >
               <Ionicons name="arrow-back" size={30} color="green" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Text
               onPress={handleSubmit}
               style={{
@@ -196,10 +196,10 @@ function FormNLLoiDL1(props) {
                 // marginBottom: 15,
                 borderRadius: 10,
                 backgroundColor: "green",
-                width: 200,
+                width: 150,
                 textAlign: "center",
                 color: "white",
-                marginLeft: 30,
+                alignItems: "center",
               }}
             >
               Xác nhận
@@ -212,13 +212,18 @@ function FormNLLoiDL1(props) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: 0,
   },
   headerContainer: {
+    flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingTop: 10,
-    paddingBottom: 10,
+    // paddingVertical: 10, 
+    paddingBottom: 20,
+    paddingTop: 40,
+    paddingHorizontal: 15,
     alignItems: "center",
+    // justifyContent: "space",
   },
   centerImg: {
     paddingTop: 10,
@@ -227,7 +232,7 @@ const styles = StyleSheet.create({
   },
   containerForm: {
     // backgroundColor: "white",
-    paddingBottom: 40,
+    paddingBottom: 10,
     paddingLeft: 40,
     paddingTop: 10,
     paddingRight: 30,

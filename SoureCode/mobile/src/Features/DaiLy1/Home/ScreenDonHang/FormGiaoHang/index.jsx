@@ -374,14 +374,13 @@ function FormGiaoHangDL1(props) {
                         borderRadius: 10,
                         // backgroundColor: "#0000e6",
                         backgroundColor: "green",
-
                         width: 200,
                         textAlign: "center",
                         color: "white",
                         marginLeft: 30,
                       }}
                     >
-                      Gửi báo cáo
+                      Giao hàng
                     </Text>
                   </View>
                 </View>

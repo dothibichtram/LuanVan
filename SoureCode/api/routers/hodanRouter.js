@@ -677,6 +677,7 @@ hodanRouter.get("/dsvthuloi/:hodanId", async (req, res) => {
 // them nguyen lieu hu loi
 hodanRouter.put("/themnglhuloi/:hodanId", async (req, res) => {
   const { dsnglLoi } = req.body;
+  console.log(dsnglLoi);
   try {
     for (const ngl of dsnglLoi) {
       const hodan = await Hodan.findById(req.params.hodanId);
@@ -688,6 +689,7 @@ hodanRouter.put("/themnglhuloi/:hodanId", async (req, res) => {
               donhang: item.donhang,
               nguyenlieu: item.nguyenlieu,
               loi: {
+                // item.loi.soluongloi + parseInt(vt.soluongloi)
                 khoiluongloi:
                   item.loi.khoiluongloi + parseInt(ngl.khoiluongloi),
                 ngaybaoloi: getCurrentDatetime(),

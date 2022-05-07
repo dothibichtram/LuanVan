@@ -44,7 +44,7 @@ const ListKhoLoiDL2 = (props) => {
       {listKhoLoi && (
         <FlatList
           data={listKhoLoi}
-          renderItem={(item) => <KhoLoi kholoi={item} navigation={navigation} idDaily1={idDaily2} />}
+          renderItem={(item) => <KhoLoi kholoi={item} navigation={navigation} idDaily2={idDaily2} />}
           keyExtractor={(item) => item._id}
         />
       )}

@@ -255,15 +255,16 @@ function Home(props) {
                 <>
                   <ScreenDonHang navigation={navigation} daily1Id={user._id} />
                 </>
-              ) : checkDaiLy2 ? (
-                <>
-                  <ScreenDaiLy2 navigation={navigation} daily1Id={user._id} />
-                </>
               ) : checkHoDan ? (
                 <>
                   <ScreenHoDanThuocDL1 navigation={navigation} daily1Id={user._id} />
                 </>
-              ) : (<></>)
+              ) : checkDaiLy2 ? (
+                <>
+                  <ScreenDaiLy2 navigation={navigation} daily1Id={user._id} />
+                </>
+              ) :
+               (<></>)
               }
             </View>
           </ScrollView>

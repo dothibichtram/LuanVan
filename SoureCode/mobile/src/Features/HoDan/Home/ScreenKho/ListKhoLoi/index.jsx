@@ -6,11 +6,13 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import hodanApi from "../../../../../api/hodanApi";
 import CongCu from "../CongCu";
 import KhoLoi from "../KhoLoi";
-
+import styles from "../style";
+import Ionicons from "react-native-vector-icons/Ionicons";
 const ListKhoLoiHD = (props) => {
   const idHodan = props.route.params.idHodan;
   const {navigation} = props;
@@ -29,26 +31,33 @@ const ListKhoLoiHD = (props) => {
 
       //  console.log(listKhoLoi);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={{ color: "white" }}>Danh sách kho lỗi</Text>
-      </View>
-      {listKhoLoi && (
-        <FlatList
-          data={listKhoLoi}
-          renderItem={(item) => <KhoLoi kholoi={item} navigation={navigation} idHodan={idHodan} />}
-          keyExtractor={(item) => item._id}
-        />
-      )}
-    </SafeAreaView>
-  );
+      return (
+        <SafeAreaView style={_styles.container}>
+        <View style={styles.appBarStyle}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <Ionicons name="arrow-back" size={25} color="white" />
+          </TouchableOpacity>
+          <Text style={{ color: "white", paddingLeft: "25%"}}>Danh sách lỗi</Text>
+        </View>
+        {listKhoLoi && (
+          <FlatList
+            data={listKhoLoi}
+            renderItem={(item) => <KhoLoi kholoi={item} navigation={navigation} idHodan={idHodan} />}
+            keyExtractor={(item) => item._id}
+          />
+        )}
+      </SafeAreaView>
+      );
 };
 
-const styles = StyleSheet.create({
+const _styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop:  0,
   },
   item: {
     backgroundColor: "#f9c2ff",

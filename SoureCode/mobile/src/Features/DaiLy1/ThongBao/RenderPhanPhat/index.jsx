@@ -156,6 +156,8 @@ function RenderPhanPhat(props) {
   );
 }
 
+
+
 const styles = StyleSheet.create({
   imgClass: {
     width: Dimensions.get("window").width - 300,

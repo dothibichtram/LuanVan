@@ -91,11 +91,6 @@ function ListDonHang(props) {
             Chi tiết
           </Text>
           {!checkComplelteOrder ? (
-            // <Text
-            //   style={[styles.btnClass, { backgroundColor: "green", fontSize: 12 }]}
-            // >
-            //   Hoàn thành
-            // </Text>
             <Ionicons name="checkmark-circle" size={20} color="green"/>
           ) : (
             <Text

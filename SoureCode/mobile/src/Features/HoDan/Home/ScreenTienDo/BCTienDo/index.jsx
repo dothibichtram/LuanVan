@@ -68,9 +68,8 @@ function BCTienDoHD(props) {
   const showDatepicker = () => {
     showMode("date");
   };
-  const thoigianValue = `${date.getDate()}/${
-    date.getMonth() + 1
-  }/${date.getFullYear()}`;
+  const thoigianValue = `${date.getDate()}/${date.getMonth() + 1
+    }/${date.getFullYear()}`;
 
   const [image, setImage] = useState(null);
   const pickImage = async () => {
@@ -125,7 +124,7 @@ function BCTienDoHD(props) {
       } else {
         handleOpen();
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -256,8 +255,8 @@ function BCTienDoHD(props) {
                         borderColor: !touched
                           ? "#ccccccf2"
                           : errors.soluong
-                          ? "#FF5A5F"
-                          : "#ccccccf2",
+                            ? "#FF5A5F"
+                            : "#ccccccf2",
                       },
                     ]}
                     keyboardType="numeric"
@@ -274,8 +273,8 @@ function BCTienDoHD(props) {
                           color: !touched
                             ? "#ccccccf2"
                             : errors.soluong
-                            ? "#FF5A5F"
-                            : "#ccccccf2",
+                              ? "#FF5A5F"
+                              : "#ccccccf2",
                           marginBottom: 5,
                         }}
                       >
@@ -283,7 +282,7 @@ function BCTienDoHD(props) {
                       </Text>
                     </>
                   ) : null}
-                  <Text style={styles.text}>Hình ảnh</Text>
+                  {/* <Text style={styles.text}>Hình ảnh</Text> */}
                   <View>
                     <Text
                       style={{
@@ -292,6 +291,7 @@ function BCTienDoHD(props) {
                         borderRadius: 10,
                         backgroundColor: "#e6e6e6",
                         width: 100,
+                        textAlign: "center",
                       }}
                       onPress={pickImage}
                     >
@@ -300,7 +300,7 @@ function BCTienDoHD(props) {
                     {image ? (
                       <Image
                         source={{ uri: image }}
-                        style={{ width: 250, height: 150, marginBottom: 10 }}
+                        style={{ width: 280, height: 90, marginBottom: 10 }}
                       />
                     ) : (
                       <View
@@ -308,8 +308,8 @@ function BCTienDoHD(props) {
                           borderRadius: 20,
                           borderColor: "#e6e6e6",
                           borderWidth: 1,
-                          width: 300,
-                          height: 150,
+                          width: 280,
+                          height: 90,
                         }}
                       ></View>
                     )}
@@ -317,30 +317,32 @@ function BCTienDoHD(props) {
                   <View
                     style={{
                       flexDirection: "row",
-                      marginTop: 35,
+                      marginTop: 10,
                       paddingTop: 10,
                       borderTopColor: "#b3b3b3",
                       borderWidth: 1,
                       borderRightWidth: 0,
                       borderLeftWidth: 0,
                       borderBottomWidth: 0,
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <Text
                       style={{
-                        borderColor: "#0000e6",
+                        borderColor: "green",
                         borderWidth: 1,
                         borderRadius: 90,
-                        paddingTop: 8,
                         width: 50,
+                        padding: 10,
+                        marginBottom: 10,
                         textAlign: "center",
-                        marginLeft: 20,
                       }}
                       onPress={() => {
                         navigation.navigate("TabNavHD");
                       }}
                     >
-                      <Ionicons name="arrow-back" size={30} color="#0000b3" />
+                      <Ionicons name="arrow-back" size={30} color="green" />
                     </Text>
                     <Text
                       onPress={handleSubmit}
@@ -348,7 +350,7 @@ function BCTienDoHD(props) {
                         padding: 10,
                         marginBottom: 10,
                         borderRadius: 10,
-                        backgroundColor: "#0000e6",
+                        backgroundColor: "green",
                         width: 200,
                         textAlign: "center",
                         color: "white",
@@ -370,13 +372,13 @@ function BCTienDoHD(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: 0,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
-    paddingTop: 10,
-    paddingBottom: 30,
-    flex: 1,
+    backgroundColor: "#4AAE4A",
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
   containerForm: {

@@ -5,12 +5,11 @@ import {
   FlatList,
   StyleSheet,
   Text,
-  StatusBar,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch } from "react-redux";
 import { logout } from "../../auth/userSlice";
-
+import { StatusBar } from "expo-status-bar";
 const CaNhan = ({navigation}) => {
  const dispatch = useDispatch();
   const handleChangePassWord = () => {
@@ -27,29 +26,43 @@ const CaNhan = ({navigation}) => {
       <View style={styles.headerContainer}>
         <Text style={{ color: "white" }}>Thông tin cá nhân </Text>
       </View>
-      <View style={styles.containerRowRedirect}>
-       
-        <View style={{ marginRight: 30 }}>
-          <Text onPress={handleChangePassWord}>
-            <View style={styles.containerRedirectKho}>
-              <Ionicons name="basket" size={60} color="#0000b3" />
-            </View>
-          </Text>
-          <Text style={[{ marginTop: 10, textAlign: "center" }]}>
-            Đổi mật khẩu
-          </Text>
+      <View padding={20}>
+        <View style={styles.containerRowRedirect} justifyContent="center">
+          <Ionicons name="person-circle-outline" size={30} color="#CCC"
+            style={[styles.containerRedirectKho, styles.userImage]} />
         </View>
-        <View>
-          <Text onPress={handleClickLogout}>
-            <View style={styles.containerRedirectKho}>
-              <Ionicons name="close-circle" size={60} color="#0000b3" />
-            </View>
-          </Text>
+        <Text onPress={handleChangePassWord}>
+          <View style={styles.containerRowRedirect} >
+            <Ionicons name="key" size={20} color="orange"
+              style={styles.containerRedirectKho} />
+            <Text style={styles.orangeText}>
+              Đổi mật khẩu
+            </Text>
+            <Ionicons name="chevron-forward-outline"
+              size={20}
+              color="orange"
+              style={styles.suffixIcon}
+            />
+          </View>
+        </Text>
 
-          <Text style={[{ marginTop: 10, textAlign: "center" }]}>
-            Đăng xuất
-          </Text>
-        </View>
+        <Text onPress={handleClickLogout}>
+          <View style={styles.containerRowRedirect}>
+            <Ionicons name="log-out"
+              size={20}
+              color="red"
+              style={styles.containerRedirectKho}
+            />
+            <Text style={styles.redText}>
+              Đăng xuất
+            </Text>
+            <Ionicons name="chevron-forward-outline"
+              size={20}
+              color="red"
+              style={styles.suffixIcon}
+            />
+          </View>
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -57,28 +70,45 @@ const CaNhan = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop:0,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
-    paddingTop: 10,
-    paddingBottom: 30,
-    flex: 1,
+    backgroundColor: "#4AAE4A",
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
   containerRowRedirect: {
     flexDirection: "row",
-    padding: 20,
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingBottom: 15,
   },
   containerRedirectKho: {
-    borderRadius: 90,
-    paddingTop: 20,
-    paddingBottom: 15,
-    paddingLeft: 20,
-    paddingRight: 15,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 15,
+    padding: 20,
     backgroundColor: "white",
-    marginRight: 15,
+    marginRight: 10,
   },
+  containerItemRedirect: {
+    alignItems: "center",
+  },
+  orangeText: {
+    color: "orange",
+  },
+  redText: {
+    color: "red",
+  },
+  suffixIcon: {
+  },
+  userImage: {
+    padding: 30,
+  }
 });
+
 
 export default CaNhan;

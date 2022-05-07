@@ -10,6 +10,8 @@ import {
   Dimensions,
 } from "react-native";
 import axiosClient from "../../../../../api/axiosClient";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import styles from "../style";
 function VatTu(props) {
   const { navigation, idHodan } = props;
   const data = props.vattu.item;
@@ -19,23 +21,22 @@ function VatTu(props) {
   };
   //get link image
   const getImg = (imgName)=>{
-    return `${axiosClient.defaults.baseURL}uploads/${imgName}`;
+    return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
   }
   return (
     <View style={styles.container}>
-      <View style={{ padding: 20 }}>
+      <View style={{ paddingBottom: 5 }}>
         <View
           style={{
             flexDirection: "row",
-            marginTop: 20,
-            marginLeft: 40,
-            backgroundColor: "#ff751a",
+            // marginTop: 20,
+            // marginLeft: 40,
+            // backgroundColor: "#ff751a",
+            backgroundColor: "white",
             borderRadius: 20,
           }}
         >
-          <View
-            style={{ position: "relative", marginTop: -20, marginLeft: -30 }}
-          >
+          <View style={styles.imageStyle}>
             <Image
               source={{
                 uri: `${getImg(data.vattu.hinhanh)}`,
@@ -44,32 +45,45 @@ function VatTu(props) {
                 width: Dimensions.get("window").width - 220,
                 height: 130,
                 borderRadius: 20,
+                borderColor: "#F1F1F1",
+                borderWidth: 1,
               }}
             />
           </View>
           <View
             style={{
+              flexDirection: "column",
+              justifyContent: "space-between",
               marginTop: 10,
               marginLeft: 10,
               marginBottom: 10,
             }}
           >
-            <Text style={{ color: "white" }}>Tên :{data.vattu.ten}</Text>
-            <Text style={{ color: "white" }}>
-              Công dụng :{data.vattu.congdung}
-            </Text>
-            <Text style={{ color: "white" }}>Mô tả :{data.vattu.mota}</Text>
-            <Text style={{ color: "white" }}>
-              Số lượng :{data.soluong}
-            </Text>
+            <View>
+              <Text style={styles.headingText}>{data.vattu.ten}</Text>
+              <View style={styles.listTile}>
+                <Ionicons name="star-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>
+                  Công dụng: {data.vattu.congdung}
+                </Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="albums-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>Mô tả: {data.vattu.mota}</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="trending-up-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>Số lượng: {data.soluong}</Text>
+              </View>
+            </View>
             <Text
               style={{
                 color: "white",
                 padding: 5,
-                backgroundColor: "red",
+                backgroundColor: "#E43A45",
                 textAlign: "center",
-                marginTop: 5,
-                borderRadius: 10,
+                marginTop: 10,
+                borderRadius: 5,
               }}
               onPress={handleClickError}
             >
@@ -81,9 +95,4 @@ function VatTu(props) {
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 0,
-  },
-});
 export default VatTu;

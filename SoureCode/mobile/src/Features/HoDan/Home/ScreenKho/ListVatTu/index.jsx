@@ -6,11 +6,13 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import hodanApi from "../../../../../api/hodanApi";
 import CongCu from "../CongCu";
 import VatTu from "../VatTu";
-
+import styles from "../style";
+import Ionicons from "react-native-vector-icons/Ionicons";
 const ListVatTu = (props) => {
   const {navigation} = props;
   const idHodan = props.route.params.idHodan;
@@ -24,9 +26,16 @@ const ListVatTu = (props) => {
   }, []);
  
   return (
-    <SafeAreaView style={styles.container}>
-       <View style={styles.headerContainer}>
-        <Text style={{ color: "white" }}>Danh sách vật tư</Text>
+    <SafeAreaView style={_styles.container}>
+    <View style={styles.appBarStyle}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%"}}>Danh sách công cụ</Text>
       </View>
       {listVatTu && (
         <FlatList
@@ -39,10 +48,10 @@ const ListVatTu = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const _styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 0,
   },
   item: {
     backgroundColor: "#f9c2ff",

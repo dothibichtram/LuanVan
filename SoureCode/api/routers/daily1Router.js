@@ -889,11 +889,12 @@ daily1Router.get("/dsvthuloi/:dl1Id", async (req, res) => {
   }
 });
 
-//--------------------------------------------
+//-------------------------------------------
 
 // them nguyen lieu hu loi
 daily1Router.put("/themnglhuloi/:dl1Id", async (req, res) => {
   const { dsnglLoi } = req.body;
+  console.log(dsnglLoi);
   try {
     for (const ngl of dsnglLoi) {
       const daily1 = await Daily1.findById(req.params.dl1Id);
@@ -906,7 +907,7 @@ daily1Router.put("/themnglhuloi/:dl1Id", async (req, res) => {
               nguyenlieu: item.nguyenlieu,
               loi: {
                 khoiluongloi:
-                  item.loi.khoiluongloi + parseInt(ngl.khoiluongloi),
+                  item.loi.khoiluongloi + parseInt(ngl.soluongloi),
                 ngaybaoloi: getCurrentDatetime(),
               },
               khoiluong: item.khoiluong,
@@ -918,7 +919,7 @@ daily1Router.put("/themnglhuloi/:dl1Id", async (req, res) => {
               donhang: item.donhang,
               nguyenlieu: item.nguyenlieu,
               loi: {
-                khoiluongloi: ngl.khoiluongloi,
+                khoiluongloi: ngl.soluongloi,
                 ngaybaoloi: getCurrentDatetime(),
               },
               khoiluong: item.khoiluong,

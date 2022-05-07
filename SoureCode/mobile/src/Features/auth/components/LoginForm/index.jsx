@@ -145,7 +145,7 @@ function LoginForm(props) {
                         : errors.taikhoan
                         ? "#FF5A5F"
                         : "#ccccccf2",
-                      marginBottom: 10,
+                      marginBottom: 5,
                     }}
                   >
                     {errors.taikhoan}
@@ -180,7 +180,7 @@ function LoginForm(props) {
                         : errors.matkhau
                         ? "#FF5A5F"
                         : "#ccccccf2",
-                      marginBottom: 10,
+                      marginBottom: 5,
                     }}
                   >
                     {errors.matkhau}
@@ -205,22 +205,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#B0D578",
     // backgroundColor:"#b35900",
     alignItems: "center",
-    paddingTop: '30%',
+    paddingTop: '25%',
     height: '100%',
     // paddingBottom: 230,
   },
   containerForm: {
+    // paddingTop: '30%',
+    // minHeight: '60%',
     backgroundColor: "white",
-    padding: 40,
-    borderRadius: 10,
+    paddingHorizontal: 40,
+    paddingVertical: 30,
+    borderRadius: 15,
   },
   text: {
     color: "black",
   },
   textInput: {
     height: 40,
-    marginBottom: 12,
-    marginTop: 12,
+    marginBottom: 10,
+    marginTop: 10,
     borderWidth: 1,
     padding: 10,
     borderRadius: 10,
@@ -232,7 +235,8 @@ const styles = StyleSheet.create({
     width: 100,
   },
   containerImg: {
-    paddingBottom: 20,
+    paddingBottom: 10,
+    justifyContent: 'center',
     marginLeft: 50,
   },
   button: {

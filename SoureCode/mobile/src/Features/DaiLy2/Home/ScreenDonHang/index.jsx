@@ -23,7 +23,7 @@ function ScreenDonHang(props) {
       {orderList && (
         <FlatList
           data={orderList}
-          keyExtractor={(item) => item._id}
+          // keyExtractor={(item) => item._id}
           renderItem={(item, index) => (
             <ListDonHang
               dataList={item}

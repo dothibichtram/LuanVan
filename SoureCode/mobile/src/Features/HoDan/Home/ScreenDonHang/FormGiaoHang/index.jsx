@@ -191,7 +191,7 @@ function FormGiaoHangHD(props) {
         </Text>
       </MaterialDialog>
       <SafeAreaView>
-        <ScrollView>
+      <ScrollView>
           {data && (
             <Formik
               initialValues={{ soluong: "" }}
@@ -298,8 +298,6 @@ function FormGiaoHangHD(props) {
                       </Text>
                     </>
                   ) : null}
-
-                  <Text style={styles.text}>Hình ảnh</Text>
                   <View>
                     <Text
                       style={{
@@ -308,6 +306,7 @@ function FormGiaoHangHD(props) {
                         borderRadius: 10,
                         backgroundColor: "#e6e6e6",
                         width: 100,
+                        textAlign: "center",
                       }}
                       onPress={pickImage}
                     >
@@ -316,7 +315,7 @@ function FormGiaoHangHD(props) {
                     {image ? (
                       <Image
                         source={{ uri: image }}
-                        style={{ width: 250, height: 150, marginBottom: 10 }}
+                        style={{ width: 250, height: 80, marginBottom: 10 }}
                       />
                     ) : (
                       <View
@@ -324,8 +323,8 @@ function FormGiaoHangHD(props) {
                           borderRadius: 20,
                           borderColor: "#e6e6e6",
                           borderWidth: 1,
-                          width: 300,
-                          height: 150,
+                          width: 250,
+                          height: 80,
                         }}
                       ></View>
                     )}
@@ -345,7 +344,8 @@ function FormGiaoHangHD(props) {
                   >
                     <Text
                       style={{
-                        borderColor: "#0000e6",
+                        // borderColor: "#0000e6",
+                        borderColor: "green",
                         borderWidth: 1,
                         borderRadius: 90,
                         paddingTop: 8,
@@ -357,7 +357,10 @@ function FormGiaoHangHD(props) {
                         navigation.navigate("TabNavHD");
                       }}
                     >
-                      <Ionicons name="arrow-back" size={30} color="#0000b3" />
+                      <Ionicons name="arrow-back" size={30} 
+                      // color="#0000b3" 
+                      color="green"
+                      />
                     </Text>
                     <Text
                       onPress={handleSubmit}
@@ -365,14 +368,15 @@ function FormGiaoHangHD(props) {
                         padding: 10,
                         marginBottom: 10,
                         borderRadius: 10,
-                        backgroundColor: "#0000e6",
+                        // backgroundColor: "#0000e6",
+                        backgroundColor: "green",
                         width: 200,
                         textAlign: "center",
                         color: "white",
                         marginLeft: 30,
                       }}
                     >
-                      Xác nhận
+                      Giao hàng
                     </Text>
                   </View>
                 </View>
@@ -387,15 +391,16 @@ function FormGiaoHangHD(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: 0,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
-    paddingTop: 10,
-    paddingBottom: 30,
-    flex: 1,
+    backgroundColor: "#4AAE4A",
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
+  
   containerForm: {
     backgroundColor: "white",
     paddingBottom: 40,

@@ -6,6 +6,7 @@ import {
   Text,
   View,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import StickyHeaderFooterScrollView from "react-native-sticky-header-footer-scroll-view";
@@ -15,151 +16,137 @@ function DonHangHD(props) {
   console.log(props);
   // const formatter = new Intl.NumberFormat("es");
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={{ color: "white" }}>Thông tin đơn hàng</Text>
       </View>
       <ScrollView>
         <View style={styles.container}>
-          <View style={{ marginLeft: 20 }}>
-            <Text>Mã đơn hàng : {data.ma}</Text>
-            {data.dssanpham.map((item, index) => (
-              <>
-                <View key={item._id}>
-                  <Text>Sản phẩm {index + 1}</Text>
-                  <View style={{ marginLeft: 10 }}>
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Tên sản
-                      phẩm : {item.sanpham.ten}
-                    </Text>
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Mã sản
-                      phẩm : {item.sanpham.ma}
-                    </Text>
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Số lượng
-                      : {item.soluong}
-                    </Text>
-                    <Text style={{ color: "green" }}>
-                      <Ionicons name="square" size={5} color="black" /> Số lượng
-                      đã hoàn thành : {item.soluonghoanthanh}
-                    </Text>
-                    {/* <Text><Ionicons name="square" size={5} color="black"  />
-                    {" "}Đơn vị : {item.donvi}</Text> */}
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Đơn giá
-                      : {item.sanpham.gia} vnđ/m
-                    </Text>
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Mô tả :{" "}
-                      {item.sanpham.mota}
-                    </Text>
-
-                    {item.sanpham.dscongcu &&
-                      item.sanpham.dscongcu.map((item, index) => (
-                        <>
-                          <View key={item._id}>
-                            <Text>
-                              <Ionicons name="square" size={5} color="black" />{" "}
-                              Công cụ
-                            </Text>
-                            <View style={{ marginLeft: 40 }}>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Tên công cụ : {item.congcu.ten}
-                              </Text>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Số lượng: {item.soluong} máy
-                              </Text>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Mô tả : {item.congcu.mota}
-                              </Text>
-                            </View>
-                          </View>
-                        </>
-                      ))}
-                    {item.sanpham.dsvattu &&
-                      item.sanpham.dsvattu.map((item, index) => (
-                        <>
-                          <View key={item._id}>
-                            <Text>
-                              <Ionicons name="square" size={5} color="black" />{" "}
-                              Vật tư
-                            </Text>
-                            <View style={{ marginLeft: 40 }}>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Tên vật tư : {item.vattu.ten}
-                              </Text>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Số lượng: {item.soluong} cái
-                              </Text>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Mô tả : {item.vattu.mota}
-                              </Text>
-                            </View>
-                          </View>
-                        </>
-                      ))}
-                    {item.sanpham.dsnguyenlieu &&
-                      item.sanpham.dsnguyenlieu.map((item, index) => (
-                        <>
-                          <View key={item._id}>
-                            <Text>
-                              <Ionicons name="square" size={5} color="black" />{" "}
-                              Nguyên liệu
-                            </Text>
-                            <View style={{ marginLeft: 40 }}>
-                              <Text>
-                                Tên nguyên liệu: {item.nguyenlieu.ten}
-                              </Text>
-                              <Text>
-                                Số lượng: {item.khoiluong} {item.donvitinh}
-                              </Text>
-                              <Text>Mô tả : {item.nguyenlieu.mota}</Text>
-                            </View>
-                          </View>
-                        </>
-                      ))}
-                  </View>
+        <View style={styles.headerContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin đơn hàng</Text>
+      </View>
+          {data.dssanpham.map((item, index) => (
+            <>
+              <View style={styles.listTile} key={item._id}>
+                <Text>
+                  <Ionicons name="leaf-outline" size={20} color="green" />
+                  {/* Tên sản phẩm :  */}
+                  {item.sanpham.ten}
+                </Text>
+                <View style={styles.listTile1}>
+                  <Text style={styles.contentTile}>
+                    Số lượng: {item.soluong}
+                  </Text>
+                  <Text style={styles.contentTile}>
+                    Đơn giá  : {item.sanpham.gia} VNĐ
+                  </Text >
                 </View>
-              </>
-            ))}
+                
+              </View>
+              <View style={styles.listTile}>
+                <Text>
+                  <Ionicons name="pie-chart-outline" size={20} color="green" />
+                  Tiến độ:  {item.soluonghoanthanh}/{item.soluong}
+                </Text>
+                
+              </View>
+              <View style={styles.listTile} >
+                <Text>
+                  <Ionicons name="construct-outline" size={20} color="green" />
+                  Công cụ:
+                </Text>
+                {item.sanpham.dscongcu &&
+                  item.sanpham.dscongcu.map((item, index) => (
+                    <>
 
-            <Text>Tổng tiền : {data.tongdongia} VNĐ</Text>
-            <Text>Ngày gửi : {data.ngaytao}</Text>
+                      <View >
+                        <View style={styles.listTile1}>
+                          <Text style={styles.contentTile}>
+                           {item.congcu.ten}: {item.soluong} máy
+                          </Text>
+                          {/* <Text style={styles.contentTile}>
+                            Số lượng: 
+                          </Text > */}
+                        </View>
+                      </View>
+                    </>
+                  ))}
+              </View>
+
+              <View style={styles.listTile} >
+                <Text>
+                  <Ionicons name="leaf-outline" size={20} color="green" />
+                  Vật tư:
+                </Text>
+                {item.sanpham.dsvattu &&
+                      item.sanpham.dsvattu.map((item, index) => (
+                    <>
+
+                      <View >
+                        <View style={styles.listTile1}>
+                          <Text style={styles.contentTile}>
+                          {item.vattu.ten}: {item.soluong} cái
+                          </Text>
+                          {/* <Text style={styles.contentTile}>
+                          Số lượng: 
+                          </Text > */}
+                        </View>
+                      </View>
+                    </>
+                  ))}
+              </View>
+
+              <View style={styles.listTile} >
+                <Text>
+                  <Ionicons name="basket-outline" size={20} color="green" />
+                  Nguyên liệu:
+                </Text>
+                {item.sanpham.dsnguyenlieu &&
+                      item.sanpham.dsnguyenlieu.map((item, index) => (
+                    <>
+
+                      <View >
+                        <View style={styles.listTile1}>
+                          <Text style={styles.contentTile}>
+                          {item.nguyenlieu.ten}: {item.khoiluong} {item.donvitinh}
+                          </Text>
+                          {/* <Text style={styles.contentTile}>
+                          Số lượng: 
+                          </Text > */}
+                        </View>
+                      </View>
+                    </>
+                  ))}
+              </View>
+            </>
+          ))
+          }
+          <View style={styles.listTile}>
+            <Text>
+              <Ionicons name="cash-outline" size={20} color="green" />
+              Tổng tiền: {data.tongdongia} VNĐ
+            </Text>
+          
           </View>
+          <View style={styles.listTile}>
+            <Text>
+              <Ionicons name="today-outline" size={20} color="green" />
+              Ngày tạo: {data.ngaytao}
+            </Text>
+          </View>
+
         </View>
+        {/* <Text>Tổng tiền : {data.tongdongia} VNĐ</Text>
+            <Text>Ngày gửi : {data.ngaytao}</Text> */}
       </ScrollView>
-      <View
+      {/* <View
         style={{
           flexDirection: "row",
           marginTop: 10,
@@ -175,7 +162,7 @@ function DonHangHD(props) {
       >
         <Text
           style={{
-            borderColor: "#0000e6",
+            borderColor: "green",
             borderWidth: 1,
             borderRadius: 90,
             width: 50,
@@ -187,14 +174,14 @@ function DonHangHD(props) {
             navigation.navigate("TabNavHD");
           }}
         >
-          <Ionicons name="arrow-back" size={25} color="#0000b3" />
+          <Ionicons name="arrow-back" size={25} color="green" />
         </Text>
         <Text
           style={{
             padding: 10,
             marginBottom: 10,
             borderRadius: 10,
-            backgroundColor: "#0000e6",
+            backgroundColor: "green",
             width: 200,
             textAlign: "center",
             color: "white",
@@ -206,18 +193,67 @@ function DonHangHD(props) {
         >
           Xác nhận
         </Text>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    flex: 1,
+    marginTop: 0,
   },
   headerContainer: {
-    backgroundColor: "#e65c00",
-    padding: 15,
+    flexDirection: "row",
+    backgroundColor: "#4AAE4A",
+    // paddingVertical: 10, 
+    paddingBottom: 20,
+    paddingTop: 40,
+    paddingHorizontal: 15,
     alignItems: "center",
+    // justifyContent: "space",
+},
+  containerItem: {
+    flexDirection: "row",
+    marginLeft: 0,
+    backgroundColor: "#e6e6e6",
+    borderRadius: 5,
   },
+  txt: {
+    color: "black",
+  },
+  btnClass: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 5,
+    color: "white",
+    marginTop: 5,
+    marginRight: 10,
+    textAlign: "center",
+  },
+  // btnClass: {
+  //   paddingHorizontal: 12,
+  //   paddingVertical: 8,
+  //   borderRadius: 5,
+  //   color: "white",
+  //   textAlign: "center",
+  // },
+  listTile: {
+    marginLeft: 40,
+    marginBottom: 3,
+  },
+  listTile1: {
+    marginLeft: 40,
+    marginBottom: 5,
+  },
+  headerTile: {
+    fontSize: 16,
+    padding: 5,
+    marginLeft: 30,
+    textAlign: "center",
+  },
+  contentTile: {
+    marginLeft: 0,
+    color: "grey",
+  }
 });
 export default DonHangHD;
