@@ -157,54 +157,7 @@ function DonHangDL1(props) {
         {/* <Text>Tổng tiền : {data.tongdongia} VNĐ</Text>
             <Text>Ngày gửi : {data.ngaytao}</Text> */}
       </ScrollView>
-      {/* <View
-        style={{
-          flexDirection: "row",
-          marginTop: 10,
-          paddingTop: 10,
-          borderTopColor: "#b3b3b3",
-          borderWidth: 1,
-          borderRightWidth: 0,
-          borderLeftWidth: 0,
-          borderBottomWidth: 0,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Text
-          style={{
-            borderColor: "green",
-            borderWidth: 1,
-            borderRadius: 90,
-            width: 50,
-            padding: 10,
-            marginBottom: 10,
-            textAlign: "center",
-          }}
-          onPress={() => {
-            navigation.navigate("TabNavDL2");
-          }}
-        >
-          <Ionicons name="arrow-back" size={25} color="green" />
-        </Text>
-        <Text
-          style={{
-            padding: 10,
-            marginBottom: 10,
-            borderRadius: 10,
-            backgroundColor: "green",
-            width: 200,
-            textAlign: "center",
-            color: "white",
-            marginLeft: 30,
-          }}
-          onPress={() => {
-            navigation.navigate("TabNavDL2");
-          }}
-        >
-          Xác nhận
-        </Text>
-      </View> */}
+    
     </SafeAreaView>
   );
 }

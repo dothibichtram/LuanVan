@@ -10,13 +10,15 @@ import daily1Api from "../../../api/daily1Api";
 import QRCode from "../Home/ScreenQR";
 const Tab = createBottomTabNavigator();
 function TabNavDL1(props) {
-  const { navigation } = props;
+  const {navigation} = props;
+  console.log(navigation);
   const [soluongdonhangchuaxacnhan, setSoluongdonhangchuaxacnhan] = useState();
   //call back number order don't confirm
   const [callback, setCallBack] = useState(false);
   const [user, setUser] = useState();
-  const handleCallBackSL = (data) => {
-    if (data) {
+  const handleCallBackSL = (data)=>{
+    if(data)
+    {
       // console.log(data);
       setCallBack(!callback);
     }

@@ -68,7 +68,7 @@ function FormCCLoiDL1(props) {
             >
               <Ionicons name="arrow-back" size={25} color="white" />
             </TouchableOpacity>
-            <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin đơn hàng</Text>
+            <Text style={{ color: "white", paddingLeft: "25%" }}>Thêm công cụ lỗi</Text>
           </View>
           <View style={styles.containerForm}>
             <ScrollView>
@@ -162,14 +162,13 @@ function FormCCLoiDL1(props) {
           </View>
           <View
             style={{
-              
               justifyContent: "center",
               width: '100%',
               height: 80,
               justifyContent: 'center',
               alignItems: 'center',
               // position: 'absolute', //Here is the trick
-              bottom: 0
+              bottom: 0,
             }}
           >
             <Text

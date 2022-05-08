@@ -68,7 +68,7 @@ function FormNLLoiDL1(props) {
             >
               <Ionicons name="arrow-back" size={25} color="white" />
             </TouchableOpacity>
-            <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin đơn hàng</Text>
+            <Text style={{ color: "white", paddingLeft: "25%" }}>Thêm nguyên liệu lỗi</Text>
           </View>
           <View style={styles.containerForm}>
             <ScrollView>

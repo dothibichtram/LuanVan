@@ -18,7 +18,7 @@ function NguyenLieu(props) {
   const data = props.nguyenlieu.item;
   // console.log(data.nguyenlieu.hinhanh);
   const handleClickError = () => {
-    navigation.navigate("FormNguyenLieuLoiDL1", { ...data, idDaily2 });
+    navigation.navigate("FormNguyenLieuLoiDL2", { ...data, idDaily2 });
   };
   //get link image
   const getImg = (imgName) => {

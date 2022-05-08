@@ -15,19 +15,19 @@ function DonHangDL2(props) {
   // const formatter = new Intl.NumberFormat("es");
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <Ionicons name="arrow-back" size={25} color="white" />
-        </TouchableOpacity>
-        <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin đơn hàng</Text>
-      </View>
+    <View style={styles.headerContainer}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        <Ionicons name="arrow-back" size={25} color="white" />
+      </TouchableOpacity>
+      <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin đơn hàng</Text>
+    </View>
       <ScrollView>
         <View style={styles.container}>
-          <View >
+        <View >
             <Text style={styles.headerTile}>{data.ma}</Text>
             {/* <Text>{data.ma}</Text> */}
           </View>

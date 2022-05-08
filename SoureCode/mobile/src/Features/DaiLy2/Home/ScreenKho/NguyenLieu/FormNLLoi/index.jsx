@@ -14,7 +14,7 @@ import { Formik, ErrorMessage, Field } from "formik";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as Yup from "yup";
 import { MaterialDialog } from "react-native-material-dialog";
-import daily1Api from "../../../../../../api/daily1Api";
+import daily2Api from "../../../../../../api/daily2Api";
 import axiosClient from "../../../../../../api/axiosClient";
 function FormNLLoiDL2(props) {
   const {
@@ -29,7 +29,7 @@ function FormNLLoiDL2(props) {
     return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
   }
   const SignupSchema = Yup.object().shape({
-    soluongloi: Yup.string().required("Trường này không được để trống"),
+    khoiluongloi: Yup.string().required("Trường này không được để trống"),
   });
   const handleClose = () => {
     setVisible(false);
@@ -38,16 +38,16 @@ function FormNLLoiDL2(props) {
     setVisible(true);
   };
   const handleSumitForm = async (dataForm) => {
-    const sendRequest = await daily1Api.themNguyenlieuHuloi(idDaily2, {
-      dsccLoi: [{ ...data, ...dataForm }],
+    const sendRequest = await daily2Api.themNguyenlieuHuloi(idDaily2, {
+      dsnglLoi: [{ ...data, ...dataForm }],
     });
     handleOpen();
 
-    // console.log({ dsccLoi: [{ ...data, ...dataForm }] }, sendRequest);
+    console.log({ dsnglLoi: [{ ...data, ...dataForm }] }, sendRequest);
   };
   return (
     <Formik
-      initialValues={{ soluongloi: "" }}
+      initialValues={{ khoiluongloi: "" }}
       onSubmit={handleSumitForm}
       validationSchema={SignupSchema}
     >
@@ -59,9 +59,16 @@ function FormNLLoiDL2(props) {
         errors,
         touched,
       }) => (
-        <View style={{ marginTop: 20, flex: 1, backgroundColor: "white" }}>
+        <View style={styles.container}>
           <View style={styles.headerContainer}>
-            <Text style={{ color: "white" }}>Thông tin nguyên liệu lỗi</Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Ionicons name="arrow-back" size={25} color="white" />
+            </TouchableOpacity>
+            <Text style={{ color: "white", paddingLeft: "25%" }}>Thêm nguyên liệu lỗi</Text>
           </View>
           <View style={styles.containerForm}>
             <ScrollView>
@@ -72,8 +79,8 @@ function FormNLLoiDL2(props) {
                     uri: `${getImg(data.nguyenlieu.hinhanh)}`
                   }}
                   style={{
-                    width: Dimensions.get("window").width - 220,
-                    height: 150,
+                    width: Dimensions.get("window").width - 120,
+                    height: 180,
                     borderRadius: 15,
                   }}
                 />
@@ -93,10 +100,10 @@ function FormNLLoiDL2(props) {
                 editable={false}
                 onChangeText={handleChange("tennl")}
                 onBlur={handleBlur("tennl")}
-                //   value={values.soluong}
+                //   value={values.khoiluong}
                 defaultValue={data.nguyenlieu.ten}
-              //   error={errors.soluong}
-              //   touched={touched.soluong}
+              //   error={errors.khoiluong}
+              //   touched={touched.khoiluong}
               />
 
               
@@ -107,31 +114,31 @@ function FormNLLoiDL2(props) {
                   {
                     borderColor: !touched
                       ? "#ccccccf2"
-                      : errors.soluongloi
+                      : errors.khoiluongloi
                         ? "#FF5A5F"
                         : "#ccccccf2",
                   },
                 ]}
                 keyboardType="numeric"
-                onChangeText={handleChange("soluongloi")}
-                onBlur={handleBlur("soluongloi")}
-                value={values.soluongloi}
-                error={errors.soluongloi}
-                touched={touched.soluongloi}
+                onChangeText={handleChange("khoiluongloi")}
+                onBlur={handleBlur("khoiluongloi")}
+                value={values.khoiluongloi}
+                error={errors.khoiluongloi}
+                touched={touched.khoiluongloi}
               />
-              {errors.soluongloi && touched.soluongloi ? (
+              {errors.khoiluongloi && touched.khoiluongloi ? (
                 <>
                   <Text
                     style={{
                       color: !touched
                         ? "#ccccccf2"
-                        : errors.soluongloi
+                        : errors.khoiluongloi
                           ? "#FF5A5F"
                           : "#ccccccf2",
                       marginBottom: 10,
                     }}
                   >
-                    {errors.soluongloi}
+                    {errors.khoiluongloi}
                   </Text>
                 </>
               ) : null}
@@ -156,39 +163,15 @@ function FormNLLoiDL2(props) {
           </View>
           <View
             style={{
-              flexDirection: "row",
-              // // marginTop: 150,
-              // paddingTop: 10,
-              borderTopColor: "#b3b3b3",
-              borderTopWidth: 1,
               justifyContent: "center",
-              backgroundColor: "#ffffff",
-              // height: 100,
               width: '100%',
               height: 80,
               justifyContent: 'center',
               alignItems: 'center',
-              position: 'absolute', //Here is the trick
-              bottom: 0
+              // position: 'absolute', //Here is the trick
+              bottom: 0,
             }}
           >
-            <TouchableOpacity
-              style={{
-                borderWidth: 1,
-                borderColor: 'green',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 55,
-                height: 55,
-                backgroundColor: '#fff',
-                borderRadius: 50,
-              }}
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Ionicons name="arrow-back" size={30} color="green" />
-            </TouchableOpacity>
             <Text
               onPress={handleSubmit}
               style={{
@@ -196,10 +179,10 @@ function FormNLLoiDL2(props) {
                 // marginBottom: 15,
                 borderRadius: 10,
                 backgroundColor: "green",
-                width: 200,
+                width: 150,
                 textAlign: "center",
                 color: "white",
-                marginLeft: 30,
+                alignItems: "center",
               }}
             >
               Xác nhận
@@ -212,13 +195,18 @@ function FormNLLoiDL2(props) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
+    marginTop: 0,
   },
   headerContainer: {
+    flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingTop: 10,
-    paddingBottom: 10,
+    // paddingVertical: 10, 
+    paddingBottom: 20,
+    paddingTop: 40,
+    paddingHorizontal: 15,
     alignItems: "center",
+    // justifyContent: "space",
   },
   centerImg: {
     paddingTop: 10,
@@ -227,7 +215,7 @@ const styles = StyleSheet.create({
   },
   containerForm: {
     // backgroundColor: "white",
-    paddingBottom: 40,
+    paddingBottom: 10,
     paddingLeft: 40,
     paddingTop: 10,
     paddingRight: 30,

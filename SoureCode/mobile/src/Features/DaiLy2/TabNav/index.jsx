@@ -10,6 +10,7 @@ import daily2Api from "../../../api/daily2Api";
 const Tab = createBottomTabNavigator();
 function TabNavDL2(props) {
   const {navigation} = props;
+  console.log(props);
   // const [soluongdonhangchuaxacnhan, setSoluongdonhangchuaxacnhan] = useState();
   //call back number order don't confirm
   const [callback, setCallBack] = useState(false);

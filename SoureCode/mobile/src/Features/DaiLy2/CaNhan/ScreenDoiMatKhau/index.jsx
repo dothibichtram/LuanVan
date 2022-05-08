@@ -211,7 +211,7 @@ function SreenDoiMatKhauDL2(props) {
             textAlign: "center",
           }}
           onPress={() => {
-            navigation.navigate("TabNavDL1");
+            navigation.navigate("TabNavDL2");
           }}
         >
           <Ionicons name="arrow-back" size={25} color="green" />

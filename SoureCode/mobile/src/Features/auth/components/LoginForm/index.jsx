@@ -48,22 +48,15 @@ function LoginForm(props) {
         taikhoan : values.taikhoan.toLowerCase(),
         matkhau : values.matkhau,
       }
-      // const dataForm = {
-      //   taikhoan: "hodan",
-      //   matkhau: "123456",
-      // };
-      // console.log(dataForm);
-
       const action = loginUser(dataForm);
       const resultAction = await dispatch(action);
       const vaitro = resultAction.payload.vaitro;
       unwrapResult(resultAction);
       // const getData2 = await AsyncStorage.getItem("user");
-      console.log(vaitro);
+      // console.log(vaitro);
       values.taikhoan = "";
       values.matkhau = "";
       switch(vaitro) {
-        // case "daily1": navigation.navigate("ScreenDoiMatKhau");
         case "daily1": {
           return(navigation.navigate("TabNavDL1"));
         }
