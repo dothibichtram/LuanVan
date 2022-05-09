@@ -14,7 +14,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import styles from "../style";
 
 function KhoLoi(props) {
-  const { navigation, idDaily2} = props;
+  const { navigation, idDaily2 } = props;
   const dataLoi = props.kholoi.item;
   const [data, setData] = useState();
   //   console.log(dataLoi);
@@ -24,7 +24,9 @@ function KhoLoi(props) {
       ? setData(dataLoi.congcu)
       : dataLoi.vattu
         ? setData(dataLoi.vattu)
-        : setData(dataLoi.nguyenlieu);
+        : dataLoi.sanpham
+          ? setData(dataLoi.sanpham)
+          : setData(dataLoi.nguyenlieu);
   }, []);
   //get link image
   const getImg = (imgName) => {
@@ -91,11 +93,11 @@ function KhoLoi(props) {
               </View>
               <View style={styles.listTile}>
                 <Ionicons name="locate-outline" size={18} style={styles.iconStyle} />
-              {dataLoi.nguyenlieu ? (
+                {dataLoi.nguyenlieu ? (
                   <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.khoiluongloi}</Text>
-              ) : (
+                ) : (
                   <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.soluongloi}</Text>
-              )}</View>
+                )}</View>
               <View style={styles.listTile}>
                 <Ionicons name="calendar-outline" size={18} style={styles.iconStyle} />
                 <Text style={styles.normalText}>Ngày báo lỗi :{dataLoi.loi.ngaybaoloi}</Text>

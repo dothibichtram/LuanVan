@@ -10,7 +10,7 @@ function ScreenDonHang(props) {
     navigation,
     daily1Id,
   } = props;
-  // console.log(daily1Api.dsDonhang(daily1Id));
+  // console.log(daily1Id);
   // const data = await daily1Api.dsDonhang(daily1Id);
   const [orderList, setOrderList] = useState();
   const [data, setData] = useState();

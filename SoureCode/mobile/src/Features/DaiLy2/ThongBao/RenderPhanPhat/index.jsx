@@ -10,10 +10,11 @@ import {
   Image,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import hodanApi from "../../../../api/hodanApi";
+import daily2Api from "../../../../api/daily2Api";
+import apiDonhang from "../../../../api/apiDonhang";
 import { Snackbar } from "react-native-paper";
 function RenderPhanPhat(props) {
-  const { phanphat, hodanId, checkCallBack, handleCallBackSL } = props;
+  const { phanphat, daily2Id, checkCallBack, handleCallBackSL } = props;
   // console.log(props);
   const { item: data } = phanphat;
   // console.log(props);
@@ -23,24 +24,26 @@ function RenderPhanPhat(props) {
   const handleComfirm = async () => {
     //call to send request
     try {
-      const sendRequest = await hodanApi.xacnhan(hodanId, data._id);
+      const sendRequest = await apiDonhang.xacnhan(data._id);
       checkCallBack("Callback");
       handleCallBackSL("CallBack");
       setVisible(true);
+      console.log(sendRequest);
     } catch (error) {
       console.log(error, RNRestart);
+      
     }
   };
   return (
     <>
       <View
-        style={{ marginBottom: 30, flexDirection: "column-reverse" }}
+        style={{ marginBottom: 10, flexDirection: "column-reverse" }}
         key={data._id}
       >
         <View
           style={{
             justifyContent: "space-between",
-            marginTop: 40,
+            marginTop: 10,
           }}
         >
           <Snackbar
@@ -55,7 +58,7 @@ function RenderPhanPhat(props) {
 
         <View
           style={{
-            padding: 10,
+            padding: 8,
             backgroundColor: "white",
             borderColor: "#cccccc",
             borderWidth: 1,
@@ -63,7 +66,7 @@ function RenderPhanPhat(props) {
             marginLeft: 50,
             marginRight: 40,
             borderRadius: 20,
-            marginBottom: 20,
+            marginBottom: 0,
           }}
         >
           <View style={{ flexDirection: "row" }}>
@@ -71,7 +74,7 @@ function RenderPhanPhat(props) {
               style={{ position: "relative", marginLeft: -55, marginTop: -5 }}
               name="logo-buffer"
               size={30}
-              color="black"
+              color="green"
             />
             <Ionicons
               style={{
@@ -85,137 +88,42 @@ function RenderPhanPhat(props) {
               color="#cccccc"
             />
           </View>
-          <View style={{ marginLeft: 3, position: "relative", marginTop: -30 }}>
-            <Text>Mã đơn hàng : {data.ma}</Text>
+          <View style={{ marginLeft: 10, marginTop: 0}}>
+            <View >
+              <Text style={styles.headerTile}>Mã đơn hàng: {data.ma}</Text>
+              {/* <Text>{data.ma}</Text> */}
+            </View>
             {data.dssanpham.map((item, index) => (
               <>
-                <View key={item._id}>
-                  <Text>Sản phẩm {index + 1}</Text>
-                  <View style={{ marginLeft: 10 }}>
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Tên sản
-                      phẩm : {item.sanpham.ten}
+                <View style={styles.listTile} key={item._id}>
+                  <Text>
+                    <Ionicons name="leaf-outline" size={20} color="green" />
+                    {/* Tên sản phẩm :  */}
+                    {item.sanpham.ten}
+                  </Text>
+                  <View style={styles.listTile1}>
+                    <Text style={styles.contentTile}>
+                      Số lượng: {item.soluong}
                     </Text>
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Mã sản
-                      phẩm : {item.sanpham.ma}
-                    </Text>
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Số lượng
-                      : {item.soluong}
-                    </Text>
+                    <Text style={styles.contentTile}>
+                      Đơn giá  : {item.sanpham.gia} VNĐ
+                    </Text >
 
-                    {/* <Text><Ionicons name="square" size={5} color="black"  />
-                    {" "}Đơn vị : {item.donvi}</Text> */}
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Đơn giá
-                      : {item.sanpham.gia} VNĐ
-                    </Text>
-                    <Text>
-                      <Ionicons name="square" size={5} color="black" /> Mô tả :{" "}
-                      {item.sanpham.mota}
-                    </Text>
-                    {item.sanpham.dscongcu &&
-                      item.sanpham.dscongcu.map((item, index) => (
-                        <>
-                          <View key={item._id}>
-                            <Text>
-                              <Ionicons name="square" size={5} color="black" />{" "}
-                              Công cụ
-                            </Text>
-                            <View style={{ marginLeft: 40 }}>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Tên công cụ : {item.congcu.ten}
-                              </Text>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Số lượng: {item.soluong} máy
-                              </Text>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Mô tả : {item.congcu.mota}
-                              </Text>
-                            </View>
-                          </View>
-                        </>
-                      ))}
-                    {item.sanpham.dsvattu &&
-                      item.sanpham.dsvattu.map((item, index) => (
-                        <>
-                          <View key={item._id}>
-                            <Text>
-                              <Ionicons name="square" size={5} color="black" />{" "}
-                              Vật tư
-                            </Text>
-                            <View style={{ marginLeft: 40 }}>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Tên vật tư : {item.vattu.ten}
-                              </Text>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Số lượng: {item.soluong} cái
-                              </Text>
-                              <Text>
-                                <Ionicons
-                                  name="square"
-                                  size={5}
-                                  color="black"
-                                />{" "}
-                                Mô tả : {item.vattu.mota}
-                              </Text>
-                            </View>
-                          </View>
-                        </>
-                      ))}
-                    {item.sanpham.dsnguyenlieu &&
-                      item.sanpham.dsnguyenlieu.map((item, index) => (
-                        <>
-                          <View key={item._id}>
-                            <Text>
-                              <Ionicons name="square" size={5} color="black" />{" "}
-                              Nguyên liệu
-                            </Text>
-                            <View style={{ marginLeft: 40 }}>
-                              <Text>
-                                Tên nguyên liệu: {item.nguyenlieu.ten}
-                              </Text>
-                              <Text>
-                                Khối lượng: {item.khoiluong} {item.donvitinh}
-                              </Text>
-                              <Text>Mô tả : {item.nguyenlieu.mota}</Text>
-                            </View>
-                          </View>
-                        </>
-                      ))}
                   </View>
                 </View>
               </>
             ))}
+            <View style={styles.listTile}>
+              <Text>
+                <Ionicons name="cash-outline" size={20} color="green" />
+                Tổng tiền: {data.tongdongia} VNĐ
+              </Text>
+              {/* <Text>
+                <Ionicons name="leaf-outline" size={20} color="green" />
+                Ngày tạo: {data.ngaytao}
+              </Text> */}
+            </View>
 
-            <Text>Tổng tiền : {data.tongdongia} VNĐ</Text>
-            <Text>Ngày gửi : {data.ngaytao}</Text>
           </View>
           <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
             {data.xacnhan ? (
@@ -224,7 +132,7 @@ function RenderPhanPhat(props) {
               </Text>
             ) : (
               <Text
-                style={[styles.btnClass, { backgroundColor: "#0000e6" }]}
+              style={[styles.btnClass, { backgroundColor: "#FF851B", fontSize: 12 }]}
                 onPress={handleComfirm}
               >
                 Xác nhận
@@ -236,7 +144,7 @@ function RenderPhanPhat(props) {
           style={{
             flexDirection: "row",
             justifyContent: "center",
-            marginTop: 10,
+            marginTop: 5,
           }}
         >
           <Text style={{ padding: 10, backgroundColor: "#cccccc" }}>
@@ -248,10 +156,12 @@ function RenderPhanPhat(props) {
   );
 }
 
+
+
 const styles = StyleSheet.create({
   imgClass: {
     width: Dimensions.get("window").width - 300,
-    height: 100,
+    height: 5,
     borderRadius: 5,
   },
   containerItem: {
@@ -260,22 +170,40 @@ const styles = StyleSheet.create({
     backgroundColor: "#e6e6e6",
     borderRadius: 5,
   },
-  containerText: {
-    marginTop: 10,
-    marginLeft: 10,
-    marginBottom: 10,
-  },
   txt: {
     color: "black",
   },
   btnClass: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    marginRight: 13,
-    borderRadius: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 5,
     color: "white",
+    marginTop: 5,
+    marginRight : 10,
+    textAlign: "center",
   },
+  // btnClass: {
+  //   paddingHorizontal: 12,
+  //   paddingVertical: 8,
+  //   borderRadius: 5,
+  //   color: "white",
+  //   textAlign: "center",
+  // },
+  listTile: {
+    marginLeft: 10,
+    marginBottom: 5,
+  },
+  listTile1: {
+    marginLeft: 20,
+    marginBottom: 5,
+  },
+  headerTile: {
+    fontSize: 16,
+    marginBottom: 3,
+  },
+  contentTile: {
+    marginLeft: 0,
+    color: "grey",
+  }
 });
 export default RenderPhanPhat;

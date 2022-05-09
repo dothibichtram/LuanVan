@@ -9,10 +9,10 @@ import {
   Image,
   Alert,
   Platform,
-  Picker,
   SafeAreaView,
   ScrollView,
 } from "react-native";
+import {Picker} from '@react-native-picker/picker';
 import { Formik, ErrorMessage, Field } from "formik";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as ImagePicker from "expo-image-picker";

@@ -21,13 +21,14 @@ const ListKhoLoiDL1 = (props) => {
       const getCCLoi = await daily1Api.dsCongcuHuloi(idDaily1);
       const getVTLoi = await daily1Api.dsVattuHuloi(idDaily1);
       const getNLLoi = await daily1Api.dsNguyenlieuHuloi(idDaily1);
-      setListKhoLoi([...getCCLoi.dscongcuhuloi,...getVTLoi.dsvattuhuloi,...getNLLoi.dsnguyenlieuhuloi]);
-
+      const getSPLoi = await daily1Api.dsSanphamHuloi(idDaily1);
+      setListKhoLoi([...getCCLoi.dscongcuhuloi,...getVTLoi.dsvattuhuloi,...getNLLoi.dsnguyenlieuhuloi,...getSPLoi.dssanphamhuloi]);
+      // console.log({ setListKhoLoi: [{...getSPLoi.dssanphamhuloi}]});
     };
     fetchData();
   }, []);
 
-      //  console.log(idDaily1);
+      //  console.log(listKhoLoi);
 
   return (
     <SafeAreaView style={_styles.container}>

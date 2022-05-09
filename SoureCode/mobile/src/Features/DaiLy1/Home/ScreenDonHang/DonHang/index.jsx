@@ -75,6 +75,19 @@ function DonHangDL1(props) {
                 </Text>
 
               </View>
+              {/* <View style={styles.listTile}>
+                <Text>
+                  <Ionicons name="archive-outline" size={20} color="green" />
+                  Đã nhận:  {item.danhan}/{item.soluong}
+                </Text>
+              </View> */}
+              <View style={styles.listTile}>
+                <Text>
+                  <Ionicons name="checkmark-circle-outline" size={20} color="green" />
+                  Đã giao:  {item.dagiao}/{item.soluong}
+                </Text>
+              </View>
+              
               {/* <View style={styles.listTile} >
                 <Text>
                   <Ionicons name="construct-outline" size={20} color="green" />

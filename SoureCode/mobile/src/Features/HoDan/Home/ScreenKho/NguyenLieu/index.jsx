@@ -73,7 +73,7 @@ function NguyenLieu(props) {
               </View>
               <View style={styles.listTile}>
                 <Ionicons name="trending-up-outline" size={18} style={styles.iconStyle} />
-                <Text style={styles.normalText}>Số lượng: {data.soluong}</Text>
+                <Text style={styles.normalText}>Số lượng: {data.khoiluong}</Text>
               </View>
             </View>
             <Text

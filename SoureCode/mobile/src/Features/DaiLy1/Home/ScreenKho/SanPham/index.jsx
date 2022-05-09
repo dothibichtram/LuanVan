@@ -17,6 +17,7 @@ function SanPham(props) {
   const { navigation, idDaily1 } = props;
   const data = props.sanpham.item;
   //get link image
+  console.log(data.loi);
   const getImg = (imgName) => {
     return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
   }
@@ -62,10 +63,6 @@ function SanPham(props) {
                 <Text style={styles.normalText}>Giá: {data.sanpham.gia} đ</Text>
               </View>
               <View style={styles.listTile}>
-                <Ionicons name="albums-outline" size={18} style={styles.iconStyle} />
-                <Text style={styles.normalText}>Mô tả: {data.sanpham.mota}</Text>
-              </View>
-              <View style={styles.listTile}>
                 <Ionicons name="git-pull-request-outline" size={18} style={styles.iconStyle} />
                 <Text style={styles.normalText}>SL yêu cầu: {data.soluong}</Text>
               </View>
@@ -76,6 +73,18 @@ function SanPham(props) {
               <View style={styles.listTile}>
                 <Ionicons name="checkmark-circle-outline" size={18} style={styles.iconStyle} />
                 <Text style={styles.normalText}>SL đã giao :{data.dagiao}</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="checkmark-circle-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>SL đã nhận :{data.danhan}</Text>
+              </View>
+              {/* {data.loi (
+                  <Text style={styles.normalText}>Số lượng lỗi: {data.loi.soluongloi}</Text>
+                )
+                } */}
+              <View style={styles.listTile}>
+                <Ionicons name="checkmark-circle-outline" size={18} style={styles.iconStyle} />
+                {/* <Text style={styles.normalText}>SL đã nhận :{data.loi}</Text> */}
               </View>
             </View>
             {/* <Text

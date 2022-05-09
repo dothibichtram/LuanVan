@@ -31,7 +31,7 @@ daily1Router.post("/them", async (req, res) => {
       giamsatvung: gsvId,
     });
     const savedDaily1 = await newDaily1.save();
-  
+
     if (savedDaily1) {
       // Thêm vào danh sách đại lý 1 của GSV
       const gsv = await Giamsatvung.findById(gsvId);
@@ -700,15 +700,17 @@ daily1Router.get("/dsshowbadge/:daily1Id", async (req, res) => {
 //-------------------------------------------
 daily1Router.put("/themsphuloi/:dl1Id", async (req, res) => {
   const { dsspLoi } = req.body;
+  const idDonhang= dsspLoi.idDonhang;
   const daily1 = await Daily1.findById(req.params.dl1Id);
   console.log(dsspLoi);
+  console.log(dsspLoi[0].idDonHang);
   try {
     for (const sp of dsspLoi) {
       const daily1 = await Daily1.findById(req.params.dl1Id);
       // console.log(daily1.dssanpham);
       daily1.dssanpham = daily1.dssanpham.map((item) =>
         item.sanpham.toString() === sp.idSanpham &&
-          item.donhang.toString() === sp.idDonhang &&
+          item.donhang.toString() === sp.idDonHang &&
           item.loi.soluongloi
           ? {
             donhang: item.donhang,
@@ -718,10 +720,14 @@ daily1Router.put("/themsphuloi/:dl1Id", async (req, res) => {
               ngaybaoloi: getCurrentDatetime(),
             },
             soluong: item.soluong,
+            soluonghoanthanh: item.soluonghoanthanh,
+            danhan: item.danhan,
+            dagiao: item.dagiao,
             ngaytao: item.ngaytao,
+
           }
           : item.sanpham.toString() === sp.idSanpham &&
-            item.donhang.toString() === sp.idDonhang
+            item.donhang.toString() === sp.idDonHang
             ? {
               donhang: item.donhang,
               sanpham: item.sanpham,
@@ -730,6 +736,9 @@ daily1Router.put("/themsphuloi/:dl1Id", async (req, res) => {
                 ngaybaoloi: getCurrentDatetime(),
               },
               soluong: item.soluong,
+              soluonghoanthanh: item.soluonghoanthanh,
+              danhan: item.danhan,
+              dagiao: item.dagiao,
               ngaytao: item.ngaytao,
             }
             : item
@@ -752,7 +761,7 @@ daily1Router.get("/dssphuloi/:dl1Id", async (req, res) => {
           path: "donhang sanpham",
         },
       });
-    // dssanphamhuloi = dssanphamhuloi.filter((sp) => sp.loi.soluongloi);
+    dssanphamhuloi = dssanphamhuloi.filter((sp) => sp.loi.soluongloi);
     res.send({ dssanphamhuloi, success: true });
   } catch (error) {
     res.send({ message: error.message, success: false });
@@ -763,27 +772,29 @@ daily1Router.get("/dssphuloi/:dl1Id", async (req, res) => {
 // them cong cu hu loi
 daily1Router.put("/themcchuloi/:dl1Id", async (req, res) => {
   const { dsccLoi } = req.body;
+  console.log(dsccLoi);
+  // console.log(dsccLoi);
   try {
     for (const cc of dsccLoi) {
       const daily1 = await Daily1.findById(req.params.dl1Id);
-      console.log(daily1);
+      // console.log(daily1);
       daily1.dscongcu = daily1.dscongcu.map((item) =>
         item.congcu.toString() === cc.congcu._id &&
-        item.donhang.toString() === cc.donhang._id &&
-        item.loi.soluongloi
+          item.donhang.toString() === cc.donhang._id &&
+          item.loi.soluongloi
           ? {
-              donhang: item.donhang,
-              congcu: item.congcu,
-              loi: {
-                soluongloi: item.loi.soluongloi + parseInt(cc.soluongloi),
-                ngaybaoloi: getCurrentDatetime(),
-              },
-              soluong: item.soluong,
-              ngaytao: item.ngaytao,
-            }
+            donhang: item.donhang,
+            congcu: item.congcu,
+            loi: {
+              soluongloi: item.loi.soluongloi + parseInt(cc.soluongloi),
+              ngaybaoloi: getCurrentDatetime(),
+            },
+            soluong: item.soluong,
+            ngaytao: item.ngaytao,
+          }
           : item.congcu.toString() === cc.congcu._id &&
             item.donhang.toString() === cc.donhang._id
-          ? {
+            ? {
               donhang: item.donhang,
               congcu: item.congcu,
               loi: {
@@ -793,9 +804,10 @@ daily1Router.put("/themcchuloi/:dl1Id", async (req, res) => {
               soluong: item.soluong,
               ngaytao: item.ngaytao,
             }
-          : item
+            : item
       );
       await daily1.save();
+      
     }
 
     res.send({ success: true });
@@ -834,21 +846,21 @@ daily1Router.put("/themvthuloi/:dl1Id", async (req, res) => {
       const daily1 = await Daily1.findById(req.params.dl1Id);
       daily1.dsvattu = daily1.dsvattu.map((item) =>
         item.vattu.toString() === vt.vattu._id &&
-        item.donhang.toString() === vt.donhang._id &&
-        item.loi.soluongloi
+          item.donhang.toString() === vt.donhang._id &&
+          item.loi.soluongloi
           ? {
-              donhang: item.donhang,
-              vattu: item.vattu,
-              loi: {
-                soluongloi: item.loi.soluongloi + parseInt(vt.soluongloi),
-                ngaybaoloi: getCurrentDatetime(),
-              },
-              soluong: item.soluong,
-              ngaytao: item.ngaytao,
-            }
+            donhang: item.donhang,
+            vattu: item.vattu,
+            loi: {
+              soluongloi: item.loi.soluongloi + parseInt(vt.soluongloi),
+              ngaybaoloi: getCurrentDatetime(),
+            },
+            soluong: item.soluong,
+            ngaytao: item.ngaytao,
+          }
           : item.vattu.toString() === vt.vattu._id &&
             item.donhang.toString() === vt.donhang._id
-          ? {
+            ? {
               donhang: item.donhang,
               vattu: item.vattu,
               loi: {
@@ -858,7 +870,7 @@ daily1Router.put("/themvthuloi/:dl1Id", async (req, res) => {
               soluong: item.soluong,
               ngaytao: item.ngaytao,
             }
-          : item
+            : item
       );
       await daily1.save();
     }
@@ -900,22 +912,22 @@ daily1Router.put("/themnglhuloi/:dl1Id", async (req, res) => {
       const daily1 = await Daily1.findById(req.params.dl1Id);
       daily1.dsnguyenlieu = daily1.dsnguyenlieu.map((item) =>
         item.nguyenlieu.toString() === ngl.nguyenlieu._id &&
-        item.donhang.toString() === ngl.donhang._id &&
-        item.loi.khoiluongloi
+          item.donhang.toString() === ngl.donhang._id &&
+          item.loi.khoiluongloi
           ? {
-              donhang: item.donhang,
-              nguyenlieu: item.nguyenlieu,
-              loi: {
-                khoiluongloi:
-                  item.loi.khoiluongloi + parseInt(ngl.soluongloi),
-                ngaybaoloi: getCurrentDatetime(),
-              },
-              khoiluong: item.khoiluong,
-              ngaytao: item.ngaytao,
-            }
+            donhang: item.donhang,
+            nguyenlieu: item.nguyenlieu,
+            loi: {
+              khoiluongloi:
+                item.loi.khoiluongloi + parseInt(ngl.soluongloi),
+              ngaybaoloi: getCurrentDatetime(),
+            },
+            khoiluong: item.khoiluong,
+            ngaytao: item.ngaytao,
+          }
           : item.nguyenlieu.toString() === ngl.nguyenlieu._id &&
             item.donhang.toString() === ngl.donhang._id
-          ? {
+            ? {
               donhang: item.donhang,
               nguyenlieu: item.nguyenlieu,
               loi: {
@@ -925,7 +937,7 @@ daily1Router.put("/themnglhuloi/:dl1Id", async (req, res) => {
               khoiluong: item.khoiluong,
               ngaytao: item.ngaytao,
             }
-          : item
+            : item
       );
       await daily1.save();
     }
@@ -1092,7 +1104,7 @@ daily1Router.get("/tiendodonhang/:dl1Id/:maDH", async (req, res) => {
         0
       ) /
         tongSLSPDonhangGoc) *
-        100
+      100
     );
     // daily 2 tinh trang nhan don
     const daily2TTND = getTinhtrangNhandon(daily2DSDonhang, tongSLSPDonhangGoc);

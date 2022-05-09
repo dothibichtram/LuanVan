@@ -17,14 +17,23 @@ function KhoLoi(props) {
   const { navigation, idDaily1 } = props;
   const dataLoi = props.kholoi.item;
   const [data, setData] = useState();
-  //   console.log(dataLoi);
+    console.log(data);
+    console.log("___________________---");
 
   useEffect(() => {
     dataLoi.congcu
       ? setData(dataLoi.congcu)
       : dataLoi.vattu
         ? setData(dataLoi.vattu)
-        : setData(dataLoi.nguyenlieu);
+        : dataLoi.sanpham
+          ? setData(dataLoi.sanpham)
+          : setData(dataLoi.nguyenlieu);
+
+    //   ? setData(dataLoi.congcu)
+    // : dataLoi.vattu
+    //   ? setData(dataLoi.vattu)
+    //   : setData(dataLoi.nguyenlieu);
+
   }, []);
   //get link image
   const getImg = (imgName) => {
@@ -81,21 +90,25 @@ function KhoLoi(props) {
               }}
             >
               <Text style={styles.headingText}>{data.ten}</Text>
-              <View style={styles.listTile}>
+              {/* <View style={styles.listTile}>
                 <Ionicons name="star-outline" size={18} style={styles.iconStyle} />
                 <Text style={styles.normalText}>Công dụng: {data.congdung}</Text>
-              </View>
+              </View> */}
               <View style={styles.listTile}>
                 <Ionicons name="albums-outline" size={18} style={styles.iconStyle} />
                 <Text style={styles.normalText}>Mô tả: {data.mota}</Text>
               </View>
               <View style={styles.listTile}>
                 <Ionicons name="locate-outline" size={18} style={styles.iconStyle} />
-              {dataLoi.nguyenlieu ? (
+                {dataLoi.nguyenlieu ? (
                   <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.khoiluongloi}</Text>
-              ) : (
+                ) : dataLoi.sanpham ? (
                   <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.soluongloi}</Text>
-              )}</View>
+                ):
+                (
+                  <Text style={styles.normalText}>Số lượng lỗi: {dataLoi.loi.soluongloi}</Text>
+                )
+                }</View>
               <View style={styles.listTile}>
                 <Ionicons name="calendar-outline" size={18} style={styles.iconStyle} />
                 <Text style={styles.normalText}>Ngày báo lỗi :{dataLoi.loi.ngaybaoloi}</Text>

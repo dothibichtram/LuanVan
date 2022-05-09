@@ -51,8 +51,7 @@ const Hanggiaoden = () => {
     let { dsgiaohang } = await apiGiaohang.dsGiaohangDenDaily2Daily1(
       daily1._id
     );
-    dsgiaohang = dsgiaohang
-      .map((item) => ({
+    dsgiaohang = dsgiaohang.map((item) => ({
         ...item,
         tongsanpham: item.dssanpham.reduce((acc, sp) => acc + sp.dagiao, 0),
       }))

@@ -7,11 +7,12 @@ function ListDonHang(props) {
   const {
     dataList: { item: data },
     navigation,
-    Daily1Id,
+    daily1Id,
   } = props;
   const checkComplelteOrder = data.dssanpham.find(
-    (item) => item.soluong !== item.soluonghoanthanh
+    (item) => item.soluong !== item.dagiao
   );
+  console.log(daily1Id);
   const [orderList, setOrderList] = useState();
   // const [data, setData] = useState();
   useEffect(() => {
@@ -32,14 +33,14 @@ function ListDonHang(props) {
     navigation.navigate("DonHangDL1", { data });
   };
   const handleClickSendOrder = () => {
-    navigation.navigate("FormGiaoHangDL1", { data, Daily1Id });
+    navigation.navigate("FormGiaoHangDL1", { data, daily1Id });
   };
 
   // console.log({ data });
   return (
     <>
       <View
-        elevation={50}
+        // elevation={50}
         style={{
           flexDirection: "row",
           paddingVertical: 12,
@@ -71,6 +72,13 @@ function ListDonHang(props) {
                     <Text key={item._id}
                       style={styles.contentTile} >
                       {item.sanpham.ten} : {item.soluonghoanthanh}/{item.soluong}
+                    </Text>
+                  </View>
+                  <View style={styles.listTile}>
+                    <Ionicons name="checkmark-circle-outline" size={18} color="grey" />
+                    <Text key={item._id}
+                      style={styles.contentTile} >
+                      Đã giao:{item.dagiao}
                     </Text>
                   </View>
                 </>

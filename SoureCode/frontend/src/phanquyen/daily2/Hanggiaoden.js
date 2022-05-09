@@ -49,14 +49,14 @@ const Hanggiaoden = () => {
     setLoading(true);
     const { daily2 } = await apiDaily2.singleDaily2BasedUser(userInfo._id);
     let { dsgiaohang } = await apiGiaohang.dsHodanGiaohang(daily2._id);
-    dsgiaohang = dsgiaohang
-      .map((item) => ({
+    dsgiaohang = dsgiaohang.map((item)=> ({
         ...item,
         tongsanpham: item.dssanpham.reduce((acc, sp) => acc + sp.dagiao, 0),
       }))
       .reverse();
     setDsHanggiaoden(dsgiaohang);
     setLoading(false);
+    console.log(dsgiaohang);
   };
 
   useEffect(() => {

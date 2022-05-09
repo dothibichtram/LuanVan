@@ -4,14 +4,14 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { MaterialDialog } from "react-native-material-dialog";
 import hodanApi from "../../../../api/hodanApi";
-import daily1Api from '../../../../api/daily1Api';
-import DonHangDL1 from '../ScreenDonHang/DonHang';
+import daily2Api from '../../../../api/daily2Api';
+import DonHangDL2 from '../ScreenDonHang/DonHang';
 // import apiDonhang from "/../../../../api/apiDonhang";
 // import sanphamApi from "/../../../../api/";
 function QRCode(props) {
   const { navigation } = props;
   const { data } = props.user;
-  const idDaily1 = props.user._id;
+  const idDaily2 = props.user._id;
   // const idDaily1 = user._id;
 
   const [hasPermission, setHasPermission] = useState(null);
@@ -59,12 +59,12 @@ function QRCode(props) {
   const handleSumit = async () => {
     const dataForm = {
       idHodan: idHodan,
-      idDaily1: idDaily1,
+      idDaily2: idDaily2,
       idSanpham: idSanpham,
       maDonhang: maDonhang,
       idDonHang: maDH[0]._id,
     };
-    const sendRequest = await daily1Api.themSanphamHuloi(idDaily1,
+    const sendRequest = await daily2Api.themSanphamHuloi(idDaily2,
       { dsspLoi: [{ ...dataForm, ...data }], }
     );
     console.log({ dsspLoi: [{ ...dataForm, ...data }], }, sendRequest);
@@ -97,7 +97,7 @@ function QRCode(props) {
       setHodan(getDataHD);
       // const getDataDH = await hodanApi.dsDonhang(idHodan);
       // setdsDonHang(getDataDH.dsdonhang);
-      const getMaDH = await daily1Api.dsDonhang(idDaily1);
+      const getMaDH = await daily2Api.dsDonhang(idDaily2);
       setMaDH(getMaDH.donhang.filter((item) => item.ma === `${maDonhang}`)
       );
 

@@ -21,7 +21,7 @@ function ListDonHang(props) {
   return (
     <>
       <View
-        elevation={50}
+        // elevation={50}
         style={{
           flexDirection: "row",
           paddingVertical: 12,

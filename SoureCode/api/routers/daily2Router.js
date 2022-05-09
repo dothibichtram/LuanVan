@@ -665,6 +665,76 @@ daily2Router.get("/dsshowbadge/:daily2Id", async (req, res) => {
 
 //--------------------------------------------
 
+daily2Router.put("/themsphuloi/:dl2Id", async (req, res) => {
+  const { dsspLoi } = req.body;
+  const idDonhang= dsspLoi.idDonhang;
+  const daily2 = await Daily2.findById(req.params.dl2Id);
+  console.log(dsspLoi);
+  console.log(dsspLoi[0].idDonHang);
+  try {
+    for (const sp of dsspLoi) {
+      const daily2 = await Daily2.findById(req.params.dl2Id);
+      // console.log(daily1.dssanpham);
+      daily2.dssanpham = daily2.dssanpham.map((item) =>
+        item.sanpham.toString() === sp.idSanpham &&
+          item.donhang.toString() === sp.idDonHang &&
+          item.loi.soluongloi
+          ? {
+            donhang: item.donhang,
+            sanpham: item.sanpham,
+            loi: {
+              soluongloi: item.loi.soluongloi + 1,
+              ngaybaoloi: getCurrentDatetime(),
+            },
+            soluong: item.soluong,
+            soluonghoanthanh: item.soluonghoanthanh,
+            danhan: item.danhan,
+            dagiao: item.dagiao,
+            ngaytao: item.ngaytao,
+
+          }
+          : item.sanpham.toString() === sp.idSanpham &&
+            item.donhang.toString() === sp.idDonHang
+            ? {
+              donhang: item.donhang,
+              sanpham: item.sanpham,
+              loi: {
+                soluongloi: 1,
+                ngaybaoloi: getCurrentDatetime(),
+              },
+              soluong: item.soluong,
+              soluonghoanthanh: item.soluonghoanthanh,
+              danhan: item.danhan,
+              dagiao: item.dagiao,
+              ngaytao: item.ngaytao,
+            }
+            : item
+      );
+      await daily2.save();
+    }
+    res.send({ success: true });
+  } catch (error) {
+    res.send({ message: error.message, success: false });
+  }
+});
+// //lay ds sản phẩm hư lỗi
+daily2Router.get("/dssphuloi/:dl2Id", async (req, res) => {
+  try {
+    let { dssanpham: dssanphamhuloi } = await Daily2.findById(req.params.dl2Id)
+      .select("dssanpham")
+      .populate({
+        path: "dssanpham",
+        populate: {
+          path: "donhang sanpham",
+        },
+      });
+    dssanphamhuloi = dssanphamhuloi.filter((sp) => sp.loi.soluongloi);
+    res.send({ dssanphamhuloi, success: true });
+  } catch (error) {
+    res.send({ message: error.message, success: false });
+  }
+});
+
 // them cong cu hu loi
 daily2Router.put("/themcchuloi/:dl2", async (req, res) => {
   const { dsccLoi } = req.body;

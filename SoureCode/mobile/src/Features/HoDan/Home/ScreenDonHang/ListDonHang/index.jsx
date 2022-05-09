@@ -9,7 +9,7 @@ function ListDonHang(props) {
     hodanId,
   } = props;
   const checkComplelteOrder = data.dssanpham.find(
-    (item) => item.soluong !== item.soluonghoanthanh
+    (item) => item.dagiao !== item.soluong
   );
   // console.log(checkComplelteOrder);
   const handleClickOrder = () => {
@@ -23,7 +23,7 @@ function ListDonHang(props) {
   return (
     <>
        <View
-        elevation={50}
+        // elevation={50}
         style={{
           flexDirection: "row",
           paddingVertical: 12,
@@ -55,6 +55,13 @@ function ListDonHang(props) {
                     <Text key={item._id}
                       style={styles.contentTile} >
                       {item.sanpham.ten} : {item.soluonghoanthanh}/{item.soluong}
+                    </Text>
+                  </View>
+                  <View style={styles.listTile}>
+                    <Ionicons name="checkmark-circle-outline" size={18} color="grey" />
+                    <Text key={item._id}
+                      style={styles.contentTile} >
+                      Đã giao:{item.dagiao}
                     </Text>
                   </View>
                 </>

@@ -9,11 +9,11 @@ import {
   Image,
   Alert,
   Platform,
-  Picker,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import {Picker} from '@react-native-picker/picker';
 import { Formik, ErrorMessage, Field } from "formik";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as ImagePicker from "expo-image-picker";
@@ -136,7 +136,7 @@ function FormGiaoHangDL2(props) {
             ],
           };
           // console.log(dataForm);
-          const sendRequest = await apiGiaohang.daily1ToGSV(dataForm);
+          const sendRequest = await apiGiaohang.daily2ToDaily1(dataForm);
           handleOpen2();
         } else {
           handleOpen3();

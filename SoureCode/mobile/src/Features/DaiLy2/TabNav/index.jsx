@@ -4,14 +4,15 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import CaNhan from "../CaNhan";
 import Home from "../Home";
 import ThongBao from "../ThongBao";
+import QRCode from "../Home/ScreenQR";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import hodanApi from "../../../api/hodanApi";
 import daily2Api from "../../../api/daily2Api";
 const Tab = createBottomTabNavigator();
 function TabNavDL2(props) {
   const {navigation} = props;
-  console.log(props);
-  // const [soluongdonhangchuaxacnhan, setSoluongdonhangchuaxacnhan] = useState();
+  // console.log(props);
+  const [soluongdonhangchuaxacnhan, setSoluongdonhangchuaxacnhan] = useState();
   //call back number order don't confirm
   const [callback, setCallBack] = useState(false);
   const [user, setUser] = useState();
@@ -38,9 +39,9 @@ function TabNavDL2(props) {
       setUser(user);
       // console.log(dataAccount);
       const dsdonhang = await daily2Api.dsDonhang(user._id);
-      // setSoluongdonhangchuaxacnhan(
-      //   dsdonhang.dsdonhang.filter((item) => item.xacnhan === false).length
-      // );
+      setSoluongdonhangchuaxacnhan(
+        dsdonhang.dsdonhang.filter((item) => item.xacnhan === false).length
+      );
     // console.log(user);
 
     })();
@@ -53,9 +54,12 @@ function TabNavDL2(props) {
 
           if (route.name === "Trang chủ") {
             iconName = focused ? "home" : "home";
-          } else if (route.name === "Đơn hàng mới") {
+          } 
+          else if (route.name === "Đơn hàng mới") {
             iconName = focused ? "notifications" : "notifications";
-          } else if (route.name === "Cá nhân") {
+          } else if (route.name === "QR") {
+            iconName = focused ? "qr-code-outline" : "qr-code-outline";
+          }else if (route.name === "Cá nhân") {
             iconName = focused ? "person" : "person";
           }
 
@@ -71,14 +75,19 @@ function TabNavDL2(props) {
         children={()=><Home user={user} navigation={navigation}  />}
         options={{ header: () => null }}
       />
-      <Tab.Screen
+       <Tab.Screen
         name="Đơn hàng mới"
         // component={ThongBao}
         children={()=><ThongBao handleCallBackSL={handleCallBackSL}  user={user} navigation={navigation} />}
-        // options={{
-        //   header: () => null,
-        //   tabBarBadge: soluongdonhangchuaxacnhan && soluongdonhangchuaxacnhan,
-        // }}
+        options={{
+          header: () => null,
+          tabBarBadge: soluongdonhangchuaxacnhan && soluongdonhangchuaxacnhan,
+        }}
+      />
+      <Tab.Screen
+        name="QR"
+        children={() => <QRCode user={user} navigation={navigation} />}
+        options={{ header: () => null }}
       />
       <Tab.Screen
         name="Cá nhân"

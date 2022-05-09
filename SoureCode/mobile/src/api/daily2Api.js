@@ -161,6 +161,15 @@ const daily2Api = {
   //   return axiosClient.put(url);
   // },
 
+  themSanphamHuloi(daily2Id, payload) {
+    const url = `/api/daily2/themsphuloi/${daily2Id}`;
+    return axiosClient.put(url, payload);
+  },
+
+  dsSanphamHuloi(daily2Id) {
+    const url = `/api/daily2/dssphuloi/${daily2Id}`;
+    return axiosClient.get(url);
+  },
   // them cong cu hu loi
   themCongcuHuloi(daily2Id, payload) {
     const url = `/api/daily2/themcchuloi/${daily2Id}`;

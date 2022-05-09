@@ -11,7 +11,7 @@ import QRCode from "../Home/ScreenQR";
 const Tab = createBottomTabNavigator();
 function TabNavDL1(props) {
   const {navigation} = props;
-  console.log(navigation);
+  // console.log(navigation);
   const [soluongdonhangchuaxacnhan, setSoluongdonhangchuaxacnhan] = useState();
   //call back number order don't confirm
   const [callback, setCallBack] = useState(false);

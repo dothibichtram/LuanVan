@@ -54,7 +54,18 @@ function DonHangDL2(props) {
                   <Ionicons name="pie-chart-outline" size={20} color="green" />
                   Tiến độ:  {item.soluonghoanthanh}/{item.soluong}
                 </Text>
-
+              </View>
+              {/* <View style={styles.listTile}>
+                <Text>
+                  <Ionicons name="archive-outline" size={20} color="green" />
+                  Đã nhận:  {item.danhan}/{item.soluong}
+                </Text>
+              </View> */}
+              <View style={styles.listTile}>
+                <Text>
+                  <Ionicons name="checkmark-circle-outline" size={20} color="green" />
+                  Đã giao:  {item.dagiao}/{item.soluong}
+                </Text>
               </View>
               {/* <View style={styles.listTile} >
                 <Text>

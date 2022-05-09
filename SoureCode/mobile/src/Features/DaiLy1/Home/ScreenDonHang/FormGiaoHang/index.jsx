@@ -9,11 +9,11 @@ import {
   Image,
   Alert,
   Platform,
-  Picker,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import {Picker} from '@react-native-picker/picker';
 import { StatusBar } from "expo-status-bar";
 import { Formik, ErrorMessage, Field } from "formik";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -31,7 +31,7 @@ function FormGiaoHangDL1(props) {
   const data = props.route.params.data;
   const daily1Id = props.route.params.daily1Id;
   // console.log(props);
-  // console.log(hodanId);
+  console.log(props);
   const SignupSchema = Yup.object().shape({
     soluong: Yup.string().required("Số lượng không được để trống "),
   });
@@ -135,7 +135,7 @@ function FormGiaoHangDL1(props) {
               { sanpham: sanphamId, dagiao: parseInt(values.soluong) },
             ],
           };
-          // console.log(dataForm);
+          console.log(dataForm);
           const sendRequest = await apiGiaohang.daily1ToGSV(dataForm);
           handleOpen2();
         } else {

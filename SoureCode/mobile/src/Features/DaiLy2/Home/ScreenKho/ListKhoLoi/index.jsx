@@ -21,7 +21,8 @@ const ListKhoLoiDL2 = (props) => {
       const getCCLoi = await daily2Api.dsCongcuHuloi(idDaily2);
       const getVTLoi = await daily2Api.dsVattuHuloi(idDaily2);
       const getNLLoi = await daily2Api.dsNguyenlieuHuloi(idDaily2);
-      setListKhoLoi([...getCCLoi.dscongcuhuloi,...getVTLoi.dsvattuhuloi,...getNLLoi.dsnguyenlieuhuloi]);
+      const getSPLoi = await daily2Api.dsSanphamHuloi(idDaily2);
+      setListKhoLoi([...getCCLoi.dscongcuhuloi,...getVTLoi.dsvattuhuloi,...getNLLoi.dsnguyenlieuhuloi,...getSPLoi.dssanphamhuloi]);
 
     };
     fetchData();
