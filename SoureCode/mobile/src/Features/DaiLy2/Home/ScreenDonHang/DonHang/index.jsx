@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   SafeAreaView,
@@ -9,9 +9,38 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import daily2Api from "../../../../../api/daily2Api";
+import apiDonhang from "../../../../../api/apiDonhang";
+import FormPhanPhatDL2 from "../FormPhanPhat";
+
 function DonHangDL2(props) {
   const data = props.route.params.data;
   const { navigation } = props;
+  const [donhang, setDonhang] = useState();
+  const [hodan, setHodan] = useState();
+console.log(data);
+  useEffect(() => {
+    (async () => {
+      // const getListOrder = await daily1Api.dsDonhang(daily1Id);
+      const getdonhang = await apiDonhang.singleDonhang(data._id);
+      setDonhang(getdonhang);
+
+      const gethodan = await daily2Api.dsHodanThuocdaily2(data.to.daily2);
+      setHodan(gethodan);
+
+      // const getData = await daily1Api.dsDonhang(daily1Id);
+      // setData(getData);
+      // setOrderList(
+      //   getListOrder.donhang.filter((item) => item.xacnhan === true)
+      // );
+      // console.log(setSubDH);
+    })();
+  }, []);
+
+  const handleClickComfirm = async () => {
+    navigation.navigate("FormPhanPhatDL2", { idDaily2: `${data.to.daily2}`, data :data, hodan:hodan, idDonhang:`${data._id}` });
+      // <FormPhanPhatDL1 navigation={navigation} daily1Id={data.to.daily1}  data={data} />
+  };
   // const formatter = new Intl.NumberFormat("es");
   return (
     <SafeAreaView style={styles.container}>
@@ -149,54 +178,43 @@ function DonHangDL2(props) {
         {/* <Text>Tổng tiền : {data.tongdongia} VNĐ</Text>
             <Text>Ngày gửi : {data.ngaytao}</Text> */}
       </ScrollView>
-      {/* <View
-        style={{
-          flexDirection: "row",
-          marginTop: 10,
-          paddingTop: 10,
-          borderTopColor: "#b3b3b3",
-          borderWidth: 1,
-          borderRightWidth: 0,
-          borderLeftWidth: 0,
-          borderBottomWidth: 0,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Text
-          style={{
-            borderColor: "green",
-            borderWidth: 1,
-            borderRadius: 90,
-            width: 50,
-            padding: 10,
-            marginBottom: 10,
-            textAlign: "center",
-          }}
-          onPress={() => {
-            navigation.navigate("TabNavDL2");
-          }}
-        >
-          <Ionicons name="arrow-back" size={25} color="green" />
-        </Text>
-        <Text
-          style={{
-            padding: 10,
-            marginBottom: 10,
-            borderRadius: 10,
-            backgroundColor: "green",
-            width: 200,
-            textAlign: "center",
-            color: "white",
-            marginLeft: 30,
-          }}
-          onPress={() => {
-            navigation.navigate("TabNavDL2");
-          }}
-        >
-          Xác nhận
-        </Text>
-      </View> */}
+      {!donhang?.donhang.ngaydathang? (
+        <>
+           <View
+            style={{
+              // marginTop: 10,
+              padding: 20,
+              borderTopColor: "#b3b3b3",
+              borderWidth: 1,
+              borderRightWidth: 0,
+              borderLeftWidth: 0,
+              borderBottomWidth: 0,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                padding: 10,
+                borderRadius: 10,
+                backgroundColor: "green",
+                width: 150,
+                textAlign: "center",
+                color: "white",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            onPress={handleClickComfirm}
+            >
+              Phân phát
+            </Text>
+          </View>
+        </>
+      ) : (
+      <>
+       
+      </>
+      )}
     </SafeAreaView>
   );
 }

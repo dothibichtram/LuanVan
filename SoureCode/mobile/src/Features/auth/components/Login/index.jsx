@@ -15,7 +15,8 @@ import BCTienDoHD from "../../../HoDan/Home/ScreenTienDo/BCTienDo";
 import TabNavHD from "../../../HoDan/TabNav";
 import LoginForm from "../LoginForm"
 import DonHangHD from "../../../HoDan/Home/ScreenDonHang/DonHang";
-
+import QRCode from "../../../HoDan/CaNhan/QRCode";
+import ListQRCode from "../../../HoDan/CaNhan/QRCode/ListQRCode";
 
 import ScreenDoiMatKhauDL1 from "../../../DaiLy1/CaNhan/ScreenDoiMatKhau";
 import TabNavDL1 from "../../../DaiLy1/TabNav";
@@ -45,6 +46,7 @@ import ListNguyenLieuHDThuocDL1 from "../../../DaiLy1/Home/ScreenHoDan/KhoHoDan/
 import ListSanPhamHDThuocDL1 from "../../../DaiLy1/Home/ScreenHoDan/KhoHoDan/ListSanPham";
 import DonHangHDThuocDL1 from "../../../DaiLy1/Home/ScreenHoDan/DonHangHoDan/DonHang";
 import ScreenDonHangHDThuocDL1 from "../../../DaiLy1/Home/ScreenHoDan/DonHangHoDan";
+import FormPhanPhatDL1 from "../../../DaiLy1/Home/ScreenDonHang/FormPhanPhat";
 
 import ScreenDoiMatKhauDL2 from "../../../DaiLy2/CaNhan/ScreenDoiMatKhau";
 import TabNavDL2 from "../../../DaiLy2/TabNav";
@@ -68,7 +70,9 @@ import ListNguyenLieuHDThuocDL2 from "../../../DaiLy2/Home/ScreenHoDan/KhoHoDan/
 import ListSanPhamHDThuocDL2 from "../../../DaiLy2/Home/ScreenHoDan/KhoHoDan/ListSanPham";
 import DonHangHDThuocDL2 from "../../../DaiLy2/Home/ScreenHoDan/DonHangHoDan/DonHang";
 import ScreenDonHangHDThuocDL2 from "../../../DaiLy2/Home/ScreenHoDan/DonHangHoDan";
+import FormPhanPhatDL2 from "../../../DaiLy2/Home/ScreenDonHang/FormPhanPhat";
 import Test from "../../../DaiLy2/Home/test"
+
 function Login(props) {
   const Stack = createNativeStackNavigator();
   return (
@@ -93,6 +97,8 @@ function Login(props) {
         <Stack.Screen name="DonHangHD" component={DonHangHD} />
         <Stack.Screen name="FormGiaoHangHD" component={FormGiaoHangHD} />
         <Stack.Screen name="ScreenDoiMatKhauHD" component={SrceenDoiMatKhauHD} />
+        <Stack.Screen name="QRCode" component={QRCode} />
+        <Stack.Screen name="ScreenQRCode" component={ListQRCode} />
 
         <Stack.Screen name="ScreenDoiMatKhauDL1" component={ScreenDoiMatKhauDL1}/>
         <Stack.Screen name="TabNavDL1" component={TabNavDL1}/>
@@ -122,6 +128,8 @@ function Login(props) {
         <Stack.Screen name="ScreenSanPhamHDThuocDL1" component={ListSanPhamHDThuocDL1} />
         <Stack.Screen name="DonHangHDThuocDL1" component={DonHangHDThuocDL1}/>
         <Stack.Screen name="ScreenDonHangHDThuocDL1" component={ScreenDonHangHDThuocDL1}/>
+        <Stack.Screen name="FormPhanPhatDL1" component={FormPhanPhatDL1}/>
+
 
         <Stack.Screen name="ScreenDoiMatKhauDL2" component={ScreenDoiMatKhauDL2}/>
         <Stack.Screen name="TabNavDL2" component={TabNavDL2}/>
@@ -146,6 +154,7 @@ function Login(props) {
         <Stack.Screen name="DonHangHDThuocDL2" component={DonHangHDThuocDL2}/>
         <Stack.Screen name="ScreenDonHangHDThuocDL2" component={ScreenDonHangHDThuocDL2}/>
         <Stack.Screen name="Test" component={Test} />
+        <Stack.Screen name="FormPhanPhatDL2" component={FormPhanPhatDL2}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

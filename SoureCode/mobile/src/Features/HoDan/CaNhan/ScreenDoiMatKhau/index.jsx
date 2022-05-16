@@ -28,6 +28,7 @@ function SreenDoiMatKhauHD(props) {
   );
   //   console.log(props);
   const { navigation } = props;
+
   useEffect(() => {
     const fetchData = async () => {
       const dataAccount = await AsyncStorage.getItem("user");
@@ -35,6 +36,7 @@ function SreenDoiMatKhauHD(props) {
     };
     fetchData();
   }, []);
+    console.log(user);
   const handleClose = () => {
     setVisible(false);
   };
@@ -138,7 +140,7 @@ function SreenDoiMatKhauHD(props) {
                 width: 280,
                 color: "black",
               }}
-              placeholder="Mật khẩu cũ"
+              placeholder="Mật khẩu mới"
               secureTextEntry={passwordShown2 ? false : true}
               onChangeText={setPasswordNew}
               value={passwordNew}
@@ -166,7 +168,7 @@ function SreenDoiMatKhauHD(props) {
                 width: 280,
                 color: "black",
               }}
-              placeholder="Mật khẩu cũ"
+              placeholder="Mật khẩu mới"
               secureTextEntry={passwordShown3 ? false : true}
               onChangeText={setPasswordNew2}
               value={passwordNew2}

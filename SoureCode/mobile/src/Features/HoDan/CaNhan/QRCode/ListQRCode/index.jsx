@@ -9,25 +9,26 @@ import {
   TouchableOpacity,
 } from "react-native";
 import hodanApi from "../../../../../api/hodanApi";
-import CongCu from "../CongCu";
-import VatTu from "../VatTu";
+// import CongCu from "../CongCu";
 import styles from "../style";
 import Ionicons from "react-native-vector-icons/Ionicons";
-const ListVatTu = (props) => {
+import QRCode from "..";
+function ListQRCode (props){
+  const idHodan = props.route.params.data._id;
   const {navigation} = props;
-  const idHodan = props.route.params.idHodan;
-  const [listVatTu, setListVatTu] = useState();
+  const [listQRCode, setListQRCode] = useState();
   useEffect(() => {
     const fetchData = async () => {
-      const getData = await hodanApi.dsVattu(idHodan);
-      setListVatTu(getData.dsvattu);
+      const getData = await hodanApi.dsDonhang(idHodan);
+      setListQRCode(getData.dsdonhang);
     };
     fetchData();
   }, []);
- 
+  // console.log(listQRCode);
+
   return (
     <SafeAreaView style={_styles.container}>
-    <View style={styles.appBarStyle}>
+     <View style={styles.appBarStyle}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
@@ -35,12 +36,12 @@ const ListVatTu = (props) => {
         >
           <Ionicons name="arrow-back" size={25} color="white" />
         </TouchableOpacity>
-        <Text style={{ color: "white", paddingLeft: "25%"}}>Danh sách vật tư</Text>
+        <Text style={{ color: "white", paddingLeft: "25%"}}>Danh sách mã QR</Text>
       </View>
-      {listVatTu && (
+      {listQRCode && (
         <FlatList
-          data={listVatTu}
-          renderItem={(item) => <VatTu vattu={item}  navigation={navigation} idHodan={idHodan}  />}
+          data={listQRCode}
+          renderItem={(item) => <QRCode donhang={item} navigation={navigation} idHodan={idHodan} />}
           keyExtractor={(item) => item._id}
         />
       )}
@@ -51,7 +52,7 @@ const ListVatTu = (props) => {
 const _styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 0,
+    marginTop:  0,
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -70,4 +71,4 @@ const _styles = StyleSheet.create({
   },
 });
 
-export default ListVatTu;
+export default ListQRCode;

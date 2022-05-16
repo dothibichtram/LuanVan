@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   SafeAreaView,
@@ -12,16 +12,23 @@ import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import daily1Api from "../../../../../api/daily1Api";
 import apiDonhang from "../../../../../api/apiDonhang";
+import FormPhanPhatDL1 from "../FormPhanPhat";
+
 function DonHangDL1(props) {
   const data = props.route.params.data;
   const { navigation } = props;
-  
+  // console.log(props);
   const [donhang, setDonhang] = useState();
+  const [daily2, setDaily2] = useState();
   useEffect(() => {
     (async () => {
       // const getListOrder = await daily1Api.dsDonhang(daily1Id);
       const getdonhang = await apiDonhang.singleDonhang(data._id);
       setDonhang(getdonhang);
+
+      const getdaily2 = await daily1Api.dsDaily2ThuocDaily1(data.to.daily1);
+      setDaily2(getdaily2);
+
       // const getData = await daily1Api.dsDonhang(daily1Id);
       // setData(getData);
       // setOrderList(
@@ -30,7 +37,12 @@ function DonHangDL1(props) {
       // console.log(setSubDH);
     })();
   }, []);
-  console.log(donhang);
+  
+
+  const handleClickComfirm = async () => {
+    navigation.navigate("FormPhanPhatDL1", { idDaily1: `${data.to.daily1}`, data :data, daily2:daily2, idDonhang:`${data._id}` });
+      // <FormPhanPhatDL1 navigation={navigation} daily1Id={data.to.daily1}  data={data} />
+  };
   // const formatter = new Intl.NumberFormat("es");
   return (
     <SafeAreaView style={styles.container}>
@@ -87,7 +99,7 @@ function DonHangDL1(props) {
                   Đã giao:  {item.dagiao}/{item.soluong}
                 </Text>
               </View>
-              
+
               {/* <View style={styles.listTile} >
                 <Text>
                   <Ionicons name="construct-outline" size={20} color="green" />
@@ -170,7 +182,45 @@ function DonHangDL1(props) {
         {/* <Text>Tổng tiền : {data.tongdongia} VNĐ</Text>
             <Text>Ngày gửi : {data.ngaytao}</Text> */}
       </ScrollView>
-    
+
+      {!donhang?.donhang.ngaydathang? (
+        <>
+           <View
+            style={{
+              // marginTop: 10,
+              padding: 20,
+              borderTopColor: "#b3b3b3",
+              borderWidth: 1,
+              borderRightWidth: 0,
+              borderLeftWidth: 0,
+              borderBottomWidth: 0,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                padding: 10,
+                borderRadius: 10,
+                backgroundColor: "green",
+                width: 150,
+                textAlign: "center",
+                color: "white",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            onPress={handleClickComfirm}
+            >
+              Phân phát
+            </Text>
+          </View>
+        </>
+      ) : (
+      <>
+       
+      </>
+      )}
+
     </SafeAreaView>
   );
 }
@@ -188,7 +238,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     alignItems: "center",
     // justifyContent: "space",
-},
+  },
   containerItem: {
     flexDirection: "row",
     marginLeft: 0,

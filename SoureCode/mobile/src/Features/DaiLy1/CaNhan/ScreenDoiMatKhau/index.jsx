@@ -71,7 +71,7 @@ function SreenDoiMatKhauDL1(props) {
         <Text style={{ color: "white" }}>Đổi mật khẩu </Text>
       </View>
       <MaterialDialog
-        title="Cảnh báo"
+        title="Thông báo"
         visible={visible}
         onOk={() => {
           setVisible(false);
@@ -83,7 +83,7 @@ function SreenDoiMatKhauDL1(props) {
         <Text style={{ color: "red" }}>Vui lòng nhập mật khẩu !</Text>
       </MaterialDialog>
       <MaterialDialog
-        title="Cảnh báo"
+        title="Thông báo"
         visible={visible2}
         onOk={() => {
           setVisible2(false);
@@ -139,7 +139,7 @@ function SreenDoiMatKhauDL1(props) {
                 width: 280,
                 color: "black",
               }}
-              placeholder="Mật khẩu cũ"
+              placeholder="Mật khẩu mới"
               secureTextEntry={passwordShown2 ? false : true}
               onChangeText={setPasswordNew}
               value={passwordNew}
@@ -167,7 +167,7 @@ function SreenDoiMatKhauDL1(props) {
                 width: 280,
                 color: "black",
               }}
-              placeholder="Mật khẩu cũ"
+              placeholder="Mật khẩu mới"
               secureTextEntry={passwordShown3 ? false : true}
               onChangeText={setPasswordNew2}
               value={passwordNew2}

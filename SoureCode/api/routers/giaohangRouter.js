@@ -63,6 +63,7 @@ giaohangRouter.post("/hodantodaily2", async (req, res) => {
               ? {
                   sanpham: item.sanpham,
                   soluong: item.soluong,
+                  qrcode: item.qrcode,
                   soluonghoanthanh: item.soluonghoanthanh,
                   dagiao: item.dagiao ? item.dagiao + x.dagiao : x.dagiao,
                 }
@@ -93,6 +94,7 @@ giaohangRouter.post("/hodantodaily2", async (req, res) => {
                   soluonghoanthanh: sp.soluonghoanthanh,
                   dagiao: sp.dagiao + x.dagiao,
                   ngaytao: sp.ngaytao,
+                  qrcode: sp.qrcode,
                 }
               : sp
           );

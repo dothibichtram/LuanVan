@@ -776,6 +776,7 @@ hodanRouter.put("/baocao", upload.single("hinhanh"), async (req, res) => {
             soluonghoanthanh: sp.soluonghoanthanh + soluong,
             dagiao: sp.dagiao,
             ngaytao: sp.ngaytao,
+            qrcode: sp.qrcode,
           }
         : sp
     );
@@ -789,6 +790,7 @@ hodanRouter.put("/baocao", upload.single("hinhanh"), async (req, res) => {
             soluong: sp.soluong,
             dagiao: sp.dagiao,
             soluonghoanthanh: sp.soluonghoanthanh + soluong,
+            qrcode :sp.qrcode,
           }
         : sp
     );

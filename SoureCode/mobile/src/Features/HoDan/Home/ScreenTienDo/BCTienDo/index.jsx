@@ -11,6 +11,7 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import {Picker} from '@react-native-picker/picker';
 import { Formik, ErrorMessage, Field } from "formik";
@@ -130,7 +131,14 @@ function BCTienDoHD(props) {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={{ color: "white" }}>Báo cáo tiến độ</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
+        <Text style={{ color: "white", paddingLeft: "25%" }}>Báo cáo tiến độ</Text>
       </View>
       <MaterialDialog
         title="Thông báo"
@@ -316,48 +324,31 @@ function BCTienDoHD(props) {
                   </View>
                   <View
                     style={{
-                      flexDirection: "row",
-                      marginTop: 10,
-                      paddingTop: 10,
-                      borderTopColor: "#b3b3b3",
-                      borderWidth: 1,
-                      borderRightWidth: 0,
-                      borderLeftWidth: 0,
-                      borderBottomWidth: 0,
-                      alignItems: "center",
                       justifyContent: "center",
+                      width: '100%',
+                      height: 80,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      // position: 'absolute', //Here is the trick
+                      bottom: 0,
                     }}
                   >
-                    <Text
-                      style={{
-                        borderColor: "green",
-                        borderWidth: 1,
-                        borderRadius: 90,
-                        width: 50,
-                        padding: 10,
-                        marginBottom: 10,
-                        textAlign: "center",
-                      }}
-                      onPress={() => {
-                        navigation.navigate("TabNavHD");
-                      }}
-                    >
-                      <Ionicons name="arrow-back" size={30} color="green" />
-                    </Text>
+
                     <Text
                       onPress={handleSubmit}
                       style={{
                         padding: 10,
-                        marginBottom: 10,
+                        // marginBottom: 15,
                         borderRadius: 10,
+                        // backgroundColor: "#0000e6",
                         backgroundColor: "green",
-                        width: 200,
+                        width: 150,
                         textAlign: "center",
                         color: "white",
-                        marginLeft: 30,
+                        alignItems: "center",
                       }}
                     >
-                      Gửi báo cáo
+                      Xác nhận
                     </Text>
                   </View>
                 </View>
@@ -376,19 +367,24 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   headerContainer: {
+    flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingTop: 40,
+    // paddingVertical: 10, 
     paddingBottom: 20,
+    paddingTop: 40,
+    paddingHorizontal: 15,
     alignItems: "center",
+    // justifyContent: "space",
   },
+
   containerForm: {
     backgroundColor: "white",
     paddingBottom: 40,
     paddingLeft: 40,
     paddingTop: 10,
     paddingRight: 30,
-    marginBottom: 100,
     borderRadius: 10,
+    marginBottom: 100,
   },
   text: {
     color: "black",

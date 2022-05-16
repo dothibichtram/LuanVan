@@ -30,8 +30,8 @@ function FormGiaoHangDL1(props) {
   const { navigation } = props;
   const data = props.route.params.data;
   const daily1Id = props.route.params.daily1Id;
+  console.log(data);
   // console.log(props);
-  console.log(props);
   const SignupSchema = Yup.object().shape({
     soluong: Yup.string().required("Số lượng không được để trống "),
   });
@@ -157,7 +157,7 @@ function FormGiaoHangDL1(props) {
         >
           <Ionicons name="arrow-back" size={25} color="white" />
         </TouchableOpacity>
-        <Text style={{ color: "white", paddingLeft: "25%" }}>Thông tin đơn hàng</Text>
+        <Text style={{ color: "white", paddingLeft: "25%" }}>Giao hàng</Text>
       </View>
       <MaterialDialog
         title="Thông báo"

@@ -61,8 +61,15 @@ function FormCCLoiHD(props) {
         touched,
       }) => (
         <View style={styles.container}>
-          <View style={styles.headerContainer}>
-            <Text style={{ color: "white" }}>Thông tin công cụ lỗi</Text>
+         <View style={styles.headerContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Ionicons name="arrow-back" size={25} color="white" />
+            </TouchableOpacity>
+            <Text style={{ color: "white", paddingLeft: "25%" }}>Thêm công cụ lỗi</Text>
           </View>
           <View style={styles.containerForm}>
             <ScrollView>
@@ -156,39 +163,15 @@ function FormCCLoiHD(props) {
           </View>
           <View
             style={{
-              flexDirection: "row",
-              // // marginTop: 150,
-              // paddingTop: 10,
-              borderTopColor: "#b3b3b3",
-              borderTopWidth: 1,
               justifyContent: "center",
-              backgroundColor: "#ffffff",
-              // height: 100,
               width: '100%',
               height: 80,
               justifyContent: 'center',
               alignItems: 'center',
-              position: 'absolute', //Here is the trick
-              bottom: 0
+              // position: 'absolute', //Here is the trick
+              bottom: 0,
             }}
           >
-            <TouchableOpacity
-              style={{
-                borderWidth: 1,
-                borderColor: 'green',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 55,
-                height: 55,
-                backgroundColor: '#fff',
-                borderRadius: 50,
-              }}
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Ionicons name="arrow-back" size={30} color="green" />
-            </TouchableOpacity>
             <Text
               onPress={handleSubmit}
               style={{
@@ -197,10 +180,10 @@ function FormCCLoiHD(props) {
                 borderRadius: 10,
                 // backgroundColor: "#0000e6",
                 backgroundColor: "green",
-                width: 200,
+                width: 150,
                 textAlign: "center",
                 color: "white",
-                marginLeft: 30,
+                alignItems: "center",
               }}
             >
               Xác nhận
@@ -217,10 +200,14 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   headerContainer: {
+    flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingTop: 40,
+    // paddingVertical: 10, 
     paddingBottom: 20,
+    paddingTop: 40,
+    paddingHorizontal: 15,
     alignItems: "center",
+    // justifyContent: "space",
   },
   centerImg: {
     paddingTop: 10,
@@ -229,7 +216,7 @@ const styles = StyleSheet.create({
   },
   containerForm: {
     // backgroundColor: "white",
-    paddingBottom: 40,
+    paddingBottom: 10,
     paddingLeft: 40,
     paddingTop: 10,
     paddingRight: 30,

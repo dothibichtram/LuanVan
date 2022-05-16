@@ -40,7 +40,7 @@ function TabNavDL2(props) {
       // console.log(dataAccount);
       const dsdonhang = await daily2Api.dsDonhang(user._id);
       setSoluongdonhangchuaxacnhan(
-        dsdonhang.dsdonhang.filter((item) => item.xacnhan === false).length
+        dsdonhang.donhang.filter((item) => item.xacnhan === false).length
       );
     // console.log(user);
 

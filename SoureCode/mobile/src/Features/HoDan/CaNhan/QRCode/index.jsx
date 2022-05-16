@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState, useEffect }from "react";
 import {
   FlatList,
   StyleSheet,
@@ -9,21 +9,35 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import axiosClient from "../../../../../api/axiosClient";
+// import axiosClient from "../../../../../api/axiosClient";
+import axiosClient from "../../../../api/axiosClient";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import styles from "../style";
-function CongCu(props) {
-  const { navigation, idHodan } = props;
-  const data = props.congcu.item;
-  // console.log(data);
-  const handleClickError = () => {
-    navigation.navigate("FormCongCuLoiHD", { ...data, idHodan });
-  };
-  //get link image
-  const getImg = (imgName) => {
-    return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
-  }
+import styles from "./style";
+import SvgQRCode from 'react-native-qrcode-svg';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+function QRCode(props) {
+  const { navigation,idHodan } = props;
+
+  // const data = props.route.params.data;
+  
+  // const [user, setUser] = useState();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const dataAccount = await AsyncStorage.getItem("user");
+  //     setUser(dataAccount);
+  //   };
+  //   fetchData();
+  // }, []);
+  // const { navigation, idHodan } = props;
+  const data = props.donhang.item;
+  // console.log(props);
+
+  //get link image
+  // const getImg = (imgName) => {
+  //   return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
+  // }
+console.log(data);
  
   return (
     <View style={styles.container}>
@@ -38,8 +52,10 @@ function CongCu(props) {
             borderRadius: 20,
           }}
         >
+          {/* <Text>Test</Text> */}
           <View style={styles.imageStyle}>
-            <Image
+          <Text><SvgQRCode value={data.dssanpham[0].qrcode} />;</Text>
+            {/* <Image
               source={{
                 uri: `${getImg(data.congcu.hinhanh)}`,
               }}
@@ -50,7 +66,7 @@ function CongCu(props) {
                 borderColor: "#F1F1F1",
                 borderWidth: 1,
               }}
-            />
+            /> */}
           </View>
           <View
             style={{
@@ -62,39 +78,31 @@ function CongCu(props) {
             }}
           >
             <View>
-              <Text style={styles.headingText}>{data.congcu.ten}</Text>
+              <Text style={styles.headingText}>{data.ma}</Text>
               <View style={styles.listTile}>
                 <Ionicons name="star-outline" size={18} style={styles.iconStyle} />
                 <Text style={styles.normalText}>
-                  Công dụng: {data.congcu.congdung}
+                   {data.dssanpham[0].sanpham.ten}
                 </Text>
               </View>
-              <View style={styles.listTile}>
+              
+              {/* <View style={styles.listTile}>
                 <Ionicons name="albums-outline" size={18} style={styles.iconStyle} />
                 <Text style={styles.normalText}>Mô tả: {data.congcu.mota}</Text>
-              </View>
+              </View> */}
               <View style={styles.listTile}>
                 <Ionicons name="trending-up-outline" size={18} style={styles.iconStyle} />
-                <Text style={styles.normalText}>Số lượng: {data.soluong}</Text>
+                <Text style={styles.normalText}>Số lượng: {data.dssanpham[0].soluong}</Text>
+              </View>
+              <View style={styles.listTile}>
+                <Ionicons name="calendar-outline" size={18} style={styles.iconStyle} />
+                <Text style={styles.normalText}>Ngày tạo: {data.ngaytao}</Text>
               </View>
             </View>
-            <Text
-              style={{
-                color: "white",
-                padding: 5,
-                backgroundColor: "#E43A45",
-                textAlign: "center",
-                marginTop: 10,
-                borderRadius: 5,
-              }}
-              onPress={handleClickError}
-            >
-              Báo lỗi
-            </Text>
           </View>
         </View>
       </View>
     </View>
   );
 }
-export default CongCu;
+export default QRCode;

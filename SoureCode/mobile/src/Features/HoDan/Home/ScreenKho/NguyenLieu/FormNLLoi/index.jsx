@@ -62,11 +62,17 @@ function FormNLLoiHD(props) {
         touched,
       }) => (
         <View style={styles.container}>
-        <View style={styles.headerContainer}>
-            <Text style={{ color: "white" }}>Thông tin nguyên liệu lỗi</Text>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Ionicons name="arrow-back" size={25} color="white" />
+            </TouchableOpacity>
+            <Text style={{ color: "white", paddingLeft: "25%" }}>Thêm nguyên liệu lỗi</Text>
           </View>
-
-         <View style={styles.containerForm}>
+          <View style={styles.containerForm}>
             <ScrollView>
               <View style={styles.centerImg} >
                 <Image
@@ -88,19 +94,21 @@ function FormNLLoiHD(props) {
                     borderColor: !touched
                       ? "#ccccccf2"
                       : errors.tencc
-                      ? "#FF5A5F"
-                      : "#ccccccf2",
+                        ? "#FF5A5F"
+                        : "#ccccccf2",
                   },
                 ]}
                 editable={false}
-                onChangeText={handleChange("tencc")}
-                onBlur={handleBlur("tencc")}
+                onChangeText={handleChange("tenngl")}
+                onBlur={handleBlur("tenngl")}
                 //   value={values.soluong}
                 defaultValue={data.nguyenlieu.ten}
-                //   error={errors.soluong}
-                //   touched={touched.soluong}
+              //   error={errors.soluong}
+              //   touched={touched.soluong}
               />
-              <Text style={styles.text}>Khối lượng hư hỏng</Text>
+
+
+              <Text style={styles.text}>Số lượng hư hỏng</Text>
               <TextInput
                 style={[
                   styles.textInput,
@@ -108,8 +116,8 @@ function FormNLLoiHD(props) {
                     borderColor: !touched
                       ? "#ccccccf2"
                       : errors.khoiluongloi
-                      ? "#FF5A5F"
-                      : "#ccccccf2",
+                        ? "#FF5A5F"
+                        : "#ccccccf2",
                   },
                 ]}
                 keyboardType="numeric"
@@ -126,8 +134,8 @@ function FormNLLoiHD(props) {
                       color: !touched
                         ? "#ccccccf2"
                         : errors.khoiluongloi
-                        ? "#FF5A5F"
-                        : "#ccccccf2",
+                          ? "#FF5A5F"
+                          : "#ccccccf2",
                       marginBottom: 10,
                     }}
                   >
@@ -151,10 +159,14 @@ function FormNLLoiHD(props) {
                 <Text style={{ color: "green" }}>Xác nhận thành công!</Text>
               </MaterialDialog>
 
+
+            </ScrollView>
+            {/* <Text style={styles.text}>Hình ảnh</Text>
+
               <View>
                 <Image
                   source={{
-                    uri: `http://10.3.53.160:5000/uploads/${data.nguyenlieu.hinhanh}`,
+                    uri: `http://10.3.53.160:5000/uploads/${data.vattu.hinhanh}`,
                   }}
                   style={{
                     width: Dimensions.get("window").width - 220,
@@ -162,44 +174,21 @@ function FormNLLoiHD(props) {
                     borderRadius: 20,
                   }}
                 />
-              </View>
-            </ScrollView>
+              </View> */}
+
+
           </View>
           <View
             style={{
-              flexDirection: "row",
-              // // marginTop: 150,
-              // paddingTop: 10,
-              borderTopColor: "#b3b3b3",
-              borderTopWidth: 1,
               justifyContent: "center",
-              backgroundColor: "#ffffff",
-              // height: 100,
               width: '100%',
               height: 80,
               justifyContent: 'center',
               alignItems: 'center',
-              position: 'absolute', //Here is the trick
-              bottom: 0
+              // position: 'absolute', //Here is the trick
+              bottom: 0,
             }}
           >
-            <TouchableOpacity
-              style={{
-                borderWidth: 1,
-                borderColor: 'green',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 55,
-                height: 55,
-                backgroundColor: '#fff',
-                borderRadius: 50,
-              }}
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Ionicons name="arrow-back" size={30} color="green" />
-              </TouchableOpacity>
             <Text
               onPress={handleSubmit}
               style={{
@@ -208,16 +197,161 @@ function FormNLLoiHD(props) {
                 borderRadius: 10,
                 // backgroundColor: "#0000e6",
                 backgroundColor: "green",
-                width: 200,
+                width: 150,
                 textAlign: "center",
                 color: "white",
-                marginLeft: 30,
+                alignItems: "center",
               }}
             >
               Xác nhận
             </Text>
           </View>
+
         </View>
+        // <View style={styles.container}>
+        // <View style={styles.headerContainer}>
+        //     <TouchableOpacity
+        //       onPress={() => {
+        //         navigation.goBack();
+        //       }}
+        //     >
+        //       <Ionicons name="arrow-back" size={25} color="white" />
+        //     </TouchableOpacity>
+        //     <Text style={{ color: "white", paddingLeft: "25%" }}>Thêm nguyên liệu lỗi</Text>
+        //   </View>
+
+        //  <View style={styles.containerForm}>
+        //     <ScrollView>
+        //       <View style={styles.centerImg} >
+        //         <Image
+        //           source={{
+        //             uri: `${getImg(data.nguyenlieu.hinhanh)}`
+        //           }}
+        //           style={{
+        //             width: Dimensions.get("window").width - 220,
+        //             height: 150,
+        //             borderRadius: 15,
+        //           }}
+        //         />
+        //       </View>
+        //       <Text style={[styles.text]}>Tên nguyên liệu</Text>
+        //       <TextInput
+        //         style={[
+        //           styles.textInput,
+        //           {
+        //             borderColor: !touched
+        //               ? "#ccccccf2"
+        //               : errors.tencc
+        //               ? "#FF5A5F"
+        //               : "#ccccccf2",
+        //           },
+        //         ]}
+        //         editable={false}
+        //         onChangeText={handleChange("tencc")}
+        //         onBlur={handleBlur("tencc")}
+        //         //   value={values.soluong}
+        //         defaultValue={data.nguyenlieu.ten}
+        //         //   error={errors.soluong}
+        //         //   touched={touched.soluong}
+        //       />
+        //       <Text style={styles.text}>Khối lượng hư hỏng</Text>
+        //       <TextInput
+        //         style={[
+        //           styles.textInput,
+        //           {
+        //             borderColor: !touched
+        //               ? "#ccccccf2"
+        //               : errors.khoiluongloi
+        //               ? "#FF5A5F"
+        //               : "#ccccccf2",
+        //           },
+        //         ]}
+        //         keyboardType="numeric"
+        //         onChangeText={handleChange("khoiluongloi")}
+        //         onBlur={handleBlur("khoiluongloi")}
+        //         value={values.khoiluongloi}
+        //         error={errors.khoiluongloi}
+        //         touched={touched.khoiluongloi}
+        //       />
+        //       {errors.khoiluongloi && touched.khoiluongloi ? (
+        //         <>
+        //           <Text
+        //             style={{
+        //               color: !touched
+        //                 ? "#ccccccf2"
+        //                 : errors.khoiluongloi
+        //                 ? "#FF5A5F"
+        //                 : "#ccccccf2",
+        //               marginBottom: 10,
+        //             }}
+        //           >
+        //             {errors.khoiluongloi}
+        //           </Text>
+        //         </>
+        //       ) : null}
+        //       <MaterialDialog
+        //         title="Thông báo"
+        //         visible={visible}
+        //         onOk={() => {
+        //           navigation.goBack();
+
+        //           setVisible(false);
+        //         }}
+        //         onCancel={() => {
+        //           navigation.goBack();
+        //           setVisible(false);
+        //         }}
+        //       >
+        //         <Text style={{ color: "green" }}>Xác nhận thành công!</Text>
+        //       </MaterialDialog>
+
+        //       <View>
+        //         <Image
+        //           source={{
+        //             uri: `http://10.3.53.160:5000/uploads/${data.nguyenlieu.hinhanh}`,
+        //           }}
+        //           style={{
+        //             width: Dimensions.get("window").width - 220,
+        //             height: 150,
+        //             borderRadius: 20,
+        //           }}
+        //         />
+        //       </View>
+        //       <View>
+        //     <Text>123</Text>
+        //   </View>
+        //     </ScrollView>
+        //   </View>
+          
+        //   <View
+        //     style={{
+        //       justifyContent: "center",
+        //       width: '100%',
+        //       height: 80,
+        //       justifyContent: 'center',
+        //       alignItems: 'center',
+        //       // position: 'absolute', //Here is the trick
+        //       bottom: 0,
+        //     }}
+        //   >
+        //     <Text
+        //       onPress={handleSubmit}
+        //       style={{
+        //         padding: 10,
+        //         // marginBottom: 15,
+        //         borderRadius: 10,
+        //         // backgroundColor: "#0000e6",
+        //         backgroundColor: "green",
+        //         width: 150,
+        //         textAlign: "center",
+        //         color: "white",
+        //         alignItems: "center",
+        //       }}
+        //     >
+        //       Xác nhận
+        //     </Text>
+        //   </View>
+        // </View>
       )}
     </Formik>
   );
@@ -228,10 +362,14 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   headerContainer: {
+    flexDirection: "row",
     backgroundColor: "#4AAE4A",
-    paddingTop: 40,
+    // paddingVertical: 10, 
     paddingBottom: 20,
+    paddingTop: 40,
+    paddingHorizontal: 15,
     alignItems: "center",
+    // justifyContent: "space",
   },
   centerImg: {
     paddingTop: 10,
@@ -240,7 +378,7 @@ const styles = StyleSheet.create({
   },
   containerForm: {
     // backgroundColor: "white",
-    paddingBottom: 40,
+    paddingBottom: 10,
     paddingLeft: 40,
     paddingTop: 10,
     paddingRight: 30,

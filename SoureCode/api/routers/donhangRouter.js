@@ -281,6 +281,7 @@ donhangRouter.put("/gsvtodaily1", async (req, res) => {
 // daily1 send donhang -> daily2
 donhangRouter.put("/daily1todaily2", async (req, res) => {
   const { donhangId, dsdonhang, daily1Id } = req.body;
+  console.log(dsdonhang);
   try {
     // Donhang coll
     const donhang = await Donhang.findById(donhangId);
@@ -344,7 +345,7 @@ donhangRouter.put("/daily1todaily2", async (req, res) => {
 // daily2 send donhang -> hodan
 donhangRouter.put("/daily2tohodan", async (req, res) => {
   const { donhangId, dsdonhang, daily2Id } = req.body;
-  console.log(req.body.dsdonhang.dssanpham);
+  // console.log(req.body.dsdonhang.dssanpham);
   try {
     
     // Donhang coll

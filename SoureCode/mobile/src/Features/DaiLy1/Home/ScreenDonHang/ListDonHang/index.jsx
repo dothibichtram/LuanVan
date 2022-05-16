@@ -12,7 +12,10 @@ function ListDonHang(props) {
   const checkComplelteOrder = data.dssanpham.find(
     (item) => item.soluong !== item.dagiao
   );
-  console.log(daily1Id);
+  const checkSL = data.dssanpham.find(
+    (item) => item.danhan > 0 || item.danhan < item.dagiao
+  );
+  // console.log(daily1Id);
   const [orderList, setOrderList] = useState();
   // const [data, setData] = useState();
   useEffect(() => {
@@ -99,15 +102,15 @@ function ListDonHang(props) {
             Chi tiết
           </Text>
           {!checkComplelteOrder ? (
-            <Ionicons name="checkmark-circle" size={20} color="green"/>
-          ) : (
+            <Ionicons name="checkmark-circle" size={20} color="green" />
+          ) : checkSL ? (
             <Text
               style={[styles.btnClass, { backgroundColor: "#FF851B", fontSize: 12 }]}
               onPress={handleClickSendOrder}
             >
               Giao hàng
             </Text>
-          )}
+          ) : (<></>)}
         </View>
       </View>
     </>

@@ -22,7 +22,7 @@ function Home(props) {
   const { navigation } = props;
   // console.log(props);
   const { user } = props;
-  console.log(props);
+  // console.log(props);
   // console.log(user);
   const [checkTienDo, setCheckTienDo] = useState(false);
   const [checkDonHang, setCheckDonHang] = useState(true);

@@ -13,24 +13,29 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
+import { StatusBar } from "expo-status-bar";
 import { Formik, ErrorMessage, Field } from "formik";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as ImagePicker from "expo-image-picker";
 import * as Yup from "yup";
 import apiTiendo from "../../../../../api/apiTiendo";
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import { MaterialDialog } from "react-native-material-dialog";
 // import hodanApi from "../../../../api/hodanApi";
+import daily2Api from "../../../../../api/daily2Api";
 import hodanApi from "../../../../../api/hodanApi";
 import apiDonhang from "../../../../../api/apiDonhang";
 import apiGiaoHang from "../../../../../api/apiGiaohang"
-// import apiGiaohang from "../../../../api/apiGiaohang";
-function FormGiaoHangHD(props) {
+import apiGiaohang from "../../../../../api/apiGiaohang"
+function FormPhanPhatDL2(props) {
   const { navigation } = props;
   const data = props.route.params.data;
-  const hodanId = props.route.params.hodanId;
+  // const daily2 = props.route.params.daily2;
+  const daily2Id = props.route.params.idDaily2;
+  const donhangId = props.route.params.idDonhang;
+  const hodan = props.route.params.hodan;
   // console.log(props);
-  // console.log(hodanId);
   const SignupSchema = Yup.object().shape({
     soluong: Yup.string().required("Số lượng không được để trống "),
   });
@@ -43,12 +48,14 @@ function FormGiaoHangHD(props) {
   const [orderList, setOrderList] = useState();
   const [selectedMaDH, setSelectedMaDH] = useState();
   const [selectedMaSP, setSelectedMaSP] = useState();
+  const [selectedMaHD, setSelectedMaHD] = useState();
   const [orderNoComplete, setOrderNoComplete] = useState();
   let checkUndifined = false;
   useEffect(() => {
     (async () => {
       setSelectedMaDH(data.ma);
       setSelectedMaSP(data.dssanpham[0].sanpham.ma);
+      setSelectedMaHD(hodan.hodan[0]._id);
       //custom file img
       if (Platform.OS !== "web") {
         const { status } =
@@ -59,7 +66,7 @@ function FormGiaoHangHD(props) {
       }
     })();
   }, []);
-
+  console.log(data);
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
@@ -74,25 +81,24 @@ function FormGiaoHangHD(props) {
   const showDatepicker = () => {
     showMode("date");
   };
-  const thoigianValue = `${date.getDate()}/${
-    date.getMonth() + 1
-  }/${date.getFullYear()}`;
+  const thoigianValue = `${date.getDate()}/${date.getMonth() + 1
+    }/${date.getFullYear()}`;
 
-  const [image, setImage] = useState(null);
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  // const [image, setImage] = useState(null);
+  // const pickImage = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
 
-    // console.log(result);
+  //   // console.log(result);
 
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
+  //   if (!result.cancelled) {
+  //     setImage(result.uri);
+  //   }
+  // };
 
   const handleClose = () => {
     setVisible(false);
@@ -115,41 +121,88 @@ function FormGiaoHangHD(props) {
 
   const handleSumitForm = async (values) => {
     try {
-      if (image) {
-        const sanphamId = data.dssanpham.find(
-          (sp) => sp.sanpham.ma === selectedMaSP
-        ).sanpham._id;
-        //kiem tra so luong hoan thanh cua san pham
-        const checkSanPham = data.dssanpham.find(
-          (item) => item.sanpham._id === sanphamId
-        );
-        if (
-          checkSanPham.soluonghoanthanh > 0 &&
-          parseInt(values.soluong) + checkSanPham.dagiao <=
-            checkSanPham.soluonghoanthanh
-        ) {
-          const dataForm = {
-            donhangId: data._id,
-            hodanId: hodanId,
-            dssanpham: [
-              { sanpham: sanphamId, dagiao: parseInt(values.soluong) },
-            ],
-          };
-          // console.log(dataForm);
-          const sendRequest = await apiGiaoHang.hodanToDaily2(dataForm);
-          handleOpen2();
-        } else {
-          handleOpen3();
+
+      let dsdonhang = [];
+      const sanphamId = data.dssanpham.find(
+        (sp) => sp.sanpham.ma === selectedMaSP
+      ).sanpham._id;
+      //kiem tra so luong hoan thanh cua san pham
+      const checkSanPham = data.dssanpham.find(
+        (item) => item.sanpham._id === sanphamId
+      );
+      
+      if (checkSanPham.soluong == parseInt(values.soluong)) {
+       
+        // const sanphamId = data.dssanpham.find(
+        //   (sp) => sp.sanpham.ma === selectedMaSP
+        // ).sanpham._id;
+        // //kiem tra so luong hoan thanh cua san pham
+        // const checkSanPham = data.dssanpham.find(
+        //   (item) => item.sanpham._id === sanphamId
+        // );
+        // checkSanPham.soluong == parseInt(values.soluong)
+        // {
+          // console.log(daily2Id);
+        let dl = {
+          ma: data.ma,
+          dssanpham: [
+            {
+              sanpham: sanphamId,
+              soluong: parseInt(values.soluong),
+              soluonghoanthanh: 0,
+              qrcode: selectedMaHD + '-' + selectedMaDH + '-' + sanphamId,
+            },
+          ],
+          tongsanpham: data.tongsanpham,
+          dscongcu: data.dscongcu.map((item) => ({
+            congcu: item._id,
+            soluong: item.soluong,
+          })),
+          tongcongcu: data.tongcongcu,
+          dsvattu: data.dsvattu.map((item) => ({
+            vattu: item._id,
+            soluong: item.soluong,
+          })),
+          tongvattu: data.tongvattu,
+          dsnguyenlieu: data.dsnguyenlieu.map((item) => ({
+            nguyenlieu: item._id,
+            khoiluong: item.khoiluong,
+          })),
+          tongnguyenlieu: data.tongnguyenlieu,
+          tongdongia: data.tongdongia,
+          from: {
+            daily2: daily2Id,
+          },
+          to: {
+            hodan: selectedMaHD,
+          },
         }
-      } else {
+        dsdonhang.push(dl);
+        console.log(dl);
+        const dataForm = {
+          donhangId: data._id,
+          daily2Id: daily2Id,
+          hodanId: selectedMaHD,
+          
+          dsdonhang,
+        };
+        console.log(123);
+        console.log(dataForm );
+        const sendRequest = await apiDonhang.daily2ToHodan(dataForm);
+
+        console.log(dataForm, sendRequest);
         handleOpen();
+        // }
       }
-    } catch (error) {}
+      else {
+        handleOpen2();
+      }
+    } catch (error) { }
   };
 
   return (
     <View style={styles.container}>
-     <View style={styles.headerContainer}>
+      <View style={styles.headerContainer}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
@@ -157,49 +210,49 @@ function FormGiaoHangHD(props) {
         >
           <Ionicons name="arrow-back" size={25} color="white" />
         </TouchableOpacity>
-        <Text style={{ color: "white", paddingLeft: "25%" }}>Giao hàng</Text>
+        <Text style={{ color: "white", paddingLeft: "25%" }}>Phân phát đơn hàng</Text>
       </View>
       <MaterialDialog
         title="Thông báo"
+        visible={visible2}
+        onOk={() => {
+          setVisible2(false);
+        }}
+        onCancel={() => {
+          setVisible2(false);
+        }}
+      >
+        <Text style={{ color: 'orange' }}>Tổng số lượng phân phát chưa đạt!</Text>
+      </MaterialDialog>
+      <MaterialDialog
         visible={visible}
         onOk={() => {
           setVisible(false);
+          navigation.navigate("TabNavDL2");
         }}
         onCancel={() => {
           setVisible(false);
+          navigation.navigate("TabNavDL2");
         }}
       >
-        <Text style={{color: 'orange'}}>Vui lòng chọn hình ảnh cho sản phẩm!</Text>
+        <Text style={{ color: "green" }}>Đã phân phát thành công !</Text>
       </MaterialDialog>
-      <MaterialDialog
-        visible={visible2}
-        onOk={() => {
-          setVisible(false);
-          navigation.navigate("TabNavHD");
-        }}
-        onCancel={() => {
-          setVisible(false);
-          navigation.navigate("TabNavHD");
-        }}
-      >
-        <Text style={{ color: "green" }}>Đã giao hàng thành công !</Text>
-      </MaterialDialog>
-      <MaterialDialog
+      {/* <MaterialDialog
         title="Thông báo"
-        visible={visible3}
+        visible={visible}
         onOk={() => {
-          setVisible3(false);
+          setVisible2(false);
         }}
         onCancel={() => {
-          setVisible3(false);
+          setVisible2(false);
         }}
       >
         <Text style={{ color: "#ff5500" }}>
           Số lượng giao hàng không hợp lệ! Vui lòng kiểm tra lại số lượng hoàn thành!
         </Text>
-      </MaterialDialog>
+      </MaterialDialog> */}
       <SafeAreaView>
-      <ScrollView>
+        <ScrollView>
           {data && (
             <Formik
               initialValues={{ soluong: "" }}
@@ -243,7 +296,7 @@ function FormGiaoHangHD(props) {
                       )}
                     </Picker>
                   </View>
-                  <Text style={[styles.text]}>Tên sản phẩm</Text>
+                  <Text style={[styles.text]}>Hộ dân</Text>
                   <View
                     style={{
                       marginBottom: 12,
@@ -256,87 +309,70 @@ function FormGiaoHangHD(props) {
                     }}
                   >
                     <Picker
-                      selectedValue={selectedMaSP}
+                      selectedValue={selectedMaHD}
                       onValueChange={(itemValue, itemIndex) =>
-                        setSelectedMaSP(itemValue)
+                        setSelectedMaHD(itemValue)
                       }
                     >
-                      {data.dssanpham.map((item) => (
+                      {hodan.hodan.map((item) => (
                         <Picker.Item
-                          label={`${item.sanpham.ma} - ${item.sanpham.ten}`}
-                          value={item.sanpham.ma}
+                          label={item.daidien}
+                          value={item._id}
                           key={item._id}
                         />
                       ))}
                     </Picker>
                   </View>
-
-                  <Text style={styles.text}>Số lượng sản phẩm muốn giao</Text>
-                  <TextInput
-                    style={[
-                      styles.textInput,
-                      {
-                        borderColor: !touched
-                          ? "#ccccccf2"
-                          : errors.soluong
-                          ? "#FF5A5F"
-                          : "#ccccccf2",
-                      },
-                    ]}
-                    keyboardType="numeric"
-                    onChangeText={handleChange("soluong")}
-                    onBlur={handleBlur("soluong")}
-                    value={values.soluong}
-                    error={errors.soluong}
-                    touched={touched.soluong}
-                  />
-                  {errors.soluong && touched.soluong ? (
+                  {data.dssanpham.map((item, index) => (
                     <>
-                      <Text
-                        style={{
-                          color: !touched
-                            ? "#ccccccf2"
-                            : errors.soluong
-                            ? "#FF5A5F"
-                            : "#ccccccf2",
-                          marginBottom: 5,
-                        }}
-                      >
-                        {errors.soluong}
-                      </Text>
+                      <View key={item._id}>
+                        <Text>
+                          <Ionicons name="leaf-outline" size={20} color="green" />
+                          {/* Tên sản phẩm :  */}
+                          {item.sanpham.ten}
+                        </Text>
+                        <Text style={styles.text}>Số lượng /{item.soluong}</Text>
+                        <TextInput
+                          style={[
+                            styles.textInput,
+                            {
+                              borderColor: !touched
+                                ? "#ccccccf2"
+                                : errors.soluong
+                                  ? "#FF5A5F"
+                                  : "#ccccccf2",
+                            },
+                          ]}
+                          keyboardType="numeric"
+                          onChangeText={handleChange("soluong")}
+                          onBlur={handleBlur("soluong")}
+                          value={index}
+                          error={errors.soluong}
+                          touched={touched.soluong}
+                          label={values.soluong}
+                          key={index}
+                        />
+                        <Text>{values.soluong.index}</Text>
+                        {errors.soluong && touched.soluong ? (
+                          <>
+                            <Text
+                              style={{
+                                color: !touched
+                                  ? "#ccccccf2"
+                                  : errors.soluong
+                                    ? "#FF5A5F"
+                                    : "#ccccccf2",
+                                marginBottom: 5,
+                              }}
+                            >
+                              {errors.soluong}
+                            </Text>
+                          </>
+                        ) : null}
+                      </View>
                     </>
-                  ) : null}
-                  <View>
-                    <Text
-                      style={{
-                        padding: 10,
-                        marginBottom: 10,
-                        borderRadius: 10,
-                        backgroundColor: "#e6e6e6",
-                        width: 100,
-                        textAlign: "center",
-                      }}
-                      onPress={pickImage}
-                    >
-                      Chọn ảnh
-                    </Text>
-                    {image ? (
-                      <Image
-                        source={{ uri: image }}
-                        style={{ width: 250, height: 80, marginBottom: 10 }}
-                      />
-                    ) : (
-                      <View
-                        style={{
-                          borderRadius: 20,
-                          borderColor: "#e6e6e6",
-                          borderWidth: 1,
-                          width: 250,
-                          height: 80,
-                        }}
-                      ></View>
-                    )}
-                  </View>
+                  ))
+                  }
 
                   <View
                     style={{
@@ -364,7 +400,7 @@ function FormGiaoHangHD(props) {
                         alignItems: "center",
                       }}
                     >
-                      Giao hàng
+                      Xác nhận
                     </Text>
                   </View>
                 </View>
@@ -443,4 +479,4 @@ const styles = StyleSheet.create({
     marginLeft: 50,
   },
 });
-export default FormGiaoHangHD;
+export default FormPhanPhatDL2;

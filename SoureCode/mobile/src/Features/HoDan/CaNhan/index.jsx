@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState, useEffect }from "react";
 import {
   SafeAreaView,
   View,
@@ -10,13 +10,29 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch } from "react-redux";
 import { logout } from "../../auth/userSlice";
 import { StatusBar } from "expo-status-bar";
-const CaNhan = ({navigation}) => {
+import AsyncStorage from "@react-native-async-storage/async-storage";
+function CaNhan(props){
+  const { navigation } = props;
+  const data = props.user;
+  const idHodan = props.user._id;
+  // const [user, setUser] = useState();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const dataAccount = await AsyncStorage.getItem("user");
+  //     setUser(dataAccount);
+  //   };
+  //   fetchData();
+  // }, []);
+  // console.log(idHodan);
  const dispatch = useDispatch();
   const handleChangePassWord = () => {
-    // console.log("ChangePassWord");
     navigation.navigate('ScreenDoiMatKhauHD');
   };
 
+  const handleQRCode = () => {
+    // console.log("ChangePassWord");
+    navigation.navigate('ScreenQRCode',{ data: data , idHodan:idHodan});
+  };
   const handleClickLogout = () => {
     dispatch(logout());
     navigation.navigate('Login')
@@ -31,6 +47,21 @@ const CaNhan = ({navigation}) => {
           <Ionicons name="person-circle-outline" size={30} color="#CCC"
             style={[styles.containerRedirectKho, styles.userImage]} />
         </View>
+        <Text onPress={handleQRCode}>
+          <View style={styles.containerRowRedirect} >
+            <Ionicons name="qr-code-outline" size={20} color="green"
+              style={styles.containerRedirectKho} />
+            <Text style={styles.greenText}>
+              Mã QR
+            </Text>
+            <Ionicons name="chevron-forward-outline"
+              size={20}
+              color="green"
+              style={styles.suffixIcon}
+            />
+          </View>
+        </Text>
+
         <Text onPress={handleChangePassWord}>
           <View style={styles.containerRowRedirect} >
             <Ionicons name="key" size={20} color="orange"
@@ -99,6 +130,9 @@ const styles = StyleSheet.create({
   },
   orangeText: {
     color: "orange",
+  },
+  greenText: {
+    color: "green",
   },
   redText: {
     color: "red",

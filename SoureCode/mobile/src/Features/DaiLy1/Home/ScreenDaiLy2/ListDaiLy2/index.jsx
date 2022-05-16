@@ -7,7 +7,7 @@ function ListDaiLy2(props) {
     navigation,
     daily2Id,
   } = props;
-  // console.log(data.email);
+  console.log(data);
   const handleClickInfo = () => {
     navigation.navigate("InfoDaiLy2", { data });
   };

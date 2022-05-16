@@ -80,7 +80,8 @@ function TabNavHD(props) {
       />
       <Tab.Screen
         name="Cá nhân"
-        component={CaNhan}
+        // component={CaNhan}
+        children={()=><CaNhan  user={user} navigation={navigation} />}
         options={{ header: () => null }}
       />
     </Tab.Navigator>

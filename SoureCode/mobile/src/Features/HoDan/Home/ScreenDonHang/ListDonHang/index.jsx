@@ -11,6 +11,9 @@ function ListDonHang(props) {
   const checkComplelteOrder = data.dssanpham.find(
     (item) => item.dagiao !== item.soluong
   );
+  const checkSL = data.dssanpham.find(
+    (item) => item.soluonghoanthanh >= 0 && item.soluonghoanthanh > item.dagiao
+  );
   // console.log(checkComplelteOrder);
   const handleClickOrder = () => {
     navigation.navigate("DonHangHD", { data });
@@ -88,14 +91,14 @@ function ListDonHang(props) {
             //   Hoàn thành
             // </Text>
             <Ionicons name="checkmark-circle" size={20} color="green"/>
-          ) : (
+          ) :checkSL?(
             <Text
               style={[styles.btnClass, { backgroundColor: "#FF851B", fontSize: 12 }]}
               onPress={handleClickSendOrder}
             >
               Giao hàng
             </Text>
-          )}
+          ):(<></>)}
         </View>
       </View>
     </>

@@ -83,7 +83,7 @@ function ListDonHangBaoCaoTienDo(props) {
           </View>
           <View flexDirection="column" justifyContent="space-between" alignItems="flex-end">
 
-            <View style={{ paddingLeft: 17 }}>
+            <View >
               <Text
                 style={{ color: "green" }}
                 onPress={handleClickOrder}
