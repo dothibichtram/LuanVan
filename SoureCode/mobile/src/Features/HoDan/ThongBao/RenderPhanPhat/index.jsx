@@ -37,7 +37,7 @@ function RenderPhanPhat(props) {
         style={{ marginBottom: 10, flexDirection: "column-reverse" }}
         key={data._id}
       >
-        <View
+        {/* <View
           style={{
             justifyContent: "space-between",
             marginTop: 10,
@@ -51,7 +51,7 @@ function RenderPhanPhat(props) {
           >
             Xác nhận đơn hàng thành công !
           </Snackbar>
-        </View>
+        </View> */}
 
         <View
           style={{

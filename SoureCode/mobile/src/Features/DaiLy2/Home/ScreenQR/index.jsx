@@ -129,21 +129,19 @@ function QRCode(props) {
         style={styles.qr}
 
       />
-      {/* <MaterialDialog
+      <MaterialDialog
         title="Thông báo"
         visible={visible}
         onOk={() => {
-          navigation.goBack();
 
           setVisible(false);
         }}
         onCancel={() => {
-          navigation.goBack();
           setVisible(false);
         }}
       >
-        <Text style={{ color: "green" }}>Xác nhận thành công!</Text>
-      </MaterialDialog> */}
+        <Text style={{ color: "green" }}>Thêm thành công!</Text>
+      </MaterialDialog>
 
       <View
         style={{
@@ -163,9 +161,17 @@ function QRCode(props) {
 
         {scanned &&
           <View>
+            <View
+            style={{
+              alignItems: 'center',
+
+            }}>
             <Text>Mã đơn hàng: {maDonhang}</Text>
-            <Text>ID hộ dân: {idHodan}</Text>
-            <Text>ID sản phẩm: {idSanpham}</Text>
+            {hodan?(<><Text>Hộ dân: {hodan.hodan.daidien}</Text>
+            </>):(<><Text>ID Hộ dân: {idHodan}</Text></>)}
+            {/* {maDH?(<><Text>Sản phẩm: {maDH[0].dssanpham[0].sanpham.ten}</Text>
+            </>):(<><Text>ID sản phẩm: {idSanpham}</Text></>)} */}
+            </View>
             <View
               style={{
                 marginTop: 10,

@@ -82,10 +82,10 @@ function SanPham(props) {
                   <Text style={styles.normalText}>Số lượng lỗi: {data.loi.soluongloi}</Text>
                 )
                 } */}
-              <View style={styles.listTile}>
+              {/* <View style={styles.listTile}>
                 <Ionicons name="checkmark-circle-outline" size={18} style={styles.iconStyle} />
-                {/* <Text style={styles.normalText}>SL đã nhận :{data.loi}</Text> */}
-              </View>
+                <Text style={styles.normalText}>SL đã nhận :{data.loi}</Text>
+              </View> */}
             </View>
             {/* <Text
               style={{

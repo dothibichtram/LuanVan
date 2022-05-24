@@ -703,7 +703,7 @@ daily1Router.put("/themsphuloi/:dl1Id", async (req, res) => {
   const idDonhang= dsspLoi.idDonhang;
   const daily1 = await Daily1.findById(req.params.dl1Id);
   console.log(dsspLoi);
-  console.log(dsspLoi[0].idDonHang);
+  // console.log(dsspLoi[0].idDonHang);
   try {
     for (const sp of dsspLoi) {
       const daily1 = await Daily1.findById(req.params.dl1Id);
@@ -919,25 +919,25 @@ daily1Router.put("/themnglhuloi/:dl1Id", async (req, res) => {
             nguyenlieu: item.nguyenlieu,
             loi: {
               khoiluongloi:
-                item.loi.khoiluongloi + parseInt(ngl.soluongloi),
+                item.loi.khoiluongloi + parseInt(ngl.khoiluongloi),
               ngaybaoloi: getCurrentDatetime(),
             },
             khoiluong: item.khoiluong,
             ngaytao: item.ngaytao,
           }
           : item.nguyenlieu.toString() === ngl.nguyenlieu._id &&
-            item.donhang.toString() === ngl.donhang._id
-            ? {
-              donhang: item.donhang,
-              nguyenlieu: item.nguyenlieu,
-              loi: {
-                khoiluongloi: ngl.soluongloi,
-                ngaybaoloi: getCurrentDatetime(),
-              },
-              khoiluong: item.khoiluong,
-              ngaytao: item.ngaytao,
-            }
-            : item
+          item.donhang.toString() === ngl.donhang._id
+          ? {
+            donhang: item.donhang,
+            nguyenlieu: item.nguyenlieu,
+            loi: {
+              khoiluongloi: ngl.khoiluongloi,
+              ngaybaoloi: getCurrentDatetime(),
+            },
+            khoiluong: item.khoiluong,
+            ngaytao: item.ngaytao,
+          }
+          : item
       );
       await daily1.save();
     }

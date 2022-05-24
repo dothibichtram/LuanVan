@@ -40,7 +40,7 @@ function RenderPhanPhat(props) {
         style={{ marginBottom: 10, flexDirection: "column-reverse" }}
         key={data._id}
       >
-        <View
+        {/* <View
           style={{
             justifyContent: "space-between",
             marginTop: 10,
@@ -48,13 +48,13 @@ function RenderPhanPhat(props) {
         >
           <Snackbar
             visible={visible}
-            onDismiss={() => setVisible(false)}
+            onDismiss={() => setVisible(true)}
             duration={6000}
             style={{ backgroundColor: "green" }}
           >
             Xác nhận đơn hàng thành công !
           </Snackbar>
-        </View>
+        </View> */}
 
         <View
           style={{

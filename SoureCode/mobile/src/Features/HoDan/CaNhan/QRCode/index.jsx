@@ -37,7 +37,7 @@ function QRCode(props) {
   // const getImg = (imgName) => {
   //   return `${axiosClient.defaults.baseURL}/uploads/${imgName}`;
   // }
-console.log(data);
+// console.log(data.dssanpham[0].qrcode);
  
   return (
     <View style={styles.container}>
@@ -54,7 +54,8 @@ console.log(data);
         >
           {/* <Text>Test</Text> */}
           <View style={styles.imageStyle}>
-          <Text><SvgQRCode value={data.dssanpham[0].qrcode} />;</Text>
+          <Text><SvgQRCode value={data.dssanpham[0].qrcode} />
+          </Text>
             {/* <Image
               source={{
                 uri: `${getImg(data.congcu.hinhanh)}`,

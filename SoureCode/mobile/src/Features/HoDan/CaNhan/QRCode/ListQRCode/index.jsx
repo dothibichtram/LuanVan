@@ -24,7 +24,7 @@ function ListQRCode (props){
     };
     fetchData();
   }, []);
-  // console.log(listQRCode);
+  // console.log(getData.dsdonhang.dssanpham);
 
   return (
     <SafeAreaView style={_styles.container}>

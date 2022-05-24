@@ -37,25 +37,7 @@ function QRCode(props) {
   const handleOpen = () => {
     setVisible(true);
   };
-  // const handleSumit = async () => {
-  //   const dataForm = {
-  //     idHodan: idHodan,
-  //     idDaily1: idDaily1,
-  //     idSanpham: idSanpham,
-  //     maDonhang: maDonhang
-  //   };
-  //   const sendRequest = await daily1Api.themSanphamHuloi(idDaily1, {
-  //     dsspLoi: [{ ...data, ...dataForm }],
-  //   });
-  //   // const sendRequest = await daily1Api.themSanphamHuloi(idDaily1, {
-  //   //   dsspLoi: [{ ...dssanpham, ...data }],
-  //   // });
-  //   console.log('----------------------------------------');
-  //   // console.log({ dsspLoi: [{ ...dssanpham, ...dataForm }]},sendRequest );
-  //   // dssanpham.push({ dsspLoi: [{ ...dssanpham, ...dataForm }]});
-  //   // setScanned(false);
-  // };
-
+  // 
   const handleSumit = async () => {
     const dataForm = {
       idHodan: idHodan,
@@ -90,8 +72,11 @@ function QRCode(props) {
       // );
       // const setTenSP =await maDH.dssanpham;
       // setTenSP(
-      //   maDH.dssanpham.sanpham.filter((item) => item._id === idSanpham)
+      //   maDH.dssanpham.sanpham.filter((item) => item._id === `${maDonhang}`)
       // );
+      const getSP = await daily1Api.dsSanpham(idDaily1);
+      setTenSP(getSP.dssanpham.filter((item) => item.ma === `${maDonhang}`)
+      );
 
       const getDataHD = await hodanApi.singleHodan(idHodan);
       setHodan(getDataHD);
@@ -100,14 +85,13 @@ function QRCode(props) {
       const getMaDH = await daily1Api.dsDonhang(idDaily1);
       setMaDH(getMaDH.donhang.filter((item) => item.ma === `${maDonhang}`)
       );
-
+      
       // setMaDH(setMaDH);
     };
     fetchData();
-
   };
   //  console.log(idDaily1);
-  // console.log(maDH);
+ 
   // console.log(123);
   console.log('----------------------------------------');
 
@@ -129,21 +113,20 @@ function QRCode(props) {
         style={styles.qr}
 
       />
-      {/* <MaterialDialog
+      <MaterialDialog
         title="Thông báo"
         visible={visible}
         onOk={() => {
-          navigation.goBack();
 
           setVisible(false);
         }}
         onCancel={() => {
-          navigation.goBack();
+        
           setVisible(false);
         }}
       >
-        <Text style={{ color: "green" }}>Xác nhận thành công!</Text>
-      </MaterialDialog> */}
+        <Text style={{ color: "green" }}>Thêm sản phẩm lỗi thành công!</Text>
+      </MaterialDialog>
 
       <View
         style={{
@@ -159,13 +142,21 @@ function QRCode(props) {
           bottom: 0
         }}
       >
-
-
         {scanned &&
           <View>
+            <View
+            style={{
+              alignItems: 'center',
+
+            }}>
             <Text>Mã đơn hàng: {maDonhang}</Text>
-            <Text>ID hộ dân: {idHodan}</Text>
-            <Text>ID sản phẩm: {idSanpham}</Text>
+            {hodan?(<><Text>Hộ dân: {hodan.hodan.daidien}</Text>
+            </>):(<><Text>ID Hộ dân: {idHodan}</Text></>)}
+            {/* {maDH?(<><Text>Sản phẩm: {maDH[0].dssanpham[0].sanpham.ten}</Text>
+            </>):(<><Text>ID sản phẩm: {idSanpham}</Text></>)} */}
+            </View>
+           
+            
             <View
               style={{
                 marginTop: 10,
