@@ -10,7 +10,7 @@
 
 Lấy dự án về máy vật lý
 
-`Git clone https://github.com/thcuong1999/luan_van_tca.git`
+`Git clone https://github.com/dothibichtram/LuanVan.git`
 
 Cài đặt các module cho ứng dụng chạy trên web
 
